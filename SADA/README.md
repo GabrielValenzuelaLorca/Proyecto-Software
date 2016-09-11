@@ -10,4 +10,4 @@
 1. Crear los perfiles 1, 2, 3 y 4 en la tabla `perfil` (Sino, no se podrá crear usuarios correctamente)
 
 ## Créditos por la plantilla 'node-express-passport-mysql' a Manjesh V (@manjeshpv)
-'https://github.com/manjeshpv/node-express-passport-mysql'
+`https://github.com/manjeshpv/node-express-passport-mysql`
