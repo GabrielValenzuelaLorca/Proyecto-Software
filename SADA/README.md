@@ -5,7 +5,7 @@
 1. Ejecutar node `server.js`
 1. Ir a `http://localhost:8080`
 
-##Prerequisitos
+##Pre-requisitos
 
 1. Crear los perfiles 1, 2, 3 y 4 en la tabla `perfil` (Sino, no se podrá crear usuarios correctamente)
 
