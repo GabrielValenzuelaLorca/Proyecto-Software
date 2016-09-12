@@ -4,8 +4,21 @@
         .module("ngEncuesta")
         .controller("testCtrl", ListController);
 
-    function ListController(){
-        // List Controller Logic
+    ListController.$inject = ['quizMetrics'];
+
+    function ListController(quizMetrics){
+
+        this.quizMetrics = quizMetrics;
+        this.Data = "Probando Angular";
+        this.activarEncuesta = activarEncuesta;
+
+
+        function activarEncuesta() {
+            quizMetrics.changeState(true);
+        }
     }
+
+    //variables...
+
 
 })();

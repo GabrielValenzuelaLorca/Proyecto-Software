@@ -13,25 +13,118 @@
         <!--angular scripts-->
         <script src="../../ngEncuesta.js"></script>
         <script src="../../controllers/test.js"></script>
+        <script src="../../controllers/quiz.js"></script>
+        <script src="../../factories/quizMetrics.js"></script>
+        <script src="../../factories/dataService.js"></script>
 
         <style>
             body { padding-top:20px; }
+            .center-btn{text-align:center;margin-top:50px;}
+            .page-header{margin-top:0px;}
+            .answer{padding:15px 20px;border-radius: 10px;border:1px solid #bbb;}
+            .answer:hover{cursor:pointer;}
+            .alert{margin-top:25px;}
         </style>
     </head>
     <body>
-
         <div class="container">
-            <div class="col-sm-6 col-sm-offset-3">
-                <div ng-controller="testCtrl">
-                    <h3>Probando Angular {{1+0}} ...</h3>
+            <div class="col-sm-12 page-header">
+                <div class="form-group">
+                    <h1 class="text-center">Encuesta</h1>
+                </div>
+            </div>
+
+            <!-- Activar Encuesta -->
+            <div ng-controller="testCtrl as test" ng-hide="test.quizMetrics.encuestaActiva">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="form-group">
+                        <!--<form action="/menu" method="post">
+                            <input type="submit" class="btn btn-info btn-md" value="Responder Encuesta">
+                            <a href="/" class="btn btn-default btn-md">Cancelar</a>
+                        </form><br>-->
+                        <div class="center-btn">
+                            <button class="btn btn-info" ng-click="test.activarEncuesta()">Empezar Encuesta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Encuesta -->
+            <div ng-controller="quizCtrl as quiz" ng-show="quiz.quizMetrics.encuestaActiva">
+
+                <!-- Progreso -->
+                <div class="row">
+                    <div class="col-xs-8">
+                        <h2>Progreso:</h2>
+                        <div class="btn-toolbar">
+                            <button class="btn"
+                            ng-repeat="question in quiz.DataService.Preguntas"
+                            ng-class="{'btn-info':question.selected !== null,
+                                       'btn-danger':question.selected == null}"
+                            ng-click="quiz.setActiveQuestion($index)">
+                            </button>
+                        </div>
+                    </div>
+                    <!--<div class="col-xs-4">
+                        <div class="row">
+                            <h4>Colores:</h4>
+                            <div class="col-sm-6">
+                                <button class="btn btn-info"></button>
+                                <p>Respondido</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-danger"></button>
+                                <p>No Respondido</p>
+                            </div>
+                        </div>
+                    </div>-->
                 </div>
 
-                <div class="form-group">
-                    <h1>Encuesta</h1>
-                    <form action="/menu" method="post">
-                        <input type="submit" class="btn btn-info btn-md" value="Responder Encuesta">
-                        <a href="/" class="btn btn-default btn-md">Cancelar</a>
-                    </form><br>
+                <!-- Preguntas -->
+                <div class="row">
+                    <div class="alert alert-danger" ng-show="quiz.error">
+                        Aún no has respondido todas las preguntas!
+                        <button class="close" ng-click="quiz.error = false">&times</button>
+                    </div>
+                    <h3>Pregunta:</h3>
+                    <div class="well well-sm" ng-hide="quiz.finalise">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4>{{quiz.activeQuestion+1 + '. '+quiz.DataService.Preguntas[quiz.activeQuestion].pregunta}}</h4>
+
+                                <!-- Respuestas -->
+                                <div class="row">
+                                    <div class="col-sm-6" ng-repeat="answer in quiz.DataService.Preguntas[quiz.activeQuestion].respuestas">
+                                        <h4 class="answer"
+                                            ng-class="{'bg-info':$index == quiz.DataService.Preguntas[quiz.activeQuestion].selected}"
+                                            ng-click="quiz.selectAnswer($index)">
+                                            {{answer.answer}}
+                                        </h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button class="btn btn-info" ng-click="quiz.Respondido()">
+                            Continuar
+                        </button>
+                        <a href="/"><button class="btn btn-default pull-right">
+                            Cancelar
+                        </button></a>
+                    </div>
+
+                    <div class="well well-sm" ng-show="quiz.finalise">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <form action="/menu" method="post">
+                                    <h3>¿Seguro que quieres enviar tus respuestas?</h3>
+                                    <button type="submit" class="btn btn-success" ng-click="quiz.finaliseAnswers()">Yes</button>
+                                    <button type="button" class="btn btn-danger" ng-click="quiz.finalise = false">No</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
