@@ -1,8 +1,8 @@
 ##Instrucciones:
 
-1.Si es necesario ejecutar `npm install`
-1.Editar lo necesario para la BD en `config/database.js`
-1.Ejecutar `node server.js`
+1. Si es necesario ejecutar `npm install`
+1. Editar lo necesario para la BD en `config/database.js`
+1. Ejecutar `node server.js`
 
 ##Pre-requisitos
 
