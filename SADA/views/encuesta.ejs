@@ -40,12 +40,11 @@
             <div ng-controller="testCtrl as test" ng-hide="test.quizMetrics.encuestaActiva">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
-                        <!--<form action="/menu" method="post">
-                            <input type="submit" class="btn btn-info btn-md" value="Responder Encuesta">
-                            <a href="/" class="btn btn-default btn-md">Cancelar</a>
-                        </form><br>-->
                         <div class="center-btn">
                             <button  class="btn btn-info" ng-click="test.activarEncuesta()">Empezar Encuesta</button>
+                            <a href="/logout"><button class="btn btn-default">
+                                    Cancelar
+                                </button></a>
                         </div>
                     </div>
                 </div>
@@ -125,10 +124,11 @@
                         <button class="btn btn-info" ng-click="quiz.Respondido()">
                             Continuar
                         </button>
-                        <a href="/"><button class="btn btn-default pull-right">
+                        <a href="/logout"><button class="btn btn-default pull-right">
                             Cancelar
                         </button></a>
                     </div>
+
 
                     <div class="well well-sm" ng-show="quiz.finalise">
                         <div class="row">
