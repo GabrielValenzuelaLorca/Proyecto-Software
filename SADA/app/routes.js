@@ -26,17 +26,24 @@ module.exports = function(app, passport,connection) {
     // =====================================
 
     app.get('/menu',isLoggedIn, function(req, res) {
-        if(req.user.perfil_idperfil==null){
-            res.render('encuesta.ejs',{title:title}); //
+
+        if(req.user.Rut==undefined) {//
+            if (req.user.perfil_idperfil == null) {
+                res.render('encuesta.ejs', {title: title}); //
+            }
+            else {
+                res.render('menu.ejs', {title: title, perfil: req.user.perfil_idperfil}); //
+                console.log("menu queryget");
+                console.log(req.user);
+            }
         }
         else{
-            res.render('menu.ejs',{title:title,perfil:req.user.perfil_idperfil}); //
-            console.log("menu queryget");
-            console.log(req.user);
+            res.render("menu.ejs");
         }
+
     });
 
-    app.post('/menu', function(req, res) {
+    app.post('/menu', function(req, res) {//Respondiendo encuesta
 
         connection.query('Update alumno set perfil_idperfil= ? where Rol = ?',[req.body.result,req.user.Rol],function (err,rows,fields) {
            if(err )throw err;
@@ -58,8 +65,25 @@ module.exports = function(app, passport,connection) {
         res.render('login.ejs', {  title:title,messages:messages });
     });
 
-    // process the login form
-    app.post('/login', passport.authenticate('local-login', {
+    //Alumno
+    app.post('/login', passport.authenticate('local-loginA', {
+            successRedirect : '/menu', // redirect to the secure profile section
+            failureRedirect : '/login', // redirect back to the signup page if there is an error
+            failureFlash : true // allow flash messages
+        }),
+        function(req, res) {
+            console.log("hello");
+
+            if (req.body.remember) {
+                req.session.cookie.maxAge = 1000 * 60 * 3;
+            } else {
+                req.session.cookie.expires = false;
+            }
+            res.redirect('/');
+        });
+
+    //Profesor
+    app.post('/loginProfesor', passport.authenticate('local-loginP', {
             successRedirect : '/menu', // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
@@ -86,7 +110,7 @@ module.exports = function(app, passport,connection) {
     });
 
     // process the signup form
-    app.post('/signup', passport.authenticate('local-signup', {
+    app.post('/signup', passport.authenticate('local-signupA', {
         successRedirect : '/login', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages

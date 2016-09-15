@@ -9,5 +9,6 @@ module.exports = {
         'password': '1234'
     },
     'database': 'sada',
-    'users_table': 'alumno'
+    'users_table': 'alumno',
+    'profesor_table':'profesor'
 };

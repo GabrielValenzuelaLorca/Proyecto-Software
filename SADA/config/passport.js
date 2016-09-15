@@ -16,19 +16,37 @@ module.exports = function(passport,connection,dbconfig) {
     // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
-    passport.serializeUser(function(user, done) {
-        done(null, user.Rol);
-        console.log("esto es serial");
-        //console.log(user.Rol);
+    passport.serializeUser(function (user, done) {
+        if(user.Rut==undefined){//Es alumno
+            done(null, [user.Rol,1]);
+            console.log("esto es serial Alumno");
+            console.log(user.Rol);
+        }
+        else{//Es profe
+            done(null, [user.Rut,0]);
+            console.log("esto es serial Profesor");
+            console.log(user.Rut);
+        }
     });
 
+
     // used to deserialize the user
-    passport.deserializeUser(function(rol, done) {
-        connection.query("SELECT * FROM "+dbconfig.users_table+" WHERE Rol = ? ",[rol], function(err, rows){
-            done(err, rows[0]);
-            console.log("esto es deserial");
-            //console.log(rows[0]);
-        });
+    passport.deserializeUser(function(id, done) {
+        if(id[1]==1){//Es alumno
+            connection.query("SELECT * FROM "+dbconfig.users_table+" WHERE Rol = ? ",[id[0]], function(err, rows){
+                done(err, rows[0]);
+                console.log("esto es deserial Alumno");
+                console.log(rows[0]);
+            });
+        }else{//Es profe
+            connection.query("SELECT * FROM "+dbconfig.profesor_table+" WHERE Rut = ? ",[id[0]], function(err, rows){
+                done(err, rows[0]);
+                console.log("esto es deserial Profesor");
+                console.log(rows[0]);
+            });
+        }
+
+
     });
 
     // =========================================================================
@@ -36,7 +54,7 @@ module.exports = function(passport,connection,dbconfig) {
     // =========================================================================
 
     passport.use(
-        'local-signup',
+        'local-signupA',
         new LocalStrategy({
                 // by default, local strategy uses username and password, we will override with email
                 usernameField : 'email',
@@ -44,11 +62,11 @@ module.exports = function(passport,connection,dbconfig) {
                 passReqToCallback : true // allows us to pass back the entire request to the callback
             },
             function(req, email, password, done) {
-                console.log('signup:');
+                /*console.log('signup:');
                 console.log("email: "+email);
                 console.log("password: "+password);
                 console.log("username: "+req.body.username);
-                console.log("rol: "+req.body.rol);
+                console.log("rol: "+req.body.rol);*/
 
                 //Errores extras de formato
                 var rolcheck = req.body.rol;
@@ -83,7 +101,7 @@ module.exports = function(passport,connection,dbconfig) {
                     if (err)
                         return done(err);
                     if (rows.length) {//Busca si ya hay un email o rol registrado del form. Agrega errores correspondientes
-                        var messages2 = []
+                        var messages2 = [];
                         for(var j=0;j<rows.length;j++){
                             console.log("entre1");
                             if(rows[j].Correo==email){
@@ -129,8 +147,9 @@ module.exports = function(passport,connection,dbconfig) {
     // LOCAL LOGIN =============================================================
     // =========================================================================
 
+    //Login alumno
     passport.use(
-        'local-login',
+        'local-loginA',
         new LocalStrategy({
                 // by default, local strategy uses username and password, we will override with email
                 usernameField : 'email',
@@ -138,11 +157,47 @@ module.exports = function(passport,connection,dbconfig) {
                 passReqToCallback : true // allows us to pass back the entire request to the callback
             },
             function(req, email, password, done) { // callback with email and password from our form
-                console.log("login:");
+                /*console.log("login:");
                 console.log("email: "+email);
                 console.log("pass: "+password);
-                console.log("SELECT * FROM "+dbconfig.users_table+" WHERE Correo = ?",[email]);
+                console.log("SELECT * FROM "+dbconfig.users_table+" WHERE Correo = ?",[email]);*/
                 connection.query("SELECT * FROM "+dbconfig.users_table+" WHERE Correo = ?",[email], function(err, rows){
+                    if (err)
+                        return done(err);
+                    if (!rows.length) {
+                        return done(null, false, {message:'Email inválido.'}); // req.flash is the way to set flashdata using connect-flash
+                    }
+
+                    // if the user is found but the password is wrong
+                    /*if (!bcrypt.compareSync(password, rows[0].password))*/
+                    console.log("pass1: "+password);
+                    console.log("pass2: "+rows[0].Clave);
+                    if(password!=rows[0].Clave)
+                        return done(null, false, {message:'Contraseña incorrecta.'}); // create the loginMessage and save it to session as flashdata
+
+                    // all is well, return successful user
+                    console.log("rows[0]: "+rows[0]);
+                    return done(null, rows[0]);
+                });
+            })
+    );
+
+
+    //Login Profesor
+    passport.use(
+        'local-loginP',
+        new LocalStrategy({
+                // by default, local strategy uses username and password, we will override with email
+                usernameField : 'email',
+                passwordField : 'password',
+                passReqToCallback : true // allows us to pass back the entire request to the callback
+            },
+            function(req, email, password, done) { // callback with email and password from our form
+                /*console.log("login:");
+                console.log("email: "+email);
+                console.log("pass: "+password);
+                console.log("SELECT * FROM "+dbconfig.profesor_table+" WHERE Correo = ?",[email]);*/
+                connection.query("SELECT * FROM "+dbconfig.profesor_table+" WHERE Correo = ?",[email], function(err, rows){
                     if (err)
                         return done(err);
                     if (!rows.length) {

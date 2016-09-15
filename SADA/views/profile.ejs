@@ -14,11 +14,17 @@
                 <h3><span class="fa fa-user"></span> Local</h3>
 
                 <p>
+                    <%if (user.Rut==undefined) { %>
                     <strong>rol</strong>: <%= user.Rol %><br>
+                    <%}else{%>
+                    <strong>rut</strong>: <%= user.Rut %><br>
+                    <%}%>
                     <strong>nombre</strong>: <%= user.Nombre %><br>
                     <strong>email</strong>: <%= user.Correo %><br>
                     <strong>password</strong>: <%= user.Clave %><br>
+                    <%if(user.perfil_idperfil!=undefined){%>
                     <strong>perfil</strong>: <%= user.perfil_idperfil %>
+                    <%}%>
                 </p>
 
             </div>

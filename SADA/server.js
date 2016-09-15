@@ -28,7 +28,10 @@ connection.query('USE ' + dbconfig.database);
 
 
 //Passport
+
 require('./config/passport')(passport,connection,dbconfig); // pass passport for configuration
+//require('./config/passportProfesor')(passport,connection,dbconfig); // pass passport for configuration
+
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
