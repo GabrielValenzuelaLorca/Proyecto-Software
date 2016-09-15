@@ -1,0 +1,35 @@
+<%include layout%>
+
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><i class="fa fa-cog" aria-hidden="true"></i> Perfil</h1>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                <p>
+                    <%if (user.Rut==undefined) { %>
+                    <strong>rol</strong>: <%= user.Rol %><br>
+                    <%}else{%>
+                    <strong>rut</strong>: <%= user.Rut %><br>
+                    <%}%>
+                    <strong>nombre</strong>: <%= user.Nombre %><br>
+                    <strong>email</strong>: <%= user.Correo %><br>
+                    <strong>password</strong>: <%= user.Clave %><br>
+                    <%if(user.perfil_idperfil!=undefined){%>
+                    <strong>perfil</strong>: <%= user.perfil_idperfil %>
+                    <%}%>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

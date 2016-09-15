@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html ng-app="ngEncuesta">
+    <head>
+        <title><%=title%></title>
+        <!--links-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="s2tylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../stylesheets/style.css">
+        <!--scripts-->
+        <!--<script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+        --><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <!--angular scripts-->
+        <script src="../../ngEncuesta.js"></script>
+        <script src="../../controllers/activaEncuesta.js"></script>
+        <script src="../../controllers/quiz.js"></script>
+        <script src="../../factories/quizMetrics.js"></script>
+        <script src="../../factories/dataService.js"></script>
+
+        <style>
+            body { padding-top:20px; }
+            .center-btn{text-align:center;margin-top:50px;}
+            .page-header{margin-top:0px;}
+            .answer{padding:20px 20px;border-radius: 10px;border:1px solid #bbb;}
+            .answer2{border:1px solid #27abbb;}
+            .alert{margin-top:25px;}
+            .no-click{pointer-events: none;}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-sm-12 page-header">
+                <div class="form-group">
+                    <h1 class="text-center">Encuesta</h1>
+                </div>
+            </div>
+
+            <!-- Activar Encuesta -->
+            <div ng-controller="testCtrl as test" ng-hide="test.quizMetrics.encuestaActiva">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="center-btn">
+                            <button  class="btn btn-info" ng-click="test.activarEncuesta()">Empezar Encuesta</button>
+                            <a href="/logout"><button class="btn btn-default">
+                                    Cancelar
+                                </button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Encuesta -->
+            <div ng-controller="quizCtrl as quiz" ng-show="quiz.quizMetrics.encuestaActiva">
+
+                <!-- Progreso -->
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h2>Progreso:</h2>
+                        <div class="btn-toolbar" role="toolbar" aria-label="...">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button class="btn"
+                                ng-repeat="question in quiz.DataService.Preguntas"
+                                ng-class="{'btn-info':question.selected[0] !== null && question.selected[1] !== null && question.selected[2] !== null && question.selected[3] !== null,
+                                           'btn-danger':question.selected[0] == null || question.selected[1] == null || question.selected[2] == null || question.selected[3] == null}"
+                                ng-click="quiz.Respondido($index)"
+                                >{{$index+1}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="alert alert-danger" ng-show="quiz.error">
+                            Aún no has respondido todas las preguntas!
+                            <button class="close" ng-click="quiz.error = false">&times</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preguntas -->
+                <div class="row">
+                    <h3>Pregunta:          {{quiz.print}}</h3>
+                    <div class="well well-sm" ng-hide="quiz.finalise">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4>{{quiz.activeQuestion+1 + '. '+quiz.DataService.Preguntas[quiz.activeQuestion].pregunta}}</h4>
+
+                                <!-- Respuestas -->
+                                <div class="row">
+                                    <div class="col-sm-6" ng-repeat="answer in quiz.DataService.Preguntas[quiz.activeQuestion].respuestas">
+                                        <h4 class="answer"
+                                            ng-class="{'answer2':null != quiz.DataService.Preguntas[quiz.activeQuestion].selected[$index]}"
+                                            >
+                                            {{answer.answer}}
+                                            <div class="btn-toolbar pull-right" role="toolbar" aria-label="...">
+                                                <div class="btn-group" role="group" aria-label="..." ng-init="list=[1,2,3,4]">
+                                                    <button ng-class="{'btn':true,
+                                                                       'btn-info':quiz.DataService.Preguntas[quiz.activeQuestion].selected[$parent.$index]==i,
+                                                                       'no-click':(quiz.DataService.Preguntas[quiz.activeQuestion].selected[0]==i
+                                                                                  || quiz.DataService.Preguntas[quiz.activeQuestion].selected[1]==i
+                                                                                  || quiz.DataService.Preguntas[quiz.activeQuestion].selected[2]==i
+                                                                                  || quiz.DataService.Preguntas[quiz.activeQuestion].selected[3]==i)
+                                                                                  && quiz.DataService.Preguntas[quiz.activeQuestion].selected[$parent.$index]!=i,
+                                                                        'btn-default':!((quiz.DataService.Preguntas[quiz.activeQuestion].selected[0]==i
+                                                                                  || quiz.DataService.Preguntas[quiz.activeQuestion].selected[1]==i
+                                                                                  || quiz.DataService.Preguntas[quiz.activeQuestion].selected[2]==i
+                                                                                  || quiz.DataService.Preguntas[quiz.activeQuestion].selected[3]==i)
+                                                                                  && quiz.DataService.Preguntas[quiz.activeQuestion].selected[$parent.$index]!=i)
+                                                                       }"
+
+                                                            ng-click="quiz.selectAnswer($parent.$index,i)"
+                                                            ng-repeat="i in list"
+                                                    >{{i}}</button>
+                                                </div>
+                                            </div>
+                                            {{quiz.DataService.Preguntas[quiz.activeQuestion].selected[$index]}}
+
+                                        </h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button class="btn btn-info" ng-click="quiz.Respondido()">
+                            Continuar
+                        </button>
+                        <a href="/logout"><button class="btn btn-default pull-right">
+                            Cancelar
+                        </button></a>
+                    </div>
+
+
+                    <div class="well well-sm" ng-show="quiz.finalise">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <form action="/menu" method="post">
+                                    <h3>¿Seguro que quieres enviar tus respuestas?</h3>
+                                    <button type="submit" class="btn btn-success" ng-click="quiz.finaliseAnswers()">Enviar</button>
+                                    <input type="hidden" value={{quiz.result}} name="result">
+                                    <button type="button" class="btn btn-danger" ng-click="quiz.finalise = false">Atrás</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
