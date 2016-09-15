@@ -1,12 +1,11 @@
-﻿#Créditos por la plantilla 'node-express-passport-mysql' a Manjesh V (@manjeshpv)
--> https://github.com/manjeshpv/node-express-passport-mysql
+﻿##Instrucciones:
 
-#Instrucciones:
+1. Si es necesario ejecutar `npm install`
+1. Editar lo necesario para la BD en `config/database.js`
+1. Ejecutar `node server.js`
 
-Si es necesario ejecutar npm install
-Editar lo necesario para la BD en config/database.js
-Ejecutar node server.js
+##Pre-requisitos
 
-#
+1. Agregar a la tabla `perfil` los id's 1, 2, 3 y 4.
 
-Para crear usuarios, se necesita tener primero creado 4 perfiles en la BD -> (1,2,3,4)
+##Créditos por la plantilla 'node-express-passport-mysql' a Manjesh V (@manjeshpv) `https://github.com/manjeshpv/node-express-passport-mysql`

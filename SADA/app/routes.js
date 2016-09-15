@@ -30,21 +30,22 @@ module.exports = function(app, passport,connection) {
             res.render('encuesta.ejs',{title:title}); //
         }
         else{
-            res.render('menu.ejs',{title:title}); //
+            res.render('menu.ejs',{title:title,perfil:req.user.perfil_idperfil}); //
             console.log("menu queryget");
             console.log(req.user);
         }
     });
 
     app.post('/menu', function(req, res) {
-        connection.query('Update alumno set perfil_idperfil=1 where Rol = ?',[req.user.Rol],function (err,rows,fields) {
+
+        connection.query('Update alumno set perfil_idperfil= ? where Rol = ?',[req.body.result,req.user.Rol],function (err,rows,fields) {
            if(err )throw err;
         });
 
         console.log("menu querypost");
         console.log(req.user);
 
-        res.render('menu.ejs',{title:title}); //
+        res.render('menu.ejs',{title:title,perfil:req.body.result}); //
     });
 
     // =====================================

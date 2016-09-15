@@ -30,7 +30,6 @@ connection.query('USE ' + dbconfig.database);
 //Passport
 require('./config/passport')(passport,connection,dbconfig); // pass passport for configuration
 
-
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -39,8 +38,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//
+// ../
 app.use(express.static(path.join(__dirname, 'scripts')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //validator
 app.use(validator());

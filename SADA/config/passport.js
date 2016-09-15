@@ -19,7 +19,7 @@ module.exports = function(passport,connection,dbconfig) {
     passport.serializeUser(function(user, done) {
         done(null, user.Rol);
         console.log("esto es serial");
-        console.log(user.Rol);
+        //console.log(user.Rol);
     });
 
     // used to deserialize the user
@@ -27,7 +27,7 @@ module.exports = function(passport,connection,dbconfig) {
         connection.query("SELECT * FROM "+dbconfig.users_table+" WHERE Rol = ? ",[rol], function(err, rows){
             done(err, rows[0]);
             console.log("esto es deserial");
-            console.log(rows[0]);
+            //console.log(rows[0]);
         });
     });
 
@@ -51,9 +51,11 @@ module.exports = function(passport,connection,dbconfig) {
                 console.log("rol: "+req.body.rol);
 
                 //Errores extras de formato
-                var rolcheck = req.body.rol.toString();
-                console.log("rolcheck length is: "+rolcheck.length);
-                /*req.checkBody('rolcheck','Rol no válido (9 dígitos mínimo)').isLength({min:9});*/
+                var rolcheck = req.body.rol;
+                if(rolcheck.length!=9) {
+                    req.checkBody('rolcheck', 'Rol tiene que tener 9 dígitos').isLength(900);
+                }
+                //req.checkBody('req.body.rol', 'Rol tiene que tener 9 dígitos').isLength(9);
                 req.checkBody('password','Contraseña tiene que tener al menos 4 carácteres').isLength({min:4});
 
 
@@ -152,7 +154,7 @@ module.exports = function(passport,connection,dbconfig) {
                     console.log("pass1: "+password);
                     console.log("pass2: "+rows[0].Clave);
                     if(password!=rows[0].Clave)
-                        return done(null, false, {message:'Oops! Contraseña incorrecta.'}); // create the loginMessage and save it to session as flashdata
+                        return done(null, false, {message:'Contraseña incorrecta.'}); // create the loginMessage and save it to session as flashdata
 
                     // all is well, return successful user
                     console.log("rows[0]: "+rows[0]);

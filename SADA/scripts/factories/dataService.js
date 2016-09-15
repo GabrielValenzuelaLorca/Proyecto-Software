@@ -17,61 +17,61 @@
 
     var Preguntas = [
             {//P1
-                pregunta:'Pregunta 1',
+                pregunta:'Cuando aprendo...',
                 respuestas:[
                     {
-                        answer: '1uno'
+                        answer: "...me gusta vivir sensaciones"
                     },
                     {
-                        answer: '1dos'
+                        answer: "...me gusta pensar sobre ideas"
                     },
                     {
-                        answer: '1tres'
+                        answer: "...me gusta estar haciendo cosas"
                     },
                     {
-                        answer:'1cuatro'
+                        answer: "...me gusta observar y escuchar"
                     }
                 ],
-                selected:null,
-                correct:null
+                selected:[null,null,null,null],
+                ok:null
             },
             {//P2
                 pregunta:'Pregunta 2',
                 respuestas:[
                     {
-                        answer: '2uno'
+                        answer: 2
                     },
                     {
-                        answer: '2dos'
+                        answer: 2
                     },
                     {
-                        answer: '2tres'
+                        answer: 2
                     },
                     {
-                        answer:'2cuatro'
+                        answer: 2
                     }
                 ],
-                selected:null,
-                correct:null
+                selected:[null,null,null,null],
+                ok:null
             },
         {//P3
             pregunta:'Pregunta 3',
             respuestas:[
                 {
-                    answer: '3uno'
+                    answer: 3
                 },
                 {
-                    answer: '3dos'
+                    answer: 3
                 },
                 {
-                    answer: '3tres'
+                    answer: 3
                 },
                 {
-                    answer:'3cuatro'
+                    answer: 3
                 }
             ],
-            selected:null,
-            correct:null
+            selected:[null,null,null,null],
+            ok:null
         }
         ];
 })();
