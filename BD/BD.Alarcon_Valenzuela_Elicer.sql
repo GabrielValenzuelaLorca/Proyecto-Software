@@ -166,6 +166,7 @@ CREATE TABLE `plantilla` (
   `Valoración` int(11) DEFAULT NULL,
   `perfil_idperfil` int(11) NOT NULL,
   `Unidad_idUnidad` int(11) NOT NULL,
+  `Autor` int(1) NOT NULL,
   PRIMARY KEY (`idPlantilla`),
   UNIQUE KEY `idPlantilla_UNIQUE` (`idPlantilla`),
   KEY `fk_Plantilla_perfil1_idx` (`perfil_idperfil`),
@@ -196,7 +197,7 @@ CREATE TABLE `profesor` (
   `Nombre` varchar(45) NOT NULL,
   `Correo` varchar(45) NOT NULL,
   `Clave` varchar(45) NOT NULL,
-  `Admin?` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Admin?` int(1) NOT NULL,
   PRIMARY KEY (`Rut`),
   UNIQUE KEY `Rut_UNIQUE` (`Rut`),
   UNIQUE KEY `Correo_UNIQUE` (`Correo`)

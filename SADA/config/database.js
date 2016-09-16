@@ -6,7 +6,7 @@ module.exports = {
     'connection': {
         'host': 'localhost',
         'user': 'root',
-        'password': '1234'
+        'password': 'Templarios16'
     },
     'database': 'sada',
     'users_table': 'alumno',
