@@ -28,7 +28,7 @@
         <!-- show any messages that come back with authentication -->
         <% if (messages.length > 0){%>
         <% for(var i=0;i<messages.length;i++){%>
-        <div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <%= messages[i] %> <button class="close">&times</button></div>
+        <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"> <%= messages[i] %> <button class="close">&times</button></div>
         <% } %>
         <% } %>
 
