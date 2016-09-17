@@ -4,8 +4,45 @@
 
 
 // app/routes.js
-module.exports = function(app, passport,connection) {
+module.exports = function(app, passport,connection,transporter) {
     var title = 'theBrutalCorp';
+
+    //email thing
+    app.get('/recover',function(req,res){
+      res.render('recover.ejs',{message:[]});
+    });
+
+    app.post('/recover',function(req,res){
+
+      connection.query('SELECT * from alumno WHERE Correo = ?',[req.body.email], function(err, rows) {
+          if (err) throw err;
+          if (!rows.length) {
+              res.render('recover.ejs',{message:["Falló.",0]});
+          }
+          else {
+              var mailOptions = {
+                  from: 'theBrutalCorp <noreply@theBrutalCorp.com>', // sender address
+                  to: req.body.email, // list of receivers
+                  subject: 'Probando Clave', // Subject line
+                  text: 'Su contraseña es:'+rows[0].Clave, // plaintext body
+                  html: '<p>Su contraseña es: <b>'+rows[0].Clave+'</b></p>' // html body
+              };
+
+              // send mail with defined transport object
+              transporter.sendMail(mailOptions, function (error, info) {
+                  if (error) {
+                      console.log(error);
+                  } else {
+                      console.log('Message sent: ' + info.response);
+                  }
+              });
+
+              res.render('recover.ejs',{message:["Enviado.",1]});
+          }
+          });
+
+    });
+
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================

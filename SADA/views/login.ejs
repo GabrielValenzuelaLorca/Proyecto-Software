@@ -25,7 +25,7 @@
         <!-- show any messages that come back with authentication -->
         <% if (messages.length > 0){%>
         <% for(var i=0;i<messages.length;i++){%>
-        <div class="alert alert-danger"><%= messages[i] %> <button class="close">&times</button></div>
+        <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"><%= messages[i] %> <button class="close">&times</button></div>
         <% } %>
         <% } %>
 
@@ -49,7 +49,7 @@
         <!-- show any messages that come back with authentication -->
         <% if (messages.length > 0){%>
         <% for(var i=0;i<messages.length;i++){%>
-        <div class="alert alert-danger"><%= messages[i] %> <button class="close">&times</button></div>
+        <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"><%= messages[i] %> <button class="close">&times</button></div>
         <% } %>
         <% } %>
 
