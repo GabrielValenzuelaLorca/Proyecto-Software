@@ -177,7 +177,7 @@ module.exports = function(passport,connection,dbconfig) {
 
                     // all is well, return successful user
                     console.log("rows[0]: "+rows[0]);
-                    return done(null, rows[0]);
+                    return done(null, rows[0],{message:'Alumno ingresado al sistema correctamente.'});
                 });
             })
     );

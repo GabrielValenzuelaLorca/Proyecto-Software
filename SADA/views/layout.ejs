@@ -60,6 +60,11 @@
                         <li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> Ver perfil</a></li>
                         <li><a href="/about"><i class="fa fa-question" aria-hidden="true"></i> About</a></li>
                         <li role="separator" class="divider"></li>
+                        <% if(user.Rol == undefined){ %>
+                        <li><a href="/signup" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Alumno</a></li>
+                        <li><a href="#" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Profesor</a></li>
+                        <li role="separator" class="divider"></li>
+                        <% } %>
                         <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <strong>Logout</strong></a></li>
                     </ul>
                 </li>
@@ -71,4 +76,3 @@
 
 </body>
 </html>
-

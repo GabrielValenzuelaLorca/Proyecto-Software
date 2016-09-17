@@ -17,15 +17,15 @@ module.exports = function(app, passport,connection,transporter) {
       connection.query('SELECT * from alumno WHERE Correo = ?',[req.body.email], function(err, rows) {
           if (err) throw err;
           if (!rows.length) {
-              res.render('recover.ejs',{message:["Falló.",0]});
+              res.render('recover.ejs',{message:["Este email no está registrado aún.",0]});
           }
           else {
               var mailOptions = {
                   from: 'theBrutalCorp <noreply@theBrutalCorp.com>', // sender address
                   to: req.body.email, // list of receivers
-                  subject: 'Probando Clave', // Subject line
-                  text: 'Su contraseña es:'+rows[0].Clave, // plaintext body
-                  html: '<p>Su contraseña es: <b>'+rows[0].Clave+'</b></p>' // html body
+                  subject: 'Olvido de Contraseña', // Subject line
+                  text: 'Se ha solicitado recuperar contraseña para el sitio SADA.\n Su contraseña es:'+rows[0].Clave, // plaintext body
+                  html: '<p>Se ha solicitado recuperar contraseña para el sitio SADA.</p><br><p>Su contraseña actual es: <b>'+rows[0].Clave+'</b></p><br><br><p>theBrutalCorp.</p>' // html body
               };
 
               // send mail with defined transport object
@@ -37,7 +37,7 @@ module.exports = function(app, passport,connection,transporter) {
                   }
               });
 
-              res.render('recover.ejs',{message:["Enviado.",1]});
+              res.render('recover.ejs',{message:["Email enviado satisfactoriamente.",1]});
           }
           });
 
@@ -64,18 +64,18 @@ module.exports = function(app, passport,connection,transporter) {
 
     app.get('/menu',isLoggedIn, function(req, res) {
 
-        if(req.user.Rut==undefined) {//
+        if(req.user.Rut==undefined) {//Es alumno
             if (req.user.perfil_idperfil == null) {
-                res.render('encuesta.ejs', {title: title}); //
+                res.render('encuesta.ejs', {title: title}); //Te manda a encuesta
             }
             else {
-                res.render('menu.ejs', {title: title, perfil: req.user.perfil_idperfil}); //
+                res.render('menu.ejs', {title: title,user:req.user}); //Te redirige a menu
                 console.log("menu queryget");
                 console.log(req.user);
             }
-        }
+        }//Es profe, manda directamente a menu
         else{
-            res.render("menu.ejs");
+            res.render("menu.ejs",{user:req.user});
         }
 
     });
@@ -140,15 +140,22 @@ module.exports = function(app, passport,connection,transporter) {
     // SIGNUP ==============================
     // =====================================
     // show the signup form
-    app.get('/signup', function(req, res) {
+    app.get('/signup',isLoggedIn, function(req, res) {
         // render the page and pass in any flash data if it exists
-        var messages =req.flash('error');
-        res.render('signup.ejs', { title:title, messages:messages });
+        if(req.user.Rol==undefined){
+            var messages =req.flash('error');
+            res.render('signup.ejs', { title:title, messages:messages });
+        }
+        else{
+          console.log("redirigiendo a menu!!");
+          res.redirect('/menu');
+          //res.render('menu.ejs', { title:title, messages:messages,user:req.user });
+        }
     });
 
     // process the signup form
     app.post('/signup', passport.authenticate('local-signupA', {
-        successRedirect : '/login', // redirect to the secure profile section
+        successRedirect : '/signup', // redirect to the secure profile section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
