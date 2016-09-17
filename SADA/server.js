@@ -27,6 +27,16 @@ var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 
 
+var nodemailer = require('nodemailer');
+//mail theBrutalCorp
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'thebrutalcorp@gmail.com',
+        pass: 'eltriodelamuerte'
+    }
+});
+
 //Passport
 
 require('./config/passport')(passport,connection,dbconfig); // pass passport for configuration
@@ -63,7 +73,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport,connection); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport,connection,transporter); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);
