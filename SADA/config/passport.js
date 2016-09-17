@@ -136,7 +136,7 @@ module.exports = function(passport,connection,dbconfig) {
 
                         });
                         connection.query("SELECT * FROM "+dbconfig.users_table+" WHERE Correo = ?",[newUserMysql.email],function(err, rows) {
-                            return done(null, rows[0]);
+                            return done(null, false,req.flash('exito',['Se agregó al alumno exitosamente.']));
                         });
                     }
                 });

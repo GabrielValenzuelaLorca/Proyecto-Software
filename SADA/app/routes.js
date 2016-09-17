@@ -55,7 +55,7 @@ module.exports = function(app, passport,connection,transporter) {
     // =====================================
 
     app.get('/about',isLoggedIn, function(req, res) {
-        res.render('about.ejs',{title:title}); // about
+        res.render('about.ejs',{title:title,user:req.user}); // about
     });
 
     // =====================================
@@ -70,8 +70,8 @@ module.exports = function(app, passport,connection,transporter) {
             }
             else {
                 res.render('menu.ejs', {title: title,user:req.user}); //Te redirige a menu
-                console.log("menu queryget");
-                console.log(req.user);
+                console.log("GET /menu");
+                console.log("req.user = "+req.user);
             }
         }//Es profe, manda directamente a menu
         else{
@@ -144,7 +144,8 @@ module.exports = function(app, passport,connection,transporter) {
         // render the page and pass in any flash data if it exists
         if(req.user.Rol==undefined){
             var messages =req.flash('error');
-            res.render('signup.ejs', { title:title, messages:messages });
+            var exito =req.flash('exito');
+            res.render('signup.ejs', { title:title, messages:messages, exito:exito, user:req.user});
         }
         else{
           console.log("redirigiendo a menu!!");
@@ -170,7 +171,6 @@ module.exports = function(app, passport,connection,transporter) {
             title:title,
             user : req.user // get the user out of session and pass to template
         });
-        console.log("Loggedin-The user is: "+req.user);
     });
 
     // =====================================
