@@ -20,30 +20,24 @@ var favicon = require('serve-favicon');
 var path = require('path');
 
 // configuration ===============================================================
-// connect to our database
+// connect to DB
 var mysql = require('mysql');
 var dbconfig = require("./config/database");
 var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
 
-
-var nodemailer = require('nodemailer');
 //mail theBrutalCorp
+var nodemailer = require('nodemailer');
+var author = require('./config/auth_mail');
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
-    auth: {
-        user: 'thebrutalcorp@gmail.com',
-        pass: 'eltriodelamuerte'
-    }
-});
+    auth: author.auth
+})
 
 //Passport
-
 require('./config/passport')(passport,connection,dbconfig); // pass passport for configuration
-//require('./config/passportProfesor')(passport,connection,dbconfig); // pass passport for configuration
 
-
-// set up our express application
+// set up express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
@@ -73,7 +67,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport,connection,transporter); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport,connection,transporter); //pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);
