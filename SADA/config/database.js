@@ -8,7 +8,6 @@ module.exports = {
         'user': 'root',
         'password': '1234'
     },
-    'database': 'sada',
-    'users_table': 'alumno',
-    'profesor_table':'profesor'
+    'database': 'sada_db',
+    'users_table': 'usuario'
 };
