@@ -4,7 +4,7 @@
 
 
 // app/routes.js
-module.exports = function(app, passport, connection, transporter) {
+module.exports = function(app, passport, connection, transporter,dbconfig) {
     var title = 'theBrutalCorp';
 
     //email thing
@@ -16,7 +16,7 @@ module.exports = function(app, passport, connection, transporter) {
 
     app.post('/recover', function(req, res) {
 
-        connection.query('SELECT * FROM usuario WHERE Correo = ?', [req.body.email], function(err, rows) {
+        connection.query('SELECT * FROM '+ dbconfig.users_table+' WHERE Correo = ?', [req.body.email], function(err, rows) {
             if (err) throw err;
             if (!rows.length) {
                 res.render('recover.ejs', {
@@ -28,7 +28,7 @@ module.exports = function(app, passport, connection, transporter) {
                     to: 'rodrigo.elicer1@gmail.com', //req.body.email, // list of receivers
                     subject: 'Solicitud recuperación de Contraseña', // Subject line
                     text: 'Se ha solicitado recuperar contraseña para el sitio SADA.\n Su contraseña es:' + rows[0].Clave, // plaintext body
-                    html: '<p>Se ha solicitado recuperar contraseña para el sitio SADA.</p><br><p>Su contraseña actual es: <b>' + rows[0].Clave + '</b></p><br><br><p>theBrutalCorp.</p>' // html body
+                    html: '<p>Se ha solicitado recuperar la contraseña del sitio SADA para el siguiente correo:'+rows[0].Correo+'</p><br><p>Su contraseña actual es: <b>' + rows[0].Clave + '</b></p><br><br><p>theBrutalCorp.</p>' // html body
                 };
 
                 // send mail with defined transport object

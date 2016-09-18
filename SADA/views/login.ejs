@@ -15,12 +15,12 @@
 
 
     <style>
-        body 		{ padding-top:20px; }
+        body 		{ padding-top:20px;}
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="col-sm-6"><!-- Alumno -->
+    <div class="col-sm-6 col-sm-offset-3"><!-- Alumno -->
         <h1><span class="fa fa-sign-in"></span> Login</h1>
         <!-- show any messages that come back with authentication -->
         <% if (messages.length > 0){%>
@@ -42,9 +42,7 @@
             </div>
             <button type="submit" class="btn btn-info">Login</button>
         </form>
-    </div>
 
-    <div class="div col-md-12">
         <hr>
 
         <p>Ir a <a href="/">Inicio</a>.</p>
