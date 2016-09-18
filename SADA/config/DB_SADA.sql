@@ -46,15 +46,16 @@ DROP TABLE IF EXISTS `Sada_DB`.`usuario` ;
 
 CREATE TABLE IF NOT EXISTS `Sada_DB`.`usuario` (
   `Rut` INT(11) NOT NULL,
+  `Rol` INT(1) NULL DEFAULT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Correo` VARCHAR(45) NOT NULL,
   `Clave` VARCHAR(45) NOT NULL,
-  `Admin` INT(1) NOT NULL,
   `Profesor` INT(1) NOT NULL,
-  `Rol` INT(1) NULL DEFAULT NULL,
+  `Admin` INT(1) NOT NULL,
   `perfil_idperfil` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`Rut`),
   UNIQUE INDEX `Correo_UNIQUE` (`Correo` ASC),
+  UNIQUE INDEX `Rol_UNIQUE` (`Rol` ASC),
   INDEX `fk_usuario_perfil1_idx` (`perfil_idperfil` ASC),
   CONSTRAINT `fk_usuario_perfil1`
     FOREIGN KEY (`perfil_idperfil`)

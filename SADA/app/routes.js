@@ -79,9 +79,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                 res.render('encuesta.ejs', { title: title }); //Te manda a encuesta
             }
             else {
-                res.render('menu.ejs', { title: title, user: req.user }); //Te redirige a menu
-                console.log("GET /menu");
-                console.log("req.user = " + req.user);
+                res.render('menu.ejs', { user: req.user }); //Te redirige a menu
             }
         } //Es profe, manda directamente a menu
         else {
@@ -137,8 +135,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // =====================================
     // SIGNUP ==============================
     // =====================================
-    // show the signup form
-    app.get('/signup', isLoggedIn, function(req, res) {
+
+    // show the signup form / Alumno
+    app.get('/signup/alumno', isLoggedIn, function(req, res) {
         // render the page and pass in any flash data if it exists
         if (req.user.Profesor != 0) {
             var messages = req.flash('error');
@@ -147,19 +146,45 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                 title: title,
                 messages: messages,
                 exito: exito,
-                user: req.user
+                user: req.user,
+                isAlumno:true
             });
         } else {
-            console.log("redirigiendo a menu!!");
             res.redirect('/menu');
             //res.render('menu.ejs', { title:title, messages:messages,user:req.user });
         }
     });
 
     // process the signup form
-    app.post('/signup', passport.authenticate('local-signupA', {
-        successRedirect: '/signup', // redirect to the secure profile section
-        failureRedirect: '/signup', // redirect back to the signup page if there is an error
+    app.post('/signup/alumno', passport.authenticate('local-signupA', {
+        successRedirect: '/signup/alumno', // redirect to the secure profile section
+        failureRedirect: '/signup/alumno', // redirect back to the signup page if there is an error
+        failureFlash: true // allow flash messages
+    }));
+
+    // show the signup form / Profesor
+    app.get('/signup/profesor', isLoggedIn, function(req, res) {
+        // render the page and pass in any flash data if it exists
+        if (req.user.Profesor != 0) {
+            var messages = req.flash('error');
+            var exito = req.flash('exito');
+            res.render('signup.ejs', {
+                title: title,
+                messages: messages,
+                exito: exito,
+                user: req.user,
+                isAlumno:false
+            });
+        } else {
+            res.redirect('/menu');
+            //res.render('menu.ejs', { title:title, messages:messages,user:req.user });
+        }
+    });
+
+    // process the signup form
+    app.post('/signup/profesor', passport.authenticate('local-signupP', {
+        successRedirect: '/signup/profesor', // redirect to the secure profile section
+        failureRedirect: '/signup/profesor', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
 

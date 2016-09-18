@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>-->
     <!--angular scripts-->
 
 </head>
@@ -61,9 +61,9 @@
                         <li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> Ver perfil</a></li>
                         <li><a href="/about"><i class="fa fa-question" aria-hidden="true"></i> About</a></li>
                         <li role="separator" class="divider"></li>
-                        <% if(user.Profesor == 1){ %>
-                        <li><a href="/signup" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Alumno</a></li>
-                        <li><a href="#" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Profesor</a></li>
+                        <% if(user.Admin == 1){ %>
+                        <li><a href="/signup/alumno" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Alumno</a></li>
+                        <li><a href="/signup/profesor" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Profesor</a></li>
                         <li role="separator" class="divider"></li>
                         <% } %>
                         <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <strong>Logout</strong></a></li>
@@ -73,7 +73,6 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
 
 </body>
 </html>

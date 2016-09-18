@@ -71,7 +71,7 @@ module.exports = function(passport, connection, dbconfig) {
 
                 //Busca si hay alguien en la BD para luego agregarlo
                 console.log("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ?", [email]);
-                connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rol = ?", [email, req.body.rol], function(err, rows) {
+                connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ? OR Rol = ?", [email, req.body.rut,req.body.rol], function(err, rows) {
                     if (err)
                         return done(err);
                     if (rows.length) { //Busca si ya hay un email o rol registrado del form. Agrega errores correspondientes
@@ -79,12 +79,16 @@ module.exports = function(passport, connection, dbconfig) {
                         for (var j = 0; j < rows.length; j++) {
                             console.log("entre1");
                             if (rows[j].Correo == email) {
-                                console.log("entremail");
+                                console.log("entro_email");
                                 messages2.push('Este Email ya está en uso.');
                             }
+                            if (rows[j].Rut == req.body.rut) {
+                                console.log("entro_rut");
+                                messages2.push('Ya hay una cuenta asociada a este Rut');
+                            }
                             if (rows[j].Rol == req.body.rol) {
-                                console.log("entrerol");
-                                messages2.push('El Rol ya está en uso');
+                                console.log("entro_rol");
+                                messages2.push('Ya hay una cuenta asociada a este Rol');
                             }
                         }
 
@@ -108,7 +112,6 @@ module.exports = function(passport, connection, dbconfig) {
                         };
 
                         var insertQuery = "INSERT INTO " + dbconfig.users_table + " ( Rut, Nombre, Correo, Clave, Admin, Profesor, Rol ) values (?,?,?,?,?,?,?)";
-                        console.log(insertQuery, [newUserMysql.rol, newUserMysql.username, newUserMysql.email, newUserMysql.password]);
                         connection.query(insertQuery, [newUserMysql.rut, newUserMysql.name, newUserMysql.email, newUserMysql.password, newUserMysql.admin, newUserMysql.profesor, newUserMysql.rol], function(err, rows) {
                             console.log("newUserMysql: " + newUserMysql);
 
@@ -120,6 +123,90 @@ module.exports = function(passport, connection, dbconfig) {
                 });
             })
     );
+
+    passport.use(
+        'local-signupP',
+        new LocalStrategy({
+                // by default, local strategy uses username and password, we will override with email
+                usernameField: 'email',
+                passwordField: 'password',
+                passReqToCallback: true // allows us to pass back the entire request to the callback
+            },
+            function(req, email, password, done) {
+
+                //Errores extras de formato
+                req.checkBody('password', 'Contraseña tiene que tener al menos 4 carácteres').isLength({
+                    min: 4
+                });
+
+                var errors = req.validationErrors();
+                if (errors) {
+                    var messages2 = [];
+                    errors.forEach(function(error) {
+                        messages2.push(error.msg);
+                    });
+                    console.log("messages2: " + messages2);
+                    //Filtra errores para que no salgan repetidos
+                    var messages = messages2.filter(function(elem, index, self) {
+                        return index == self.indexOf(elem);
+                    });
+
+                    //Envía los errores por flash
+                    console.log("errores: " + errors);
+                    console.log("messages: " + messages);
+                    return done(null, false, req.flash('error', messages));
+                }
+
+                //Busca si hay alguien en la BD para luego agregarlo
+                console.log("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ?", [email]);
+                connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ?", [email, req.body.rut], function(err, rows) {
+                    if (err)
+                        return done(err);
+                    if (rows.length) { //Busca si ya hay un email o rol registrado del form. Agrega errores correspondientes
+                        var messages2 = [];
+                        for (var j = 0; j < rows.length; j++) {
+                            console.log("entre1");
+                            if (rows[j].Correo == email) {
+                                console.log("entremail");
+                                messages2.push('Este Email ya está en uso.');
+                            }
+                            if (rows[j].Rut == req.body.rut) {
+                                console.log("entrerut");
+                                messages2.push('Ya hay una cuenta asociada a este Rut');
+                            }
+                        }
+
+                        //Filtra repetidos
+                        var messages = messages2.filter(function(elem, index, self) {
+                            return index == self.indexOf(elem);
+                        });
+                        console.log("mensajitos: " + messages);
+                        return done(null, false, req.flash('error', messages));
+                    } else {
+                        // Se crea el usuario
+                        var newUserMysql = {
+                            email: email,
+                            password: /*bcrypt.hashSync(*/ password /*, null, null)*/ // use the generateHash function in our user model
+                                ,
+                            name: req.body.username,
+                            rut:req.body.rut,
+                            admin:0,
+                            profesor:1
+                        };
+
+                        var insertQuery = "INSERT INTO " + dbconfig.users_table + " ( Rut, Nombre, Correo, Clave, Admin, Profesor ) values (?,?,?,?,?,?)";
+                        connection.query(insertQuery, [newUserMysql.rut, newUserMysql.name, newUserMysql.email, newUserMysql.password, newUserMysql.admin, newUserMysql.profesor], function(err, rows) {
+                            console.log("newUserMysql: " + newUserMysql);
+
+                        });
+                        connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ?", [newUserMysql.email], function(err, rows) {
+                            return done(null, false, req.flash('exito', ['Se agregó al profesor exitosamente.']));
+                        });
+                    }
+                });
+            })
+    );
+
 
     // =========================================================================
     // LOCAL LOGIN =============================================================
