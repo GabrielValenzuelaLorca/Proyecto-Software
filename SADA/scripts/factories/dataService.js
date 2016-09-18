@@ -6,7 +6,7 @@
     angular
         .module('ngEncuesta')
         .factory("DataService",DataFactory);
-    
+
     function DataFactory() {
         var dataObj = {
             Preguntas:Preguntas
@@ -53,7 +53,7 @@
                 ],
                 selected:[null,null,null,null],
                 ok:null
-            },
+            }/*,
         {//P3
             pregunta:'Cuando estoy aprendiendo...',
             respuestas:[
@@ -243,6 +243,6 @@
             ],
             selected:[null,null,null,null],
             ok:null
-        }
+        }*/
         ];
 })();

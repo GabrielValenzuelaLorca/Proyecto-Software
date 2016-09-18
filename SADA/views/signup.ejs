@@ -1,66 +1,109 @@
-<!-- views/signup.ejs -->
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html ng-app="ngEncuesta" lang="en">
 <head>
-    <title><%= title%></title>
-    <!--links-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!--scripts-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-    <style>
-        body 		{ padding-top:20px; }
-    </style>
+  <title><%= title%></title>
+  <!-- links -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="s2tylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="../../stylesheets/style.css">
+  <!-- scripts -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="../../ngEncuesta.js"></script>
 </head>
 <body>
-<div class="container">
+  <div class="container">
 
-    <div class="col-sm-6 col-sm-offset-3">
+      <!-- Alumno -->
+      <div class="col-sm-6 col-sm-offset-3" ng-show=<%= isAlumno%>>
 
-        <h1><span class="fa fa-sign-in"></span> Signup</h1>
+          <h1><span class="fa fa-sign-in"></span> Agregar Alumno</h1>
 
-        <!-- show any messages that come back with authentication -->
-        <% if (messages.length > 0){%>
-        <% for(var i=0;i<messages.length;i++){%>
-        <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"> <%= messages[i] %> <button class="close">&times</button></div>
-        <% } %>
-        <% } %>
+          <!-- show any messages that come back with authentication -->
+          <% if (messages.length > 0){%>
+          <% for(var i=0;i<messages.length;i++){%>
+          <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"> <%= messages[i] %> <button class="close">&times</button></div>
+          <% } %>
+          <% } %>
+          <% if (exito.length > 0){%>
+          <% for(var i=0;i<exito.length;i++){%>
+          <div class="alert alert-success fade in" data-dismiss="alert" aria-label="close"> <%= exito[i] %> <button class="close">&times</button></div>
+          <% } %>
+          <% } %>
 
-        <!-- LOGIN FORM -->
-        <form action="/signup" method="post">
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" class="form-control" name="username" placeholder="Nombre" required>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
-            </div>
-            <div class="form-group">
-                <label>Rol</label>
-                <input type="number" class="form-control" name="rol" placeholder="123456789 (Sin dígito verificador)" required>
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" class="form-control" name="password" placeholder="Contraseña (Mínimo 4 carácteres)" required>
-            </div>
 
-            <button type="submit" class="btn btn-info">Signup</button>
-        </form>
+          <!-- SIGNUP FORM -->
+          <form action="/signup/alumno" method="post">
+              <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control" name="username" placeholder="Nombre" required>
+              </div>
+              <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
+              </div>
+              <div class="form-group">
+                  <label>Rol</label>
+                  <input type="number" class="form-control" name="rol" placeholder="123456789 (Sin dígito verificador)" required>
+              </div>
+              <div class="form-group">
+                  <label>Rut</label>
+                  <input type="number" class="form-control" name="rut" placeholder="123456789 (Sin dígito verificador)" required>
+              </div>
+              <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" class="form-control" name="password" placeholder="Contraseña (Mínimo 4 carácteres)" required>
+              </div>
 
-        <hr>
+              <button type="submit" class="btn btn-info">Agregar</button>
+              <a href="/menu"><button type="button" class="btn btn-default">Volver Atrás</button></a>
+          </form>
+      </div>
 
-        <p>Ya tienes una cuenta? <a href="/login">Login</a></p>
-        <p>Ir a <a href="/">Inicio</a>.</p>
+      <!-- Profesor -->
+      <div class="col-sm-6 col-sm-offset-3" ng-hide=<%= isAlumno%>>
 
-    </div>
+          <h1><span class="fa fa-sign-in"></span> Agregar Profesor</h1>
 
-</div>
+          <!-- show any messages that come back with authentication -->
+          <% if (messages.length > 0){%>
+          <% for(var i=0;i<messages.length;i++){%>
+          <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"> <%= messages[i] %> <button class="close">&times</button></div>
+          <% } %>
+          <% } %>
+          <% if (exito.length > 0){%>
+          <% for(var i=0;i<exito.length;i++){%>
+          <div class="alert alert-success fade in" data-dismiss="alert" aria-label="close"> <%= exito[i] %> <button class="close">&times</button></div>
+          <% } %>
+          <% } %>
+
+
+          <!-- SIGNUP FORM -->
+          <form action="/signup/profesor" method="post">
+              <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" class="form-control" name="username" placeholder="Nombre" required>
+              </div>
+              <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
+              </div>
+              <div class="form-group">
+                  <label>Rut</label>
+                  <input type="number" class="form-control" name="rut" placeholder="123456789 (Sin dígito verificador)" required>
+              </div>
+              <div class="form-group">
+                  <label>Contraseña</label>
+                  <input type="password" class="form-control" name="password" placeholder="Contraseña (Mínimo 4 carácteres)" required>
+              </div>
+
+              <button type="submit" class="btn btn-info">Agregar</button>
+              <a href="/menu"><button type="button" class="btn btn-default">Volver Atrás</button></a>
+          </form>
+      </div>
+
+  </div>
+
 </body>
 </html>
