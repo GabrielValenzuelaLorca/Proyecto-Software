@@ -1,24 +1,32 @@
 html{
   height: 100%;
   //border: 2px solid red;
+  //box-sizing: border-box
 }
 body{
   font: 14px "Lucida Grande", Arial, sans-serif;
-  height: 100%;
-  //border: 2px solid blue;
+  min-height: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #b2b2b2;
+  position: relative;
+  margin:0;
 }
 .menu{
   position:relative;
+  margin-bottom:110px;
   min-height: 100%;
   //border: 5px solid lightblue;
 }
 .index{
   min-height: 100%;
   //border: 5px solid lightblue;
+  position:relative;
+  margin-bottom:120px;
 }
 .footer-site{
   //border: 2px solid green;
-  position:relative;
+  position:absolute;
   right:0;
   left:0;
   bottom:0;
@@ -48,6 +56,13 @@ body{
 }
 .footer-nav a:hover{
   color:white;
+  text-decoration: none;
+}
+.recover-pass a{
+  color:#3366cc;
+}
+.recover-pass a:hover{
+  color:#0099cc;
   text-decoration: none;
 }
 #footer-text{

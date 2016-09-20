@@ -1,29 +1,34 @@
-
 // app/routes.js
 module.exports = function(app, passport, connection, transporter,dbconfig) {
 
-    var title = 'theBrutalCorp';
+    var title = 'SADA';
 
      // =====================================
-     // HOME PAGE  ========
+     // HOME PAGE  ==========================
      // =====================================
 
     app.get('/', function(req, res) {
+      if(req.user==undefined){
         var messages = req.flash('error');
         res.render('index.ejs', {
             title: title,
             messages: messages,
             recover:false,
         }); // inicio
+      }
+      else{
+        res.redirect('/menu');
+      }
     });
 
     // =====================================
-    // Email thingy  ========
+    // Email thingy  =======================
     // =====================================
 
     app.get('/recover', function(req, res) {
         res.render('index.ejs', {
             message: [],
+            title:title,
             recover:true
         });
     });
@@ -35,7 +40,8 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
             if (!rows.length) {
                 res.render('index.ejs', {
                     message: ["Este email no está registrado aún.", 0],
-                    recover:true
+                    recover:true,
+                    title:title
                 });
             } else {
                 var mailOptions = {
@@ -57,7 +63,8 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
 
                 res.render('index.ejs', {
                     message: ["Email enviado satisfactoriamente.", 1],
-                    recover:true
+                    recover:true,
+                    title:title
                 });
             }
         });
@@ -65,7 +72,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     });
 
     // =====================================
-    // ABOUT ========
+    // ABOUT ===============================
     // =====================================
 
     app.get('/about', isLoggedIn, function(req, res) {
@@ -76,7 +83,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     });
 
     // =====================================
-    // MENU ========
+    // MENU ================================
     // =====================================
 
     app.get('/menu', isLoggedIn, function(req, res) {
@@ -86,11 +93,11 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                 res.render('encuesta.ejs', { title: title }); //Te manda a encuesta
             }
             else {
-                res.render('menu.ejs', { user: req.user }); //Te redirige a menu
+                res.render('menu.ejs', { title:title, user: req.user }); //Te redirige a menu
             }
         } //Es profe, manda directamente a menu
         else {
-            res.render("menu.ejs", { user: req.user });
+            res.render("menu.ejs", { title:title, user: req.user });
         }
     });
 
@@ -188,7 +195,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     }));
 
     // =====================================
-    // Perfil =========================
+    // PERFIL ==============================
     // =====================================
 
     // we will want this protected so you have to be logged in to visit
@@ -208,6 +215,37 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         req.logout();
         res.redirect('/');
     });
+
+    // =====================================
+    // ERROR 404 NOT FOUND =================
+    // =====================================
+
+    app.get('/404', function(req, res, next){
+      // trigger a 404 since no other middleware
+      // will match /404 after this one, and we're not
+      // responding here
+      next();
+    });
+
+    app.use(function(req, res, next){
+      res.status(404);
+
+      // respond with html page
+      if (req.accepts('html')) {
+        res.render('404', { url: req.url });
+        return;
+      }
+
+      // respond with json
+      if (req.accepts('json')) {
+        res.send({ error: 'Not found' });
+        return;
+      }
+
+      // default to plain-text. send()
+      res.type('txt').send('Not found');
+    });
+
 };
 
 // route middleware to make sure

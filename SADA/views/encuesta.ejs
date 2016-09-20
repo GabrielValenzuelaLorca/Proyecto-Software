@@ -18,7 +18,6 @@
         <script src="../../factories/dataService.js"></script>
 
         <style>
-            body { padding-top:20px; }
             .center-btn{text-align:center;margin-top:50px;}
             .page-header{margin-top:0px;}
             .answer{padding:20px 20px;border-radius: 10px;border:1px solid #bbb;}
@@ -27,26 +26,46 @@
             .no-click{pointer-events: none;}
             //.row{border:1px solid red}
             .spacing{margin-top:30px;position: relative;}
-            .botones{margin-top:25px;}
-            //.progreso{margin-bottom: 20px;}
-            //.numbers{border:1px solid blue;padding:20px 0px 20px 25px;/*-ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);*/}
+            .botones{margin-top:25px;margin-bottom: 60px;}
+            //.numbers{border:1px solid blue;padding:20px 0px 20px 25px;}
         </style>
     </head>
     <body>
         <div class="container menu">
-            <div class="col-sm-12 page-header">
-                <div class="form-group">
-                    <h1 class="text-center">Encuesta</h1>
+            <div class="col-sm-12 ">
+                <div class="form-group page-header">
+                    <h2 class="text-center">Cuestionario de Aprendizaje</h2>
                 </div>
             </div>
 
             <!-- Activar Encuesta -->
             <div ng-controller="testCtrl as test" ng-hide="test.quizMetrics.encuestaActiva">
+
+              <div class="col-sm-12 ">
+                  <div class="col-xs-6 col-xs-offset-3 text-justify text-center help-block">
+                    <p>El siguiente cuestionario describe la manera en que tú aprendes y cómo afrontas las situaciones diarias de tu trabajo.
+                    Todos sabemos que las personas tienen diferentes formas de aprender; sin embargo, este cuestionario te ayudará a entender
+                    qué puede significar para tí tu estilo de aprendizaje.</p>
+                  </div>
+              </div>
+              <div class="col-sm-12 ">
+                  <div class="form-group ">
+                      <h2 class="text-center">Instrucciones</h2>
+
+                  </div>
+                  <div class="col-xs-6 col-xs-offset-3 text-justify text-center help-block">
+                    <p>A continuación se te pedirá que completes 12 frases. Cada frase puede terminarse de cuatro formas distintas.
+                    Ordena las cuatro opciones de cada frase según pienses que se ajustan a tu manera de aprender algo nuevo.
+                    Trata de pensar en situaciones recientes en las que te enfrentaste a algo nuevo. Numera con un <strong>4</strong> la terminación
+                    que <strong>mejor</strong> se ajuste a tu forma de aprender y con un <strong>1</strong> la que <strong>peor</strong> se ajuste.
+                    Asegúrate de asignar un número a todas las terminaciones de cada una de las 12 frases.</p>
+                  </div>
+              </div>
+
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="form-group">
                         <div class="center-btn">
-                            <button  class="btn btn-info" ng-click="test.activarEncuesta()">Empezar Encuesta</button>
+                            <button  class="btn btn-primary" ng-click="test.activarEncuesta()">Entendido! Empezar Encuesta</button>
                             <a href="/logout"><button class="btn btn-default">
                                     Cancelar
                                 </button></a>
@@ -59,9 +78,9 @@
             <div ng-controller="quizCtrl as quiz" ng-show="quiz.quizMetrics.encuestaActiva">
 
                 <!-- Progreso -->
-                <div class="row progreso">
+                <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <h2>Progreso:</h2>
+                        <h3>Progreso:</h3>
                         <div class="btn-toolbar" role="toolbar" aria-label="...">
                             <div class="btn-group" role="group" aria-label="...">
                                 <button class="btn"
@@ -84,7 +103,7 @@
 
                 <!-- Preguntas -->
                 <div class="row">
-                    <h3>Pregunta:          {{quiz.print}}</h3>
+                    <h3>Pregunta:          <!--{{quiz.print}}--></h3>
                     <div class="well well-lg" ng-hide="quiz.finalise">
                         <div class="row">
                             <div class="col-xs-12">
@@ -93,7 +112,7 @@
                                 <!-- Respuestas -->
                                     <div class="row spacing answer" ng-class="{'answer2':null != quiz.DataService.Preguntas[quiz.activeQuestion].selected[$index]}"
                                      ng-repeat="answer in quiz.DataService.Preguntas[quiz.activeQuestion].respuestas">
-                                        <h4 class="col-xs-12 col-sm-8 col-md-9 col-lg-10 "
+                                        <h4 class="col-xs-12 col-sm-8 col-md-9 col-lg-10 numbers"
                                             >
                                             {{answer.answer}}
 
@@ -125,10 +144,10 @@
                             </div>
                         </div>
                         <div class="botones">
-                          <button class="btn btn-info" ng-click="quiz.Respondido()">
+                          <button class="btn btn-primary pull-right" ng-click="quiz.Respondido()">
                               Continuar
                           </button>
-                          <a href="/logout"><button class="btn btn-default pull-right">
+                          <a href="/logout"><button class="btn btn-default pull-left">
                               Cancelar
                           </button></a>
                         </div>
@@ -151,7 +170,4 @@
 
             </div>
         </div>
-    </body>
-
-    <% include footer %>
-</html>
+        <% include footer_encuesta %>
