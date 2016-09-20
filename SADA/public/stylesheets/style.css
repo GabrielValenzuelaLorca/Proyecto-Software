@@ -1,8 +1,55 @@
-body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Arial, sans-serif;
+html{
+  height: 100%;
+  //border: 2px solid red;
 }
-
-a {
-    color: #00B7FF;
+body{
+  font: 14px "Lucida Grande", Arial, sans-serif;
+  height: 100%;
+  //border: 2px solid blue;
+}
+.menu{
+  position:relative;
+  min-height: 100%;
+  //border: 5px solid lightblue;
+}
+.index{
+  min-height: 100%;
+  //border: 5px solid lightblue;
+}
+.footer-site{
+  //border: 2px solid green;
+  position:relative;
+  right:0;
+  left:0;
+  bottom:0;
+  background-color: #222;
+  color:white;
+  width: 100%;
+}
+.bottom-footer{
+  border-top:1px solid #b2b2b2;
+  margin-top:10px;
+  padding-top:10px;
+  color:#b2b2b2;
+}
+.footer-nav{
+  text-align: right;
+  list-style:none;
+}
+.footer-nav li{
+  display:inline;
+}
+.footer-nav li:not(:first-child):before{
+  content:'|';
+  padding:0px 10px;
+}
+.footer-nav a{
+  color:#b2b2b2;
+}
+.footer-nav a:hover{
+  color:white;
+  text-decoration: none;
+}
+#footer-text{
+margin-top: 20px;
 }
