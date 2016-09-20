@@ -1,34 +1,35 @@
-<!DOCTYPE html>
-<html ng-app="ngEncuesta" lang="en">
-<head>
-  <title><%= title%></title>
-  <!-- links -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="s2tylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-  <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="../../stylesheets/style.css">
-  <!-- scripts -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-  <script src="../../ngEncuesta.js"></script>
-</head>
-<body>
-  <div class="container">
+<%include layout%>
+
+<style>
+  .menu{
+    margin-top: 0px;
+  }
+</style>
+
+<script src="../../ngEncuesta.js"></script>
+<script src="../../controllers/signup.js"></script>
+
+<div ng-app="ngEncuesta" class="menu">
+  <div class="container"  ng-controller="signupCtrl as signup">
 
       <!-- Alumno -->
-      <div class="col-sm-6 col-sm-offset-3" ng-show=<%= isAlumno%>>
+      <div class="col-sm-4 col-sm-offset-4" ng-show=<%= isAlumno%>>
 
-          <h1><span class="fa fa-sign-in"></span> Agregar Alumno</h1>
+          <h2 class="page-header"><span class="fa fa-sign-in"></span> Agregar Alumno</h2>
 
           <!-- show any messages that come back with authentication -->
           <% if (messages.length > 0){%>
           <% for(var i=0;i<messages.length;i++){%>
-          <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"> <%= messages[i] %> <button class="close">&times</button></div>
+          <div class="alert alert-danger fade in" ng-hide="signup.error">
+            <%= messages[i] %> <button class="close" ng-click="signup.error=true">&times;</button>
+          </div>
           <% } %>
           <% } %>
           <% if (exito.length > 0){%>
           <% for(var i=0;i<exito.length;i++){%>
-          <div class="alert alert-success fade in" data-dismiss="alert" aria-label="close"> <%= exito[i] %> <button class="close">&times</button></div>
+          <div class="alert alert-success fade in" ng-hide="signup.error">
+            <%= exito[i] %> <button class="close" ng-click="signup.error=true">&times;</button>
+          </div>
           <% } %>
           <% } %>
 
@@ -62,19 +63,23 @@
       </div>
 
       <!-- Profesor -->
-      <div class="col-sm-6 col-sm-offset-3" ng-hide=<%= isAlumno%>>
+      <div class="col-sm-4 col-sm-offset-4" ng-hide=<%= isAlumno%>>
 
-          <h1><span class="fa fa-sign-in"></span> Agregar Profesor</h1>
+          <h2 class="page-header"1><span class="fa fa-sign-in"></span> Agregar Profesor</h2>
 
           <!-- show any messages that come back with authentication -->
           <% if (messages.length > 0){%>
           <% for(var i=0;i<messages.length;i++){%>
-          <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"> <%= messages[i] %> <button class="close">&times</button></div>
+          <div class="alert alert-danger fade in" ng-hide="signup.error">
+            <%= messages[i] %> <button class="close" ng-click="signup.error=true">&times;</button>
+          </div>
           <% } %>
           <% } %>
           <% if (exito.length > 0){%>
           <% for(var i=0;i<exito.length;i++){%>
-          <div class="alert alert-success fade in" data-dismiss="alert" aria-label="close"> <%= exito[i] %> <button class="close">&times</button></div>
+          <div class="alert alert-success fade in" ng-hide="signup.error">
+            <%= exito[i] %> <button class="close" ng-click="signup.error=true">&times;</button>
+          </div>
           <% } %>
           <% } %>
 
@@ -102,8 +107,7 @@
               <a href="/menu"><button type="button" class="btn btn-default">Volver Atrás</button></a>
           </form>
       </div>
-
   </div>
+</div>
 
-</body>
-</html>
+<%include footer%>

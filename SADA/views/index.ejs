@@ -1,34 +1,25 @@
 <!-- views/index.ejs -->
-<!doctype html>
-<html>
-<head>
-    <title><%= title%></title>
-    <!--links-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
+<% include indexLayout%>
 
-    <!--scripts-->
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
-    <style>
-        body 	{ padding-top:80px; background: lightblue;}
-    </style>
-</head>
-<body>
+<div class="index">
+
     <div class="container">
-        <div class="jumbotron text-center">
-            <h1>Bienvenido a SADA!</h1>
-            <h3>Sistema adaptativo de aprendizaje.</h3>
 
-            <div>
-                <p>Login or Register:</p>
-                <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-                <a href="/recover" class="btn btn-warning"><i class="fa fa-key" aria-hidden="true"></i> ¿Olvidaste tu contraseña?</a>
-            </div>
+      <div class="col-md-8">
+        <h1>Bienvenido a SADA!</h1>
+        <h3>Sistema adaptativo de aprendizaje.</h3>
+      </div>
+      <div class="col-md-4">
+        <%if(recover==false){%>
+          <%include login%>
+        <%}else{%>
+          <%include recover%>
+        <%}%>
+      </div>
 
-        </div>
     </div>
-</body>
-</html>
+
+</div>
+
+<% include footer %>

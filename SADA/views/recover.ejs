@@ -1,46 +1,21 @@
-<!-- views/login.ejs -->
-<!doctype html>
-<html>
-<head>
-    <title>Recover</title>
-    <!--links-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!--scripts-->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <style>
-        body 		{ padding-top:20px; }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="col-sm-6 col-sm-offset-3">
-      <h1></span> Recuperar Contraseña</h1>
-      <% if (message.length > 0 && message[1]==0){%>
-      <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"><%= message[0] %> <button class="close">&times</button></div>
-      <% } %>
-      <% if (message.length > 0 && message[1]==1){%>
-      <div class="alert alert-success fade in" data-dismiss="alert" aria-label="close"><%= message[0] %> <button class="close">&times</button></div>
-      <% } %>
+<div class="col-md-4">
+  <h3 class=page-header> Recuperar Contraseña</h3>
+  <% if (message.length > 0 && message[1]==0){%>
+  <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close"><%= message[0] %> <button class="close">&times</button></div>
+  <% } %>
+  <% if (message.length > 0 && message[1]==1){%>
+  <div class="alert alert-success fade in" data-dismiss="alert" aria-label="close"><%= message[0] %> <button class="close">&times</button></div>
+  <% } %>
 
 
-      <!-- Recover FORM -->
-      <form action="/recover" method="post">
-              <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
-              </div>
-              <button type="submit" class="btn btn-warning">Solicitar Contraseña</button>
-      </form>
-      <hr>
+  <!-- Recover FORM -->
+  <form action="/recover" method="post">
+          <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
+          </div>
+          <button type="submit" class="btn btn-warning pull-left btn-sm">Solicitar Contraseña</button>
+          <a href="/"><button type="button" class="btn btn-default pull-right btn-sm">Atrás</button></a>
+  </form>
 
-      <p>Ir a <a href="/">Inicio</a>.</p>
-    </div>
 </div>
-</body>
-</html>

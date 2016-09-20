@@ -1,16 +1,30 @@
-/**
- * Created by rodri on 10-09-2016.
- */
-
 
 // app/routes.js
 module.exports = function(app, passport, connection, transporter,dbconfig) {
+
     var title = 'theBrutalCorp';
 
-    //email thing
+     // =====================================
+     // HOME PAGE  ========
+     // =====================================
+
+    app.get('/', function(req, res) {
+        var messages = req.flash('error');
+        res.render('index.ejs', {
+            title: title,
+            messages: messages,
+            recover:false,
+        }); // inicio
+    });
+
+    // =====================================
+    // Email thingy  ========
+    // =====================================
+
     app.get('/recover', function(req, res) {
-        res.render('recover.ejs', {
-            message: []
+        res.render('index.ejs', {
+            message: [],
+            recover:true
         });
     });
 
@@ -19,8 +33,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         connection.query('SELECT * FROM '+ dbconfig.users_table+' WHERE Correo = ?', [req.body.email], function(err, rows) {
             if (err) throw err;
             if (!rows.length) {
-                res.render('recover.ejs', {
-                    message: ["Este email no está registrado aún.", 0]
+                res.render('index.ejs', {
+                    message: ["Este email no está registrado aún.", 0],
+                    recover:true
                 });
             } else {
                 var mailOptions = {
@@ -40,21 +55,13 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                     }
                 });
 
-                res.render('recover.ejs', {
-                    message: ["Email enviado satisfactoriamente.", 1]
+                res.render('index.ejs', {
+                    message: ["Email enviado satisfactoriamente.", 1],
+                    recover:true
                 });
             }
         });
 
-    });
-
-    // =====================================
-    // HOME PAGE (with login links) ========
-    // =====================================
-    app.get('/', function(req, res) {
-        res.render('index.ejs', {
-            title: title
-        }); // inicio
     });
 
     // =====================================
@@ -107,18 +114,10 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function(req, res) {
-        var messages = req.flash('error');
-        // render the page and pass in any flash data if it exists
-        res.render('login.ejs', {
-            title: title,
-            messages: messages
-        });
-    });
 
     app.post('/login', passport.authenticate('local-login', {
             successRedirect: '/menu', // redirect to the secure profile section
-            failureRedirect: '/login', // redirect back to the signup page if there is an error
+            failureRedirect: '/', // redirect back to the signup page if there is an error
             failureFlash: true // allow flash messages
         }),
         function(req, res) {
@@ -189,8 +188,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     }));
 
     // =====================================
-    // PROFILE SECTION =========================
+    // Perfil =========================
     // =====================================
+
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
@@ -203,6 +203,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // =====================================
     // LOGOUT ==============================
     // =====================================
+
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
