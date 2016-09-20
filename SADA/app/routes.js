@@ -1,16 +1,35 @@
-/**
- * Created by rodri on 10-09-2016.
- */
-
-
 // app/routes.js
 module.exports = function(app, passport, connection, transporter,dbconfig) {
-    var title = 'theBrutalCorp';
 
-    //email thing
+    var title = 'SADA';
+
+     // =====================================
+     // HOME PAGE  ==========================
+     // =====================================
+
+    app.get('/', function(req, res) {
+      if(req.user==undefined){
+        var messages = req.flash('error');
+        res.render('index.ejs', {
+            title: title,
+            messages: messages,
+            recover:false,
+        }); // inicio
+      }
+      else{
+        res.redirect('/menu');
+      }
+    });
+
+    // =====================================
+    // Email thingy  =======================
+    // =====================================
+
     app.get('/recover', function(req, res) {
-        res.render('recover.ejs', {
-            message: []
+        res.render('index.ejs', {
+            message: [],
+            title:title,
+            recover:true
         });
     });
 
@@ -19,8 +38,10 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         connection.query('SELECT * FROM '+ dbconfig.users_table+' WHERE Correo = ?', [req.body.email], function(err, rows) {
             if (err) throw err;
             if (!rows.length) {
-                res.render('recover.ejs', {
-                    message: ["Este email no está registrado aún.", 0]
+                res.render('index.ejs', {
+                    message: ["Este email no está registrado aún.", 0],
+                    recover:true,
+                    title:title
                 });
             } else {
                 var mailOptions = {
@@ -40,8 +61,10 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                     }
                 });
 
-                res.render('recover.ejs', {
-                    message: ["Email enviado satisfactoriamente.", 1]
+                res.render('index.ejs', {
+                    message: ["Email enviado satisfactoriamente.", 1],
+                    recover:true,
+                    title:title
                 });
             }
         });
@@ -49,16 +72,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     });
 
     // =====================================
-    // HOME PAGE (with login links) ========
-    // =====================================
-    app.get('/', function(req, res) {
-        res.render('index.ejs', {
-            title: title
-        }); // inicio
-    });
-
-    // =====================================
-    // ABOUT ========
+    // ABOUT ===============================
     // =====================================
 
     app.get('/about', isLoggedIn, function(req, res) {
@@ -69,7 +83,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     });
 
     // =====================================
-    // MENU ========
+    // MENU ================================
     // =====================================
 
     app.get('/menu', isLoggedIn, function(req, res) {
@@ -79,11 +93,11 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                 res.render('encuesta.ejs', { title: title }); //Te manda a encuesta
             }
             else {
-                res.render('menu.ejs', { user: req.user }); //Te redirige a menu
+                res.render('menu.ejs', { title:title, user: req.user }); //Te redirige a menu
             }
         } //Es profe, manda directamente a menu
         else {
-            res.render("menu.ejs", { user: req.user });
+            res.render("menu.ejs", { title:title, user: req.user });
         }
     });
 
@@ -107,18 +121,10 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function(req, res) {
-        var messages = req.flash('error');
-        // render the page and pass in any flash data if it exists
-        res.render('login.ejs', {
-            title: title,
-            messages: messages
-        });
-    });
 
     app.post('/login', passport.authenticate('local-login', {
             successRedirect: '/menu', // redirect to the secure profile section
-            failureRedirect: '/login', // redirect back to the signup page if there is an error
+            failureRedirect: '/', // redirect back to the signup page if there is an error
             failureFlash: true // allow flash messages
         }),
         function(req, res) {
@@ -189,8 +195,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     }));
 
     // =====================================
-    // PROFILE SECTION =========================
+    // PERFIL ==============================
     // =====================================
+
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
@@ -203,10 +210,42 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // =====================================
     // LOGOUT ==============================
     // =====================================
+
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     });
+
+    // =====================================
+    // ERROR 404 NOT FOUND =================
+    // =====================================
+
+    app.get('/404', function(req, res, next){
+      // trigger a 404 since no other middleware
+      // will match /404 after this one, and we're not
+      // responding here
+      next();
+    });
+
+    app.use(function(req, res, next){
+      res.status(404);
+
+      // respond with html page
+      if (req.accepts('html')) {
+        res.render('404', { url: req.url });
+        return;
+      }
+
+      // respond with json
+      if (req.accepts('json')) {
+        res.send({ error: 'Not found' });
+        return;
+      }
+
+      // default to plain-text. send()
+      res.type('txt').send('Not found');
+    });
+
 };
 
 // route middleware to make sure

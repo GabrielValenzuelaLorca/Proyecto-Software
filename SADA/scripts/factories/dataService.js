@@ -42,18 +42,18 @@
                         answer: "...escucho y observo cuidadosamente"
                     },
                     {
-                        answer: "...confio en el pensamiento logico"
+                        answer: "...confío en el pensamiento lógico"
                     },
                     {
-                        answer: "...confio en mi intuicion y sentimientos"
+                        answer: "...confío en mi intuición y sentimientos"
                     },
                     {
-                        answer: "...trabajo duro para lograr las cosas"
+                        answer: "...trabajo duro para lograr hacer las cosas"
                     }
                 ],
                 selected:[null,null,null,null],
                 ok:null
-            }/*,
+            },
         {//P3
             pregunta:'Cuando estoy aprendiendo...',
             respuestas:[
@@ -86,7 +86,7 @@
                     answer: "...observando"
                 },
                 {
-                    answer: "pensando"
+                    answer: "...pensando"
                 }
             ],
             selected:[null,null,null,null],
@@ -99,7 +99,7 @@
                     answer: "...estoy abierto a nuevas experiencias"
                 },
                 {
-                    answer: "...observo rodos los aspectos del asunto"
+                    answer: "...observo todos los aspectos del asunto"
                 },
                 {
                     answer: "...me gusta analizar las cosas, descomponerlas en sus partes"
@@ -124,7 +124,7 @@
                     answer: "...soy una persona intuitiva"
                 },
                 {
-                    answer: "...soy una persona logica"
+                    answer: "...soy una persona lógica"
                 }
             ],
             selected:[null,null,null,null],
@@ -137,10 +137,10 @@
                     answer: "...la observación"
                 },
                 {
-                    answer: "...la relacion con otras personas"
+                    answer: "...la relación con otras personas"
                 },
                 {
-                    answer: "...las teorias racionales"
+                    answer: "...las teorías racionales"
                 },
                 {
                     answer: "...la oportunidad de probar y practicar"
@@ -156,7 +156,7 @@
                     answer: "...me gusta ver los resultados de mi trabajo"
                 },
                 {
-                    answer: "me gustan las ideas y las teorias"
+                    answer: "...me gustan las ideas y las teorías"
                 },
                 {
                     answer: "...me tomo mi tiempo antes de actuar"
@@ -172,23 +172,23 @@
             pregunta:'Aprendo mejor cuando...',
             respuestas:[
                 {
-                    answer: "...confio en mis observaciones"
+                    answer: "...confío en mis observaciones"
                 },
                 {
-                    answer: "...confio en mis sentimientos"
+                    answer: "...confío en mis sentimientos"
                 },
                 {
                     answer: "...puedo probar por mi cuenta"
                 },
                 {
-                    answer: "confio en mis ideas"
+                    answer: "...confío en mis ideas"
                 }
             ],
             selected:[null,null,null,null],
             ok:null
         },
         {//P10
-            pregunta:'Cuando estoy aprendiendo',
+            pregunta:'Cuando estoy aprendiendo...',
             respuestas:[
                 {
                     answer: "...soy una persona reservada"
@@ -216,7 +216,7 @@
                     answer: "...me gusta observar"
                 },
                 {
-                    answer: "...evaluo las cosas"
+                    answer: "...evalúo las cosas"
                 },
                 {
                     answer: "...me gusta ser activo"
@@ -238,11 +238,11 @@
                     answer: "...soy cuidadoso"
                 },
                 {
-                    answer: "soy practico"
+                    answer: "...soy práctico"
                 }
             ],
             selected:[null,null,null,null],
             ok:null
-        }*/
+        }
         ];
 })();
