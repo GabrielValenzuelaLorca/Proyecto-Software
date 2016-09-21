@@ -10,7 +10,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     app.get('/', function(req, res) {
       if(req.user==undefined){
         var messages = req.flash('error');
-        res.render('index.ejs', {
+        res.render('index/index.ejs', {
             title: title,
             messages: messages,
             recover:false,
@@ -26,7 +26,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // =====================================
 
     app.get('/recover', function(req, res) {
-        res.render('index.ejs', {
+        res.render('index/index.ejs', {
             message: [],
             title:title,
             recover:true
@@ -38,7 +38,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         connection.query('SELECT * FROM '+ dbconfig.users_table+' WHERE Correo = ?', [req.body.email], function(err, rows) {
             if (err) throw err;
             if (!rows.length) {
-                res.render('index.ejs', {
+                res.render('index/index.ejs', {
                     message: ["Este email no está registrado aún.", 0],
                     recover:true,
                     title:title
@@ -61,7 +61,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                     }
                 });
 
-                res.render('index.ejs', {
+                res.render('index/index.ejs', {
                     message: ["Email enviado satisfactoriamente.", 1],
                     recover:true,
                     title:title
@@ -76,7 +76,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // =====================================
 
     app.get('/about', isLoggedIn, function(req, res) {
-        res.render('about.ejs', {
+        res.render('menu/about.ejs', {
             title: title,
             user: req.user
         }); // about
@@ -90,14 +90,14 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
 
         if (req.user.Profesor == 0) { //Es alumno
             if (req.user.perfil_idperfil == null) {
-                res.render('encuesta.ejs', { title: title }); //Te manda a encuesta
+                res.render('menu/encuesta.ejs', { title: title }); //Te manda a encuesta
             }
             else {
-                res.render('menu.ejs', { title:title, user: req.user }); //Te redirige a menu
+                res.render('menu/menu.ejs', { title:title, user: req.user }); //Te redirige a menu
             }
         } //Es profe, manda directamente a menu
         else {
-            res.render("menu.ejs", { title:title, user: req.user });
+            res.render("menu/menu.ejs", { title:title, user: req.user });
         }
     });
 
@@ -110,7 +110,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         console.log("menu querypost");
         console.log(req.user);
 
-        res.render('menu.ejs', {
+        res.render('menu/menu.ejs', {
             title: title,
             perfil: req.body.result,
             user:req.user
@@ -148,7 +148,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         if (req.user.Profesor != 0) {
             var messages = req.flash('error');
             var exito = req.flash('exito');
-            res.render('signup.ejs', {
+            res.render('menu/signup.ejs', {
                 title: title,
                 messages: messages,
                 exito: exito,
@@ -174,7 +174,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         if (req.user.Profesor != 0) {
             var messages = req.flash('error');
             var exito = req.flash('exito');
-            res.render('signup.ejs', {
+            res.render('menu/signup.ejs', {
                 title: title,
                 messages: messages,
                 exito: exito,
@@ -201,7 +201,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
+        res.render('menu/profile.ejs', {
             title: title,
             user: req.user // get the user out of session and pass to template
         });
