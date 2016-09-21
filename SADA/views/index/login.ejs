@@ -1,0 +1,24 @@
+<h2 class="page-header">Login</h2>
+
+<% if (messages.length > 0){%>
+<% for(var i=0;i<messages.length;i++){%>
+<div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close">
+  <%= messages[i] %> <button class="close">&times;</button>
+</div>
+<% } %>
+<% } %>
+
+<form action="/login" method="post">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
+    </div>
+    <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm pull-left"><span class="fa fa-sign-in"></span> Login</button>
+    <div class="recover-pass">
+      <a class="pull-right" href="/recover"><i class="fa fa-lock " aria-hidden="true"></i> ¿Olvidaste tu contraseña?</a>
+    </div>
+</form>

@@ -1,0 +1,24 @@
+<!-- views/index.ejs -->
+<% include indexLayout%>
+
+<div class="index">
+
+    <div class="container">
+
+      <div class="col-sm-7 col-md-8">
+        <h1>Bienvenido a SADA!</h1>
+        <h3>Sistema adaptativo de aprendizaje.</h3>
+      </div>
+      <div class="col-sm-5 col-md-4">
+        <%if(recover==false){%>
+          <%include login%>
+        <%}else{%>
+          <%include recover%>
+        <%}%>
+      </div>
+
+    </div>
+
+</div>
+
+<% include ../footer %>
