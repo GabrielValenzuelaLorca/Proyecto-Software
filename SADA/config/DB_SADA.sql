@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `Sada_DB`.`usuario` (
   `Rol` INT(1) NULL DEFAULT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Correo` VARCHAR(45) NOT NULL,
-  `Clave` VARCHAR(45) NOT NULL,
+  `Clave` VARCHAR(150) NOT NULL,
   `Profesor` INT(1) NOT NULL,
   `Admin` INT(1) NOT NULL,
   `perfil_idperfil` INT(11) NULL DEFAULT NULL,
