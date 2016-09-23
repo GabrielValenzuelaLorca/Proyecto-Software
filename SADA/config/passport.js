@@ -47,8 +47,9 @@ module.exports = function(passport, connection, dbconfig) {
             function(req, email, password, done) {
 
                 //Errores extras de formato
-                req.checkBody('password', 'Contraseña tiene que tener al menos 4 carácteres').isLength({
-                    min: 4
+                req.checkBody('password', 'Contraseña tiene que contener entre 4 a 20 caracteres').isLength({
+                    min: 4,
+                    max: 20
                 });
 
                 var errors = req.validationErrors();
@@ -74,7 +75,7 @@ module.exports = function(passport, connection, dbconfig) {
                 connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ? OR Rol = ?", [email, req.body.rut,req.body.rol], function(err, rows) {
                     if (err)
                         return done(err);
-                    if (rows.length) { //Busca si ya hay un email o rol registrado del form. Agrega errores correspondientes
+                    if (rows.length) { //Busca si ya hay un email o rol o rut registrado del form. Agrega errores correspondientes
                         var messages2 = [];
                         for (var j = 0; j < rows.length; j++) {
                             console.log("entre1");
@@ -92,7 +93,7 @@ module.exports = function(passport, connection, dbconfig) {
                             }
                         }
 
-                        //Filtra repetidos
+                        //Filtra mensajes de error repetidos
                         var messages = messages2.filter(function(elem, index, self) {
                             return index == self.indexOf(elem);
                         });
@@ -102,15 +103,14 @@ module.exports = function(passport, connection, dbconfig) {
                         // Se crea el usuario
                         var newUserMysql = {
                             email: email,
-                            password: /*bcrypt.hashSync(*/ password /*, null, null)*/ // use the generateHash function in our user model
-                                ,
+                            password: bcrypt.hashSync(password, null, null), // use the generateHash function in our user model
                             name: req.body.username,
                             rol: req.body.rol,
                             rut:req.body.rut,
                             admin:0,
                             profesor:0
                         };
-
+                        console.log("SingupAlumno. La clave has es: "+newUserMysql.password);
                         var insertQuery = "INSERT INTO " + dbconfig.users_table + " ( Rut, Nombre, Correo, Clave, Admin, Profesor, Rol ) values (?,?,?,?,?,?,?)";
                         connection.query(insertQuery, [newUserMysql.rut, newUserMysql.name, newUserMysql.email, newUserMysql.password, newUserMysql.admin, newUserMysql.profesor, newUserMysql.rol], function(err, rows) {
                             console.log("newUserMysql: " + newUserMysql);
@@ -135,8 +135,9 @@ module.exports = function(passport, connection, dbconfig) {
             function(req, email, password, done) {
 
                 //Errores extras de formato
-                req.checkBody('password', 'Contraseña tiene que tener al menos 4 carácteres').isLength({
-                    min: 4
+                req.checkBody('password', 'Contraseña tiene que contener entre 4 a 20 caracteres').isLength({
+                    min: 4,
+                    max: 20
                 });
 
                 var errors = req.validationErrors();
@@ -186,8 +187,7 @@ module.exports = function(passport, connection, dbconfig) {
                         // Se crea el usuario
                         var newUserMysql = {
                             email: email,
-                            password: /*bcrypt.hashSync(*/ password /*, null, null)*/ // use the generateHash function in our user model
-                                ,
+                            password: bcrypt.hashSync( password, null, null), // use the generateHash function in our user model
                             name: req.body.username,
                             rut:req.body.rut,
                             admin:0,
@@ -207,12 +207,11 @@ module.exports = function(passport, connection, dbconfig) {
             })
     );
 
-
     // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
 
-    //Login alumno
+    //Login
     passport.use(
         'local-login',
         new LocalStrategy({
@@ -232,16 +231,18 @@ module.exports = function(passport, connection, dbconfig) {
                     }
 
                     // if the user is found but the password is wrong
-                    /*if (!bcrypt.compareSync(password, rows[0].password))*/
+                    if (!bcrypt.compareSync(password, rows[0].Clave)){
+                      return done(null, false, {
+                        message: 'Contraseña incorrecta.'
+                    })};
                     console.log("pass1: " + password);
                     console.log("pass2: " + rows[0].Clave);
-                    if (password != rows[0].Clave)
+                    /*if (password != rows[0].Clave)
                         return done(null, false, {
                             message: 'Contraseña incorrecta.'
-                        }); // create the loginMessage and save it to session as flashdata
+                        });*/ // create the loginMessage and save it to session as flashdata
 
                     // all is well, return successful user
-                    console.log("rows[0]: " + rows[0]);
                     return done(null, rows[0]);
                 });
             })

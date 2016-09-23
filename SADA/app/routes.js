@@ -1,7 +1,40 @@
+var bcrypt = require('bcrypt-nodejs');
+
 // app/routes.js
 module.exports = function(app, passport, connection, transporter,dbconfig) {
 
     var title = 'SADA';
+
+    // =====================================
+    // ADMIN PAGE  =========================
+    // =====================================
+
+    app.get('/admin',function(req,res){//Si no existe ningún admin, se puede ingresar a esta página
+      connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Admin = 1 ", function(err, rows) {
+        if (!rows.length){
+          res.render('admin.ejs',{title:title});
+        }
+        else{
+          res.redirect('/menu');
+        }
+      });
+    });
+
+    app.post('/admin',function(req,res){
+          // Se crea el usuario
+          var newUserMysql = {
+              email: req.body.email,
+              password: bcrypt.hashSync(req.body.password, null, null), // use the generateHash function in our user model
+              name: req.body.username,
+              rut:req.body.rut,
+              admin:1,
+              profesor:1
+          };
+          var insertQuery = "INSERT INTO " + dbconfig.users_table + " ( Rut, Nombre, Correo, Clave, Admin, Profesor) values (?,?,?,?,?,?)";
+          connection.query(insertQuery, [newUserMysql.rut, newUserMysql.name, newUserMysql.email, newUserMysql.password, newUserMysql.admin, newUserMysql.profesor], function(err, rows) {
+          });
+          res.send('Se agregó Admin correctamente');
+    });
 
      // =====================================
      // HOME PAGE  ==========================
@@ -9,17 +42,17 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
 
     app.get('/', function(req, res) {
       if(req.user==undefined){
-        var messages = req.flash('error');
-        res.render('index/index.ejs', {
-            title: title,
-            messages: messages,
-            recover:false,
-        }); // inicio
+          var messages = req.flash('error');
+          res.render('index/index.ejs', {
+              title: title,
+              messages: messages,
+              recover:false,
+          }); // inicio
       }
       else{
-        res.redirect('/menu');
+          res.redirect('/menu');
       }
-    });
+});
 
     // =====================================
     // Email thingy  =======================
@@ -31,6 +64,10 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
             title:title,
             recover:true
         });
+    });
+
+    app.post('/recover/change',function(req,res){
+      res.send(req.body.hola);
     });
 
     app.post('/recover', function(req, res) {
@@ -48,8 +85,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                     from: 'theBrutalCorp <noreply@theBrutalCorp.com>', // sender address
                     to: 'rodrigo.elicer1@gmail.com', //req.body.email, // list of receivers
                     subject: 'Solicitud recuperación de Contraseña', // Subject line
-                    text: 'Se ha solicitado recuperar contraseña para el sitio SADA.\n Su contraseña es:' + rows[0].Clave, // plaintext body
-                    html: '<p>Se ha solicitado recuperar la contraseña del sitio SADA para el siguiente correo:'+rows[0].Correo+'</p><br><p>Su contraseña actual es: <b>' + rows[0].Clave + '</b></p><br><br><p>theBrutalCorp.</p>' // html body
+                    text: 'Se ha solicitado recuperar contraseña para el sitio SADA.\n Su contraseña es: ' + rows[0].Clave, // plaintext body
+                    html: '<p>Se ha solicitado recuperar la contraseña del sitio SADA para el siguiente correo: '+rows[0].Correo+
+                          '</p><br><p>Su contraseña actual es: <b>' + rows[0].Clave + '</b></p><br><br><p>theBrutalCorp.</p><br>'  // html body
                 };
 
                 // send mail with defined transport object
@@ -120,7 +158,6 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // =====================================
     // LOGIN ===============================
     // =====================================
-    // show the login form
 
     app.post('/login', passport.authenticate('local-login', {
             successRedirect: '/menu', // redirect to the secure profile section
@@ -142,7 +179,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // SIGNUP ==============================
     // =====================================
 
-    // show the signup form / Alumno
+    // Alumno
     app.get('/signup/alumno', isLoggedIn, function(req, res) {
         // render the page and pass in any flash data if it exists
         if (req.user.Profesor != 0) {
@@ -168,7 +205,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
         failureFlash: true // allow flash messages
     }));
 
-    // show the signup form / Profesor
+    // Profesor
     app.get('/signup/profesor', isLoggedIn, function(req, res) {
         // render the page and pass in any flash data if it exists
         if (req.user.Profesor != 0) {
