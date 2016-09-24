@@ -13,16 +13,16 @@ body{
   margin:0;
 }
 .menu{
+  min-height: 100%;
   position:relative;
   margin-bottom:110px;
-  min-height: 100%;
   //border: 5px solid lightblue;
 }
 .index{
   min-height: 100%;
-  //border: 5px solid lightblue;
   position:relative;
   margin-bottom:150px;
+  //border: 5px solid lightblue;
 }
 .footer-site{
   //border: 2px solid green;
@@ -67,4 +67,7 @@ body{
 }
 #footer-text{
 margin-top: 20px;
+}
+.center-btn{
+  text-align:center;margin-top:50px;
 }
