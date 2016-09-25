@@ -138,7 +138,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
             } else {
                 var mailOptions = {
                     from: '<SADA noreply@theBrutalCorp.com>', // sender address
-                    to: 'rodrigo.elicer1@gmail.com', //req.body.email, // list of receivers
+                    to: /*'rodrigo.elicer1@gmail.com',*/ req.body.email, // list of receivers
                     subject: 'Solicitud recuperación de Contraseña', // Subject line
                     text: 'Se ha solicitado recuperar contraseña para el sitio SADA.\n Su contraseña es: ' + rows[0].Clave, // plaintext body
                     html: '<!DOCTYPE html>'+
