@@ -11,6 +11,7 @@ body{
   border-color: #b2b2b2;
   position: relative;
   margin:0;
+  //border: 2px solid blue;
 }
 .menu{
   min-height: 100%;
