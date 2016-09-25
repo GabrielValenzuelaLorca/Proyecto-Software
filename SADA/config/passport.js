@@ -235,8 +235,6 @@ module.exports = function(passport, connection, dbconfig) {
                       return done(null, false, {
                         message: 'Contraseña incorrecta.'
                     })};
-                    console.log("pass1: " + password);
-                    console.log("pass2: " + rows[0].Clave);
                     /*if (password != rows[0].Clave)
                         return done(null, false, {
                             message: 'Contraseña incorrecta.'

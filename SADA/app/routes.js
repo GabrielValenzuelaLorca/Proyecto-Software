@@ -1,3 +1,5 @@
+//*******no se utiliza este archivo, se cambió por routes2.js*******
+
 var bcrypt = require('bcrypt-nodejs');
 
 // app/routes.js
@@ -74,7 +76,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     app.post('/recover/changePass',function(req,res){
 
       if(req.body.password!=req.body.password2){
-        res.render('index/change_pass.ejs', {
+        res.render('index/recover_pass.ejs', {
             message: 'Contraseñas tienen que ser iguales',
             title:title,
             email:req.body.email,
@@ -83,7 +85,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
       }
       else{
         if(req.body.password.length<4 || req.body.password.length>20 ){
-          res.render('index/change_pass.ejs', {
+          res.render('index/recover_pass.ejs', {
               message: 'Contraseña tiene que contener entre 4 a 20 caracteres',
               title:title,
               email:req.body.email,
@@ -95,7 +97,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
           connection.query('SELECT * FROM '+dbconfig.users_table+' WHERE Correo = "'+req.body.email+'"',function (err,rows) {
             if (err) throw err;
             if(!rows.length){
-              res.render('index/change_pass.ejs', {
+              res.render('index/recover_pass.ejs', {
                   message: 'Usuario no encontrado',
                   title:title,
                   email:req.body.email,
@@ -107,7 +109,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
               connection.query(query,function (err,rows) {
                 if (err) throw err;
               });
-              res.render('index/change_pass.ejs', {
+              res.render('index/recover_pass.ejs', {
                   message: '',
                   title:title,
                   email:req.body.email,
@@ -119,9 +121,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
       }
     });
 
-    app.post('/recover/change_pass/form',function(req,res){
+    app.post('/recover/recover_pass/form',function(req,res){
 
-      res.render('index/change_pass.ejs', {
+      res.render('index/recover_pass.ejs', {
           message: [],
           title:title,
           email:req.body.email,
@@ -160,7 +162,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
                           '<body>'+
 
                             '<p>Se ha solicitado recuperar la contraseña del sitio SADA para el siguiente correo: '+rows[0].Correo+
-                            '<form method="post" class="inline" action="http://localhost:8080/recover/change_pass/form">'+
+                            '<form method="post" class="inline" action="http://localhost:8080/recover/recover_pass/form">'+
                               '<input type="hidden" name="email" value='+rows[0].Correo+'>'+
                               '<button type="submit" class="link-button">Cambiar Contraseña<button>'+
                             '</form>'+
@@ -321,6 +323,63 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
             title: title,
             user: req.user // get the user out of session and pass to template
         });
+    });
+
+    app.get('/change_pass',isLoggedIn, function(req,res){
+        res.render('menu/change_pass.ejs',{
+          title:title,
+          user: req.user,
+          message:"",
+          exito:false
+        });
+    });
+
+    app.post('/change_pass',function(req,res){
+      //req.body.curr_pass
+      //req.body.new_pass
+      //req.body.new_pass2
+      console.log('SELECT * FROM '+dbconfig.users_table+' WHERE Correo = '+req.user.Correo);
+      connection.query('SELECT * FROM '+dbconfig.users_table+' WHERE Correo = ?',[req.user.Correo],function(err,rows){
+        if (err) throw err;
+
+        if(!bcrypt.compareSync(req.body.curr_pass, rows[0].Clave)){
+          res.render('menu/change_pass.ejs',{
+            title:title,
+            user: req.user,
+            message:"Contraseña incorrecta",
+            exito:false
+          });
+        }
+        else if(req.body.new_pass!=req.body.new_pass2){
+          res.render('menu/change_pass.ejs',{
+            title:title,
+            user: req.user,
+            message:"Contraseñas no coinciden",
+            exito:false
+          });
+        }
+        else if(req.body.new_pass.length<4 || req.body.new_pass.length>20 ){
+          res.render('menu/change_pass.ejs', {
+              title:title,
+              user: req.user,
+              message: 'Contraseña tiene que contener entre 4 a 20 caracteres',
+              exito:false
+          });
+        }
+        else{
+          connection.query('UPDATE '+dbconfig.users_table+' SET Clave = ? WHERE Correo = ?',[bcrypt.hashSync(req.body.new_pass, null, null),req.user.Correo],function(err,rows){
+            if (err) throw err;
+          });
+          res.render('menu/change_pass.ejs', {
+              title:title,
+              user: req.user,
+              message: 'Contraseña cambiada exitosamente',
+              exito:true
+          });
+
+        }
+
+      });
     });
 
     // =====================================
