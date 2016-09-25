@@ -18,6 +18,11 @@
 
 <body>
 
-  <h4>Cannot find <%= url %></h4>
+  <% if (settings['verbose errors']) { %>
+    <pre><%= error.stack %></pre>
+  <% } else { %>
+    <h4>An error occurred!</h4>
+  <% } %>
+  <!--<h4>Error: <%= error.message %></h4>-->
 
-  <%include footer%>
+  <% include footer %>

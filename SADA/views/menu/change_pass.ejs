@@ -1,0 +1,58 @@
+<%include layout%>
+
+<style>
+  .botones{
+    margin-bottom: 45px;
+  }
+</style>
+
+<div class="menu row">
+  <div class="col-xs-4 col-xs-offset-4">
+
+    <div class="text-center">
+      <h3>Cambiar Contraseña</h3>
+    </div>
+
+    <% if (message.length > 0){%>
+      <% if (!exito) {%>
+        <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close">
+          <%= message %> <button class="close">&times;</button>
+        </div>
+      <% }else{ %>
+        <div class="alert alert-success fade in" data-dismiss="alert" aria-label="close">
+          <%= message %> <button class="close">&times;</button>
+        </div>
+    <% }} %>
+
+    <% if(!exito){ %>
+      <div class="well">
+        <form action="/change_pass" method="post">
+
+          <div class="form-group">
+              <label>Contraseña actual</label>
+              <input type="password" class="form-control" name="curr_pass" required>
+          </div>
+          <div class="form-group">
+              <label>Nueva contraseña</label>
+              <input type="password" class="form-control" name="new_pass" required>
+          </div>
+          <div class="form-group">
+              <label>Confirmar nueva contraseña</label>
+              <input type="password" class="form-control" name="new_pass2" required>
+          </div>
+
+          <div class="botones">
+            <button type="submit" class="btn btn-primary btn-sm pull-left">Cambiar contraseña</button>
+          </div>
+        </form>
+
+      </div>
+    <% }else{ %>
+      <div class="center-btn">
+        <a href="/menu"><button class="btn btn-primary">Volver a Menu</button></a>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<% include ../footer %>
