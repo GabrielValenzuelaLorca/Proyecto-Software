@@ -1,3 +1,9 @@
+<style>
+  .botones{
+    margin-bottom: 45px;
+  }
+</style>
+
 <h2 class="page-header">Login</h2>
 
 <% if (messages.length > 0){%>
@@ -7,18 +13,21 @@
 </div>
 <% } %>
 <% } %>
-
-<form action="/login" method="post">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
-    </div>
-    <div class="form-group">
-        <label>Contraseña</label>
-        <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
-    </div>
-    <button type="submit" class="btn btn-primary btn-sm pull-left"><span class="fa fa-sign-in"></span> Login</button>
-    <div class="recover-pass">
-      <a class="pull-right" href="/recover"><i class="fa fa-lock " aria-hidden="true"></i> ¿Olvidaste tu contraseña?</a>
-    </div>
-</form>
+<div class="well">
+  <form action="/login" method="post">
+      <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
+      </div>
+      <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+      </div>
+      <div class="botones">
+        <button type="submit" class="btn btn-primary btn-sm pull-left"><span class="fa fa-sign-in"></span> Login</button>
+        <div class="recover-pass">
+          <a class="pull-right" href="/recover"><i class="fa fa-lock " aria-hidden="true"></i> ¿Olvidó su contraseña?</a>
+        </div>
+      </div>
+  </form>
+</div>

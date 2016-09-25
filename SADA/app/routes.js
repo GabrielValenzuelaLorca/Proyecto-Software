@@ -55,15 +55,20 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
 });
 
     // =====================================
-    // EMAIL  ==============================
+    // EMAIL / RECOVER  ====================
     // =====================================
 
     app.get('/recover', function(req, res) {
+      if(req.user==undefined){
         res.render('index/index.ejs', {
             message: [],
             title:title,
             recover:true
         });
+      }
+      else{
+          res.redirect('/menu');
+      }
     });
 
     app.post('/recover/changePass',function(req,res){
