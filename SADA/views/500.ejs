@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title%></title>
+    <title>Error 404</title>
     <!--links-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -18,25 +18,11 @@
 
 <body>
 
-  <nav class="navbar navbar-default">
-      <div class="container-fluid">
+  <% if (settings['verbose errors']) { %>
+    <pre><%= error.stack %></pre>
+  <% } else { %>
+    <h4>An error occurred!</h4>
+  <% } %>
+  <!--<h4>Error: <%= error.message %></h4>-->
 
-          <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a href="/"><img class="navbar-brand" aria-hidden="true" src="../../img/escudo.png" height="100"></a>
-              <!--<a class="navbar-brand" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>-->
-          </div>
-
-          <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div>
-
-      </div>
-  </nav>
+  <% include footer %>

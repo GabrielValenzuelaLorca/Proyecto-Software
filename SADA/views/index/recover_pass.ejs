@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title%></title>
+    <!--links-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../stylesheets/style.css">
+    <!--scripts-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>-->
+    <!--angular scripts-->
+    <script src="../../ngEncuesta.js"></script>
+    <script src="../../controllers/signup.js"></script>
+
+    <style>
+      .butt{
+        text-align: center;
+      }
+    </style>
+
+</head>
+
+<body ng-app="ngEncuesta">
+
+  <div ng-controller="signupCtrl as signup" class="index">
+
+    <div class="col-sm-4 col-sm-offset-4" ng-show=<%= form %>>
+
+      <h3 class="page-header">Cambio de Contraseña</h3>
+
+      <% if(message.length>1){ %>
+        <div class="alert alert-danger fade in" ng-hide="signup.error">
+          <%= message %> <button class="close" ng-click="signup.error=true">&times;</button>
+        </div>
+      <% } %>
+
+      <form action="/recover/changePass" method="post">
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+        </div>
+        <div class="form-group">
+            <label>Confirmar Contraseña</label>
+            <input type="password" class="form-control" name="password2" placeholder="Contraseña" required>
+        </div>
+        <input type="hidden" name="email" value = <%= email %> >
+        <button type="submit" class="btn btn-primary">Cambiar Contraseña!</button>
+
+      </form>
+    </div>
+
+    <div class="col-sm-4 col-sm-offset-4" ng-hide=<%= form %>>
+      <h3 class="text-center page-header">Contraseña cambiada exitosamente!</h3>
+      <div class="center-btn">
+        <a href="/menu"><button class="butt btn btn-primary">Ir a Menu</button></a>
+      </div>
+    </div>
+
+  </div>
+
+<% include ../footer %>

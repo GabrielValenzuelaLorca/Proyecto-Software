@@ -17,14 +17,21 @@
         this.selectAnswer=selectAnswer;
         this.Respondido = Respondido;
         this.finaliseAnswers = finaliseAnswers;
+        this.Cancelar = Cancelar;
 
         this.activeQuestion = 0;
         this.error = false;
         this.finalise = false;
+        this.cancelar = false;
 
         var numResp = 0;
         this.result = 0;
 
+        this.activarEncuesta = activarEncuesta;
+
+        function activarEncuesta(param) {
+            quizMetrics.changeState(param);
+        }
 
         function setActiveQuestion(index) {
             if(index == undefined){
@@ -51,6 +58,16 @@
             this.print = "numresp: "+numResp + " / active: "+this.activeQuestion;
         }
 
+        function Cancelar(param){
+          if(param == true){
+            this.finalise = true;
+            this.cancelar = true;
+          }
+          else{
+            this.finalise = false;
+            this.cancelar = false;
+          }
+        }
 
         //Con parametro es por barra de progreso, sin parametro es por botón continuar
         function Respondido(param) {
@@ -94,14 +111,13 @@
                 }
             }
 
-
             if(param == undefined){
                 this.setActiveQuestion();
             }else{
                 this.setActiveQuestion(param);
             }
-        } 
-        
+        }
+
         function selectAnswer(index,val) {
             if(DataService.Preguntas[this.activeQuestion].selected[index] == val){
                 DataService.Preguntas[this.activeQuestion].selected[index] = null;
@@ -109,7 +125,7 @@
                 DataService.Preguntas[this.activeQuestion].selected[index] = val;
             }
         }
-        
+
         function finaliseAnswers() {//Hace el cálculo correspondiente para asignar perfil
             var quizLen = DataService.Preguntas.length;
             var CA = 0;
