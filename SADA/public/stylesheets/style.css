@@ -8,10 +8,10 @@ body{
   min-height: 100%;
   border-width: 1px;
   border-style: solid;
-  border-color: #b2b2b2;
+  //border-color: #b2b2b2;
   position: relative;
   margin:0;
-  //border: 2px solid blue;
+  background: url('../img/physic.jpg');
 }
 .menu{
   min-height: 100%;

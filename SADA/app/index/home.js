@@ -10,7 +10,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
        res.render('index/index.ejs', {
            title: title,
            messages: messages,
-           recover:false,
+           recover:false
        }); // inicio
    }
    else{
