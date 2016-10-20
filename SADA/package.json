@@ -1,5 +1,5 @@
 {
-  "name": "node-authentication",
+  "name": "sada-project",
   "main": "server.js",
   "scripts": {
     "start": "node ./server"

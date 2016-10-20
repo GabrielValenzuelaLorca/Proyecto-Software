@@ -4,7 +4,6 @@
 // server.js
 
 // set up ======================================================================
-// get all the tools we need
 var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -67,7 +66,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // routes ======================================================================
-require('./app/routes2.js')(app, passport, connection, transporter,dbconfig); //pass in our app and fully configured passport
+require('./app/routes.js')(app, passport, connection, transporter,dbconfig); //pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);

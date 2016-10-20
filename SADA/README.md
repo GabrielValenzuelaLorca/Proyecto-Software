@@ -15,7 +15,7 @@
 1. Moverse al directorio `SADA` ejecutando `cd SADA`
 1. Ejecutar el comando `npm install`
 1. Editar `user` y `password` en `config/database.js`
-1. Ejecutar `node server.js`
+1. Ejecutar `npm start`
 1. Ir al directorio `http://localhost:8080/`
 
 ##Pre-requisitos antes de ejecutar
