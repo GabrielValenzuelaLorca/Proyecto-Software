@@ -13,6 +13,14 @@ body{
   margin:0;
 }
 
+.c12{
+  min-height: 1px;
+  //float: left;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+}
+
 #header a img{
   margin:0;
   height:57px;
@@ -28,11 +36,35 @@ body{
   height: 50px;
 }
 
+
+.row.nav{
+  margin: 0 auto 15px auto;
+}
+.row.nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.nav{
+  //float:left;
+}
+ul.nav li{
+  padding: 0 0 2px 0;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  color: #0077ad;
+  text-decoration: none;
+}
+ul.nav a{
+  transition: all .2s linear;
+}
+
 .indexPanel{
   //margin-top:70px;
 }
 .indexLayout{
-  background-color: white;
+  //background-color: white;
   //background: url('../img/physic.jpg');
 }
 .index{
@@ -45,10 +77,7 @@ body{
 
 
 .menuLayout{
-  background-color: white;
-}
-.menu-navbar{
-  background-color: white;
+  //background-color: white;
 }
 .menu{
   min-height: 100%;
