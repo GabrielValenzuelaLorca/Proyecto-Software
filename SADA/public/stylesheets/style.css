@@ -11,7 +11,44 @@ body{
   //border-color: #b2b2b2;
   position: relative;
   margin:0;
-  background: url('../img/physic.jpg');
+}
+
+#header a img{
+  margin:0;
+  height:57px;
+}
+#header .brand{
+  padding: 15px 20px;
+}
+#header .since{
+  margin-top:0;
+  float:right;
+}
+#header .since img{
+  height: 50px;
+}
+
+.indexPanel{
+  //margin-top:70px;
+}
+.indexLayout{
+  background-color: white;
+  //background: url('../img/physic.jpg');
+}
+.index{
+  margin-top:20px;
+  min-height: 100%;
+  position:relative;
+  margin-bottom:150px;
+  //border: 5px solid lightblue;
+}
+
+
+.menuLayout{
+  background-color: white;
+}
+.menu-navbar{
+  background-color: white;
 }
 .menu{
   min-height: 100%;
@@ -19,12 +56,8 @@ body{
   margin-bottom:110px;
   //border: 5px solid lightblue;
 }
-.index{
-  min-height: 100%;
-  position:relative;
-  margin-bottom:150px;
-  //border: 5px solid lightblue;
-}
+
+
 .footer-site{
   //border: 2px solid green;
   position:absolute;
@@ -69,6 +102,7 @@ body{
 #footer-text{
 margin-top: 20px;
 }
+
 .center-btn{
   text-align:center;margin-top:50px;
 }
