@@ -56,7 +56,7 @@ ul.nav li{
   color: #0077ad;
   text-decoration: none;
 }
-ul.nav a{
+ul.nav a,button{
   transition: all .2s linear;
 }
 

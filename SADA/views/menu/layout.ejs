@@ -32,29 +32,30 @@
       </div>
 
       <div class="c12 nav">
+
         <nav id=nav>
-          <ul class="nav">
-            <li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> Ver perfil</a></li>
+          <ul class="nav navbar-left">
             <li><a href="/about"><i class="fa fa-question" aria-hidden="true"></i> About</a></li>
             <li role="separator" class="divider"></li>
             <% if(user.Admin == 1){ %>
             <li><a href="/signup/alumno" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Alumno</a></li>
             <li><a href="/signup/profesor" ><i class="fa fa-user-plus" aria-hidden="true"></i> Agregar Profesor</a></li>
-            <li role="separator" class="divider"></li>
             <% } %>
+          </ul>
+          <ul class="nav navbar-right">
             <li style="float:right;">
               <div class="dropwdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Usuario
+                  Usuario <span class="caret"></span></a>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
+                  <li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> Ver perfil</a></li>
+                  <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <strong>Logout</strong></a></li>
                 </ul>
               </div>
             </li>
-            <li style="float:right;"><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <strong>Logout</strong></a></li>
           </ul>
+
         </nav>
       </div>
     </div>
