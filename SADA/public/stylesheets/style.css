@@ -8,10 +8,70 @@ body{
   min-height: 100%;
   border-width: 1px;
   border-style: solid;
-  //border-color: #b2b2b2;
+  border-color: white;
   position: relative;
   margin:0;
-  background: url('../img/physic.jpg');
+}
+
+#header a img{
+  margin:0;
+  height:57px;
+}
+#header .brand{
+  padding: 15px 20px;
+}
+#header .since{
+  margin-top:0;
+  float:right;
+}
+#header .since img{
+  height: 50px;
+}
+
+
+.row.nav{
+  margin: 0 auto 15px auto;
+}
+.row.nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.nav{
+  //float:left;
+}
+ul.nav.navbar-left li{
+  display: inline-block;
+}
+ul.nav li{
+  padding: 0 0 2px 0;
+  position: relative;
+  outline: none;
+  color: #0077ad;
+  text-decoration: none;
+}
+ul.nav a,button{
+  transition: all .2s linear;
+}
+
+.indexPanel{
+  //margin-top:70px;
+}
+.indexLayout{
+  //background-color: white;
+  //background: url('../img/physic.jpg');
+}
+.index{
+  margin-top:20px;
+  min-height: 100%;
+  position:relative;
+  margin-bottom:150px;
+  //border: 5px solid lightblue;
+}
+
+
+.menuLayout{
+  //background-color: white;
 }
 .menu{
   min-height: 100%;
@@ -19,12 +79,8 @@ body{
   margin-bottom:110px;
   //border: 5px solid lightblue;
 }
-.index{
-  min-height: 100%;
-  position:relative;
-  margin-bottom:150px;
-  //border: 5px solid lightblue;
-}
+
+
 .footer-site{
   //border: 2px solid green;
   position:absolute;
@@ -69,6 +125,68 @@ body{
 #footer-text{
 margin-top: 20px;
 }
+
 .center-btn{
   text-align:center;margin-top:50px;
+}
+
+.c4, .c12, .c8{
+  min-height: 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+}
+
+.c12{
+  width:100%;
+}
+.c4{
+  width:33.33%;
+}
+.c8{
+  width:66.66%;
+}
+
+.signup a{
+  background: #28a4e0;
+  color: #fff;
+  border-bottom: 1px solid #2598cf;
+  display: block;
+  padding: 20px;
+  margin: 0;
+  text-decoration: none;
+  transition: all .2s linear;
+}
+
+.ramos, .signup{
+  float:left;
+  padding-left: 35px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+.ramos a{
+  background: #0077ad;
+  color: #fff;
+  border-bottom: 1px solid #006492;
+  display: block;
+  padding: 20px;
+  margin: 0;
+  text-decoration: none;
+  transition: all .2s linear;
+}
+
+.ramos a:hover{
+  background: #006492;
+}
+.signup a:hover{
+  background: #2598cf;
+}
+
+.ramos-img{
+  padding-right:20px;
+}
+
+.ramos-img img{
+  border: 1px solid gray;
+  width: 100%;
 }

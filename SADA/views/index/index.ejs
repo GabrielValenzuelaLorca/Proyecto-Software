@@ -5,19 +5,25 @@
 
     <div class="container">
 
-      <div class="col-sm-7 col-md-8">
-        <h1>Bienvenido a SADA!</h1>
-        <h3>Sistema adaptativo de aprendizaje.</h3>
-        <p class="help-block">*Más info por agregar acá...</p>
-      </div>
-      <div class="col-sm-5 col-md-4">
-        <%if(recover==false){%>
-          <%include login%>
-        <%}else{%>
-          <%include recover%>
-        <%}%>
-      </div>
+      <div class="row">
 
+        <div class="indexPanel">
+          <div class="col-sm-7 col-md-8">
+            <h1>Bienvenido a SADA!</h1>
+            <h3>Sistema adaptativo de aprendizaje.</h3>
+            <p class="help-block">*Más info por agregar acá...</p>
+          </div>
+        </div>
+
+        <div class="col-sm-5 col-md-4">
+          <%if(recover==false){%>
+            <%include login%>
+          <%}else{%>
+            <%include recover%>
+          <%}%>
+        </div>
+
+      </div>
     </div>
 
 </div>
