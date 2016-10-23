@@ -4,6 +4,19 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
   // SIGNUP ==============================
   // =====================================
 
+  app.get('/signup', isLoggedIn, function(req, res) {
+    if (req.user.Profesor != 0) {
+        res.render('menu/signup.ejs', {
+            title: title,
+            isAlumno:null,
+            user: req.user
+        });
+    }
+    else {
+        res.redirect('/menu');
+    }
+  });
+
   // Alumno
   app.get('/signup/alumno', isLoggedIn, function(req, res) {
       // render the page and pass in any flash data if it exists
@@ -19,7 +32,6 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
           });
       } else {
           res.redirect('/menu');
-          //res.render('menu.ejs', { title:title, messages:messages,user:req.user });
       }
   });
 
