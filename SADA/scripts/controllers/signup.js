@@ -7,6 +7,7 @@
     function signupController(){
 
         this.error = false;
+        this.isAlumno = null;
     }
 
 })();

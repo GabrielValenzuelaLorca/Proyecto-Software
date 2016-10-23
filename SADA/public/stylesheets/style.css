@@ -130,24 +130,41 @@ margin-top: 20px;
   text-align:center;margin-top:50px;
 }
 
-.c4, .c12, .c8{
+.c4, .c5, .c6, .c7, .c12, .c8{
   min-height: 1px;
   padding-left: 20px;
   padding-right: 20px;
   position: relative;
 }
 
-.c12{
-  width:100%;
-}
 .c4{
   width:33.33%;
+}
+.c5{
+  width: 41.66%;
+}
+.c6{
+  width: 50%;
+}
+.c7{
+  width: 58.33%
 }
 .c8{
   width:66.66%;
 }
+.c12{
+  width:100%;
+}
 
-.signup a{
+.signup-form{
+  float: right;
+}
+
+.signup-agregar{
+  float:left;
+}
+
+.signup-agregar a{
   background: #28a4e0;
   color: #fff;
   border-bottom: 1px solid #2598cf;
@@ -178,7 +195,8 @@ margin-top: 20px;
 .ramos a:hover{
   background: #006492;
 }
-.signup a:hover{
+.signup-agregar a:hover{
+  cursor: pointer;
   background: #2598cf;
 }
 
@@ -190,3 +208,6 @@ margin-top: 20px;
   border: 1px solid gray;
   width: 100%;
 }
+
+/* reset + grid + mediaqueries */
+@media handheld, only screen and (max-width: 700px), only screen and (max-device-width: 700px) and (orientation:portrait){body{font-size:100%}.row{margin-bottom:0!important}.c1,.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{width:100%;margin-right:0;margin-left:0;margin-bottom:20px}}
