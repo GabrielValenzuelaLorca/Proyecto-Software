@@ -14,8 +14,8 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     require('./index/login.js')(app, passport, connection, transporter,dbconfig,title,bcrypt);
 
     //Menu page
+    require('./menu/menu.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn_Encuesta);
     require('./menu/about.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
-    require('./menu/menu.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/signup.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/perfil.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/ramos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
@@ -80,6 +80,24 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+      if(req.user.Profesor == 0 && req.user.perfil_idperfil != null){
+        return next();
+      }
+      else if(req.user.Profesor == 1){
+        return next();
+      }
+      else{
+        res.redirect('/');
+      }
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
+function isLoggedIn_Encuesta(req, res, next) {
 
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
