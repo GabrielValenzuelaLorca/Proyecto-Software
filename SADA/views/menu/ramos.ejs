@@ -1,18 +1,17 @@
-<%include layout%>
+<%include ../layout %>
+<%include nav %>
 
 <div class="menu container">
   <div class="row">
     <section class="col-sm-4 ramos">
 
-      <form action="/ramos" id="form1" method="post">
-          <input type="hidden" name="id_ramo" value= <%= rows[0].idRamo %> >
-          <input type="hidden" name="nombre_ramo" value= <%= rows[0].Nombre %> >
-          <input type="hidden" name="sigla_ramo" value= <%= rows[0].Sigla %> >
-          <a href="#" onclick="document.getElementById('form1').submit();"><%= rows[0].Nombre%></a>
-      </form>
+      <a href="/ramos/120"><%= rows[0].Nombre%></a>
+
+      <!--<form action="/ramos/120" id="form1" method="post">
+          <input type="hidden" name="ramo" value= <%= rows[0].Sigla %> >
+      </form>-->
 
       <a href="#" onclick="document.getElementById('form2').submit();"><%= rows[1].Nombre%></a>
-
 
     </section>
 

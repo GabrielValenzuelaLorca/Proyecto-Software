@@ -57,10 +57,7 @@ ul.nav a,button{
 .indexPanel{
   //margin-top:70px;
 }
-.indexLayout{
-  //background-color: white;
-  //background: url('../img/physic.jpg');
-}
+
 .index{
   margin-top:20px;
   min-height: 100%;
@@ -69,10 +66,6 @@ ul.nav a,button{
   //border: 5px solid lightblue;
 }
 
-
-.menuLayout{
-  //background-color: white;
-}
 .menu{
   min-height: 100%;
   position:relative;

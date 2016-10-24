@@ -45,13 +45,13 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
 
       // respond with html page
       if (req.accepts('html')) {
-        res.render('404', { url: req.url });
+        res.render('404', { url: req.url, title:title });
         return;
       }
 
       // respond with json
       if (req.accepts('json')) {
-        res.send({ error: 'Not found' });
+        res.send({ error: 'Not found', title:title});
         return;
       }
 
@@ -73,7 +73,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
       // here and next(err) appropriately, or if
       // we possibly recovered from the error, simply next().
       res.status(err.status || 500);
-      res.render('500', { error: err });
+      res.render('500', { error: err, title:title});
       console.log(err.message);
     });
 };
