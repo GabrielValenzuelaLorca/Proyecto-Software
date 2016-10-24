@@ -8,7 +8,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
       res.render('menu/about.ejs', {
           title: title,
           user: req.user
-      }); // about
+      });
   });
 
 }

@@ -1,11 +1,20 @@
 <%include layout%>
 
 <div class="menu container">
-
   <div class="row">
-    <div class="well col-sm-4">
-      <h4>Menú Principal aún por mejorar...</h4>
-    </div>
+    <section class="col-sm-4 ramos">
+
+      <form action="/ramos" id="form1" method="post">
+          <input type="hidden" name="id_ramo" value= <%= rows[0].idRamo %> >
+          <input type="hidden" name="nombre_ramo" value= <%= rows[0].Nombre %> >
+          <input type="hidden" name="sigla_ramo" value= <%= rows[0].Sigla %> >
+          <a href="#" onclick="document.getElementById('form1').submit();"><%= rows[0].Nombre%></a>
+      </form>
+
+      <a href="#" onclick="document.getElementById('form2').submit();"><%= rows[1].Nombre%></a>
+
+
+    </section>
 
     <section class="col-sm-6 col-sm-offset-1 ramos-img">
       <%if(user.perfil_idperfil==1){%>
