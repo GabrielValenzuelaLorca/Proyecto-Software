@@ -16,19 +16,20 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     });
   });
 
-  app.post('/ramos', isLoggedIn, function(req, res){
-    if(req.body.sigla_ramo == "FIS120"){
-      res.render('menu/ramos/120',{
-        title:title,
-        user: req.user,
-        id_ramo: req.body.id_ramo,
-        nombre_ramo: req.body.nombre_ramo,
-        sigla_ramo: req.body.sigla_ramo
-      });
-    }
-    else{
-      res.redirect('/menu');
-    }
+  app.get('/ramos/120', isLoggedIn, function(req, res){
+
+    res.render('menu/ramos/120.ejs',{
+      title:title,
+      user: req.user,
+    });
+
+  });
+
+  app.get('/ramos/120/Voltaje',isLoggedIn,function(req, res){
+    res.render('menu/ramos/unidades/120_voltaje.ejs',{
+      title:title,
+      user:req.user
+    });
   });
 
 }

@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%= title%></title>
-    <!--links-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link href="https://bootswatch.com/readable/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="../../stylesheets/style.css">
-    <!--scripts-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>-->
-    <!--angular scripts-->
-    <script src="../../ngEncuesta.js"></script>
-    <script src="../../controllers/signup.js"></script>
+<%include ../layout %>
+<script src="../../ngEncuesta.js"></script>
+<script src="../../controllers/signup.js"></script>
 
-    <style>
-      .butt{
-        text-align: center;
-      }
-    </style>
+<style>
+  .butt{
+    text-align: center;
+  }
+</style>
 
-</head>
-
-<body ng-app="ngEncuesta">
-
+<div ng-app="ngEncuesta">
+  
   <div ng-controller="signupCtrl as signup" class="index">
 
     <div class="col-sm-4 col-sm-offset-4" ng-show=<%= form %>>
@@ -60,5 +45,7 @@
     </div>
 
   </div>
+
+</div>
 
 <% include ../footer %>

@@ -12,7 +12,11 @@ body{
   position: relative;
   margin:0;
 }
+p{
+  text-align:justify;
+}
 
+/* HEADER */
 #header a img{
   margin:0;
   height:57px;
@@ -28,7 +32,7 @@ body{
   height: 50px;
 }
 
-
+/* NAVIGATOR BAR */
 .row.nav{
   margin: 0 auto 15px auto;
 }
@@ -43,6 +47,9 @@ ul.nav{
 ul.nav.navbar-left li{
   display: inline-block;
 }
+ul.nav.navbar-right li{
+  display: inline-block;
+}
 ul.nav li{
   padding: 0 0 2px 0;
   position: relative;
@@ -54,33 +61,16 @@ ul.nav a,button{
   transition: all .2s linear;
 }
 
-.indexPanel{
-  //margin-top:70px;
-}
-.indexLayout{
-  //background-color: white;
-  //background: url('../img/physic.jpg');
-}
-.index{
-  margin-top:20px;
+/*  */
+.index, .menu{
+  margin-top:50px;
   min-height: 100%;
   position:relative;
   margin-bottom:150px;
   //border: 5px solid lightblue;
 }
 
-
-.menuLayout{
-  //background-color: white;
-}
-.menu{
-  min-height: 100%;
-  position:relative;
-  margin-bottom:110px;
-  //border: 5px solid lightblue;
-}
-
-
+/* FOOTER */
 .footer-site{
   //border: 2px solid green;
   position:absolute;
@@ -126,17 +116,13 @@ ul.nav a,button{
 margin-top: 20px;
 }
 
-.center-btn{
-  text-align:center;margin-top:50px;
-}
-
+/* c */
 .c4, .c5, .c6, .c7, .c12, .c8{
   min-height: 1px;
   padding-left: 20px;
   padding-right: 20px;
   position: relative;
 }
-
 .c4{
   width:33.33%;
 }
@@ -156,15 +142,17 @@ margin-top: 20px;
   width:100%;
 }
 
+/* DISEÑO RAMOS Y AGREGAR */
 .signup-form{
   float: right;
   margin-right:40px;
 }
-
-.signup-agregar{
+.ramos, .signup-agregar{
   float:left;
+  padding-left: 35px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 }
-
 .signup-agregar a{
   background: #28a4e0;
   color: #fff;
@@ -174,13 +162,6 @@ margin-top: 20px;
   margin: 0;
   text-decoration: none;
   transition: all .2s linear;
-}
-
-.ramos, .signup{
-  float:left;
-  padding-left: 35px;
-  padding-right: 20px;
-  padding-bottom: 20px;
 }
 .ramos a{
   background: #0077ad;
@@ -192,7 +173,6 @@ margin-top: 20px;
   text-decoration: none;
   transition: all .2s linear;
 }
-
 .ramos a:hover{
   background: #006492;
 }
@@ -200,15 +180,27 @@ margin-top: 20px;
   cursor: pointer;
   background: #2598cf;
 }
-
 .ramos-img{
   padding-right:20px;
 }
-
 .ramos-img img{
   border: 1px solid gray;
   width: 100%;
 }
+.administrar{
+  margin-top:40px;
+}
+.administrar a{
+  background: #b95f5f;
+}
+.administrar a:hover{
+  background: #955351;
+}
 
 /* reset + grid + mediaqueries */
 @media handheld, only screen and (max-width: 700px), only screen and (max-device-width: 700px) and (orientation:portrait){body{font-size:100%}.row{margin-bottom:0!important}.c1,.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{width:100%;margin-right:0;margin-left:0;margin-bottom:20px}}
+
+
+.center-btn{
+  text-align:center;margin-top:50px;
+}
