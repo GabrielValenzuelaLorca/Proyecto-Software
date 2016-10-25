@@ -12,6 +12,9 @@ body{
   position: relative;
   margin:0;
 }
+p{
+  text-align:justify;
+}
 
 /* HEADER */
 #header a img{
