@@ -1,21 +1,25 @@
-<%include layout%>
+<%include ../layout %>
+<%include nav %>
 
 <script src="../../ngEncuesta.js"></script>
 <script src="../../controllers/signup.js"></script>
 
-<div ng-app="ngEncuesta" class="menu">
-  <div class="container"  ng-controller="signupCtrl as signup">
+<div ng-app="ngEncuesta">
+  <div class="menu container"  ng-controller="signupCtrl as signup">
 
     <div class="row">
 
-      <section class="c4 signup-agregar">
-        <div class="row">
-            <a ng-click="signup.isAlumno=true; signup.error=true">
-              Agregar Alumno <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            </a>
-            <a ng-click="signup.isAlumno=false; signup.error=true">
-              Agregar Profesor <i class="fa fa-plus-circle" aria-hidden="true"></i>
-            </a>
+      <section class="col-sm-4 signup-agregar">
+        <a ng-click="signup.isAlumno=true; signup.error=true">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Alumno
+        </a>
+        <a ng-click="signup.isAlumno=false; signup.error=true">
+          <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Profesor
+        </a>
+
+        <!-- Administrar usuarios -->
+        <div class="administrar">
+          <a href="/administrarUsuarios"><i class="fa fa-wrench" aria-hidden="true"></i> Editar Usuarios</a>
         </div>
       </section>
 

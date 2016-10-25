@@ -14,11 +14,12 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     require('./index/login.js')(app, passport, connection, transporter,dbconfig,title,bcrypt);
 
     //Menu page
+    require('./menu/menu.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn_Encuesta);
     require('./menu/about.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
-    require('./menu/menu.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/signup.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/perfil.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/ramos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+    require('./menu/administrar_u.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
 
     // =====================================
     // LOGOUT ==============================
@@ -45,13 +46,13 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
 
       // respond with html page
       if (req.accepts('html')) {
-        res.render('404', { url: req.url });
+        res.render('404', { url: req.url, title:title });
         return;
       }
 
       // respond with json
       if (req.accepts('json')) {
-        res.send({ error: 'Not found' });
+        res.send({ error: 'Not found', title:title});
         return;
       }
 
@@ -73,13 +74,31 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
       // here and next(err) appropriately, or if
       // we possibly recovered from the error, simply next().
       res.status(err.status || 500);
-      res.render('500', { error: err });
+      res.render('500', { error: err, title:title});
       console.log(err.message);
     });
 };
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+      if(req.user.Profesor == 0 && req.user.perfil_idperfil != null){
+        return next();
+      }
+      else if(req.user.Profesor == 1){
+        return next();
+      }
+      else{
+        res.redirect('/');
+      }
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+
+function isLoggedIn_Encuesta(req, res, next) {
 
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
