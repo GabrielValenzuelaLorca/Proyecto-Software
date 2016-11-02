@@ -8,6 +8,6 @@ module.exports = {
         'user': 'root',
         'password': '1234'
     },
-    'database': 'sada_db',
+    'database': 'Sada_DB',
     'users_table': 'usuario'
 };
