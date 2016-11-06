@@ -1,6 +1,5 @@
 (function(){
 
-    angular
-        .module("ngApp", [ ]);
+    angular.module("ngApp", [ ]);
 
 })();

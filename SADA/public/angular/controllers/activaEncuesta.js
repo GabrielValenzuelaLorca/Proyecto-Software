@@ -1,8 +1,6 @@
 (function(){
 
-    angular
-        .module("ngApp")
-        .controller("testCtrl", ListController);
+    angular.module("ngApp").controller("testCtrl", ListController);
 
     ListController.$inject = ['quizMetrics'];
 

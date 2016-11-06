@@ -3,9 +3,7 @@
  */
 (function () {
 
-    angular
-        .module('ngApp')
-        .controller('quizCtrl',QuizController);
+    angular.module('ngApp').controller('quizCtrl',QuizController);
 
     QuizController.$inject = ['quizMetrics','DataService'];
 
