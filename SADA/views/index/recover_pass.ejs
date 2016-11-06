@@ -1,6 +1,6 @@
 <%include ../layout %>
-<script src="../../ngEncuesta.js"></script>
-<script src="../../controllers/signup.js"></script>
+<script src="../../angular/ngApp.js"></script>
+<script src="../../angular/controllers/signup.js"></script>
 
 <style>
   .butt{
@@ -8,8 +8,8 @@
   }
 </style>
 
-<div ng-app="ngEncuesta">
-  
+<div ng-app="ngApp">
+
   <div ng-controller="signupCtrl as signup" class="index">
 
     <div class="col-sm-4 col-sm-offset-4" ng-show=<%= form %>>

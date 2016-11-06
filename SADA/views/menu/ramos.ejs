@@ -1,30 +1,36 @@
 <%include ../layout %>
 <%include nav %>
 
-<div class="menu container">
+<script src="../../angular/ngApp.js"></script>
+<script src="../../angular/controllers/ramos.js"></script>
 
-  <div class="row">
+<div class="menu container" ng-app="ngApp">
+  <div ng-controller="ngRamos as ramos">
+    <div class="row">
 
-    <section class="col-sm-4 ramos">
-      <a href="/ramos/120"><%= rows[0].Nombre%></a>
+      <p>{{ramos.cols}}</p>
+      <p>{{ramos.print}}</p>
 
-      <a href="#" onclick="document.getElementById('form2').submit();"><%= rows[1].Nombre%></a>
-    </section>
+      <!--<section class="col-sm-4 ramos">
+        <a href="/ramos/120"><%= rows[0].Nombre%></a>
 
-    <section class="col-sm-6 col-sm-offset-1 ramos-img">
-      <%if(user.perfil_idperfil==1){%>
-        <img src="../../img/adaptador.jpg" alt="">
-      <%}else if(user.perfil_idperfil==2){%>
-        <img src="../../img/divergente.jpg" alt="">
-      <%}else if(user.perfil_idperfil==3){%>
-        <img src="../../img/convergente.jpg" alt="">
-      <%}else if(user.perfil_idperfil==4){%>
-        <img src="../../img/asimilador.jpg" alt="">
-      <%}%>
-    </section>
-    
+        <a href="#" onclick="document.getElementById('form2').submit();"><%= rows[1].Nombre%></a>
+      </section>
+
+      <section class="col-sm-6 col-sm-offset-1 ramos-img">
+        <%if(user.perfil_idperfil==1){%>
+          <img src="../../img/adaptador.jpg" alt="">
+        <%}else if(user.perfil_idperfil==2){%>
+          <img src="../../img/divergente.jpg" alt="">
+        <%}else if(user.perfil_idperfil==3){%>
+          <img src="../../img/convergente.jpg" alt="">
+        <%}else if(user.perfil_idperfil==4){%>
+          <img src="../../img/asimilador.jpg" alt="">
+        <%}%>
+      </section>-->
+
+    </div> <!-- end row -->
   </div>
-
 </div>
 
 <% include ../footer %>

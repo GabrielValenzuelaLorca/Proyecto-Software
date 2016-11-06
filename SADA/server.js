@@ -14,23 +14,6 @@ var favicon = require('serve-favicon');
 var path = require('path');
 
 // configuration ===============================================================
-// connect to DB
-var mysql = require('mysql');
-var dbconfig = require("./config/database");
-var connection = mysql.createConnection(dbconfig.connection);
-connection.query('USE ' + dbconfig.database);
-
-//mail theBrutalCorp
-var nodemailer = require('nodemailer');
-var author = require('./config/auth_mail');
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: author.auth
-})
-
-//Passport
-require('./config/passport')(passport, connection, dbconfig);
-
 // set up express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -40,7 +23,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // ../
-app.use(express.static(path.join(__dirname, 'scripts')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //validator
@@ -58,6 +40,23 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+// connect to DB
+var mysql = require('mysql');
+var dbconfig = require("./config/database");
+var connection = mysql.createConnection(dbconfig.connection);
+connection.query('USE ' + dbconfig.database);
+
+//mail theBrutalCorp
+var nodemailer = require('nodemailer');
+var author = require('./config/auth_mail');
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: author.auth
+})
+
+//Passport
+require('./config/passport')(passport, connection, dbconfig);
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport, connection, transporter,dbconfig);
