@@ -1,6 +1,3 @@
-/**
- * Created by rodri on 10-09-2016.
- */
 // config/database.js
 module.exports = {
     'connection': {
@@ -8,6 +5,6 @@ module.exports = {
         'user': 'root',
         'password': '1234'
     },
-    'database': 'sada_db',
+    'database': 'Sada_DB',
     'users_table': 'usuario'
 };
