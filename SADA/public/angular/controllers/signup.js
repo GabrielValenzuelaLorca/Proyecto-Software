@@ -1,8 +1,6 @@
 (function(){
 
-    angular
-        .module("ngEncuesta")
-        .controller("signupCtrl", signupController);
+    angular.module("ngApp").controller("signupCtrl", signupController);
 
     function signupController(){
 
