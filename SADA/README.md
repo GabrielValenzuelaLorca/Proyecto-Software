@@ -11,7 +11,7 @@
 
 ##Pre-requisitos antes de ejecutar
   1. Ir al directorio `/config` y ejecutar el comando `mysql -u "nombreusuario" -p < DB_SADA.sql` para crear la Base de Datos en caso de que no exista. Se le pedirá su contraseña. (Puede que el nombre de usuario sea 'root')<br />
-    \* Si el comando anterior no funciona (sería estando en Windows), importar de forma manual la Base de Datos a través de `MySql`.
+    \* Si el comando anterior no funciona (Windows u otro), importar de forma manual la Base de Datos a través de `MySql`.
   1. Editar `user` y `password` en `config/database.js`
 
 

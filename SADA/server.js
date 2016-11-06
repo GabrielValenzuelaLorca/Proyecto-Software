@@ -1,8 +1,3 @@
-/**
- * Created by rodri on 10-09-2016.
- */
-// server.js
-
 // set up ======================================================================
 var express = require('express');
 var session = require('express-session');
@@ -34,7 +29,7 @@ var transporter = nodemailer.createTransport({
 })
 
 //Passport
-require('./config/passport')(passport, connection, dbconfig); // pass passport for configuration
+require('./config/passport')(passport, connection, dbconfig);
 
 // set up express application
 app.use(morgan('dev')); // log every request to the console
@@ -65,7 +60,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport, connection, transporter,dbconfig); //pass in our app and fully configured passport
+require('./app/routes.js')(app, passport, connection, transporter,dbconfig);
 
 // launch ======================================================================
 app.listen(port, function() {
