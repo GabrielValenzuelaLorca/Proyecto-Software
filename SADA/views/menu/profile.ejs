@@ -1,13 +1,34 @@
 <%include ../layout %>
 <%include nav %>
 
+<style type="text/css">
+#prueba
+{
+    <%if(user.Admin==1){%>
+      background: url('http://adminweapon.com/wp-content/uploads/2012/06/logo-admin-weapon.jpg');
+    <%}else if(user.Profesor==1){%>
+      background: url('http://www.eldinamo.cl/wp-content/uploads/2016/10/profesor-574x238.jpg');
+    <%}else if(user.perfil_idperfil!=1){%>
+      background: url('../../img/adaptador.jpg');
+    <%}else if(user.perfil_idperfil!=2){%>
+      background: url('../../img/divergente.jpg');
+    <%}else if(user.perfil_idperfil!=3){%>
+      background: url('../../img/convergente.jpg');
+    <%}else if(user.perfil_idperfil!=4){%>
+      background: url('../../img/asimilador.jpg');
+    <%}%>
+}
+</style>
+
 <div class="container menu">
 
+
+
     <div class="page-header text-center">
-        <h1><i class="fa fa-cog" aria-hidden="true"></i> Perfil (En fase de mejora)</h1>
+        <h1><i class="fa fa-cog" aria-hidden="true"></i> Perfil</h1>
     </div>
 
-    <div class="row">
+    <div class="row" id="prueba">
 
         <div class="col-sm-6">
           <a href="/change_pass"><button class="btn btn-warning">Cambiar Contraseña</button></a>
