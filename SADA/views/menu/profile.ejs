@@ -4,40 +4,28 @@
 <div class="container menu">
 
     <div class="page-header text-center">
-        <h1><i class="fa fa-cog" aria-hidden="true"></i> Perfil (En fase de mejora)</h1>
+        <h1><i class="fa fa-cog" aria-hidden="true"></i> Información de Perfil</h1>
     </div>
 
-    <div class="row">
 
-        <div class="col-sm-6">
-          <a href="/change_pass"><button class="btn btn-warning">Cambiar Contraseña</button></a>
+    <!-- LOCAL INFORMATION -->
+    <div class="col-sm-6" id="profile-info">
+        <div class="well">
+            <h3><span class="fa fa-user"></span> <%= user.Nombre %><br> </h3>
+
+            <p>
+                <strong>RUT</strong>: <%= user.Rut %><br>
+                <%if (user.Rol!=null) { %>
+                <strong>Rol</strong>: <%= user.Rol %><br>
+                <%}%>
+                <strong>Email</strong>: <%= user.Correo %><br>
+                <br>
+                <a href="/change_pass"><button class="btn btn-warning">Cambiar Contraseña</button></a>
+            </p>
+
         </div>
+    </div><!-- LOCAL INFORMATION -->
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6" id="profile-info">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                <p>
-                    <strong>rut</strong>: <%= user.Rut %><br>
-
-                    <%if (user.Rol!=null) { %>
-                    <strong>rol</strong>: <%= user.Rol %><br>
-                    <%}%>
-
-                    <strong>nombre</strong>: <%= user.Nombre %><br>
-                    <strong>email</strong>: <%= user.Correo %><br>
-                    <strong>password</strong>: <%= user.Clave %><br>
-
-                    <%if(user.perfil_idperfil!=null && user.Profesor==0){%>
-                    <strong>perfil</strong>: <%= user.perfil_idperfil %>
-                    <%}%>
-                </p>
-
-            </div>
-        </div><!-- LOCAL INFORMATION -->
-
-    </div>
 </div>
 
 <% include ../footer %>
