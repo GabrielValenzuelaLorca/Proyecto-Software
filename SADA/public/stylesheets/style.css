@@ -163,7 +163,8 @@ margin-top: 20px;
   text-decoration: none;
   transition: all .2s linear;
 }
-.ramos a{
+.ramos button{
+  border:none;
   background: #0077ad;
   color: #fff;
   border-bottom: 1px solid #006492;
@@ -172,8 +173,9 @@ margin-top: 20px;
   margin: 0;
   text-decoration: none;
   transition: all .2s linear;
+  min-width: 180px;
 }
-.ramos a:hover{
+.ramos button:hover{
   background: #006492;
 }
 .signup-agregar a:hover{

@@ -1,5 +1,9 @@
 module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
 
+  //requires
+  require('./FIS120.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+  require('./FIS140.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+
   // =====================================
   // RAMOS ===============================
   // =====================================
@@ -16,20 +20,19 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     });
   });
 
-  app.get('/ramos/120', isLoggedIn, function(req, res){
+  app.post('/ramos/u',isLoggedIn,function(req,res){
 
-    res.render('menu/ramos/120.ejs',{
-      title:title,
-      user: req.user,
-    });
+    req.session.idRamo = req.body.ramo_id;
 
-  });
-
-  app.get('/ramos/120/Voltaje',isLoggedIn,function(req, res){
-    res.render('menu/ramos/unidades/120_voltaje.ejs',{
-      title:title,
-      user:req.user
-    });
+    if(req.body.ramo_sigla=="FIS120"){
+      res.redirect("/ramos/120");
+    }
+    else if(req.body.ramo_sigla=="FIS140"){
+      res.redirect("/ramos/140");
+    }
+    else{
+      res.redirect("/");
+    }
   });
 
 }
