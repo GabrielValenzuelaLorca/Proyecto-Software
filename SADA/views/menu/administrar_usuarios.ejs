@@ -3,7 +3,20 @@
 
 <div class="menu">
   <div class="container">
-    <h1>administrarUsuarios</h1>
+
+    <section>
+      <%for(var i=0;i<usuarios.length;i++){%>
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-4">
+            <h4><%=usuarios[i].Nombre%></h4>
+          </div>
+          <div class="col-xs-2">
+            <button>alskd</button>
+          </div>
+        </div>
+      <%}%>
+    </section>
+
   </div>
 </div>
 
