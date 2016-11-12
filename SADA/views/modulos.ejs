@@ -31,8 +31,12 @@ li { margin: 5px; padding: 5px; width: 150px; }
               $("#printeo3").text (order3);
            }
          });
-         $("#botoncito1").click(function () {
-           $('#sortable1').append("<li class='ui-state-default'>New fruit</li>");
+         $("#botoncito1").on('click',function () {
+           $('#sortable1').append("<li class='ui-state-default'>New fruit<button class='delete'>Borrar</button></li>");
+         });
+
+         $("#sortable1").on('click', '.delete', function () {
+           $(this).parent().remove();
          });
 
 
@@ -49,11 +53,26 @@ li { margin: 5px; padding: 5px; width: 150px; }
       <button id='botoncito1'>Agregar modulo</button>
 
         <ul id="sortable1">
-          <li class="ui-state-default" id="11">Item 1</li>
-          <li class="ui-state-default" id="12">Item 2</li>
-          <li class="ui-state-default" id="13">Item 3</li>
-          <li class="ui-state-default" id="14">Item 4</li>
-          <li class="ui-state-default" id="15">Item 5</li>
+          <li class="ui-state-default" id="11">Item 1
+              <button class="delete">Borrar</button>
+          </li>
+
+          <li class="ui-state-default" id="12">Item 2
+            <button class="delete">Borrar</button>
+          </li>
+
+          <li class="ui-state-default" id="13">Item 3
+            <button class="delete">Borrar</button>
+          </li>
+
+          <li class="ui-state-default" id="14">Item 4
+            <button class="delete">Borrar</button>
+          </li>
+
+          <li class="ui-state-default" id="15">Item 5
+            <button class="delete">Borrar</button>
+          </li>
+
         </ul>
         <br>
         <h3><span id="printeo1"></span></h3>
