@@ -12,7 +12,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     connection.query('SELECT * FROM ramo', function(err, rows, fields) {
       if (err) throw err;
       //console.log('RAMO '+ rows[0].Nombre);
-      res.render('menu/ramos.ejs', {
+      res.render('ramos/ramos.ejs', {
           title: title,
           user: req.user,
           rows:rows
@@ -33,6 +33,17 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     else{
       res.redirect("/");
     }
+  });
+
+  app.post('/ramos/u/materia',isLoggedIn,function(req,res){
+
+    if(req.body.nombreUnidad=="Voltaje"){
+      res.redirect("/ramos/120/voltaje");
+    }
+    else{
+      res.redirect("/");
+    }
+
   });
 
 }
