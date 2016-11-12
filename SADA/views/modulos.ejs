@@ -10,33 +10,83 @@ li { margin: 5px; padding: 5px; width: 150px; }
 
 <script>
       $(function() {
-         $( "#sortable" ).sortable();
+         $( '#sortable1' ).sortable({
+           cursor: "move",
+           update: function(event, ui) {
+              var order1 = $(this).sortable('toArray').toString();
+              $("#printeo1").text (order1);
+           }
+         });
+         $( '#sortable2' ).sortable({
+           cursor: "move",
+           update: function(event, ui) {
+              var order2 = $(this).sortable('toArray').toString();
+              $("#printeo2").text (order2);
+           }
+         });
+         $( '#sortable3' ).sortable({
+           cursor: "move",
+           update: function(event, ui) {
+              var order3 = $(this).sortable('toArray').toString();
+              $("#printeo3").text (order3);
+           }
+         });
+         $("#botoncito1").click(function () {
+           $('#sortable1').append("<li class='ui-state-default'>New fruit</li>");
+         });
+
+
       });
+
    </script>
 
 
 <div class="menu container">
 
   <div class="row">
-    <div class="col-sm-4">
-      <h1>Menú Principal aún por mejorar...</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam nisi nostrum, qui reprehenderit possimus blanditiis dolorum rerum quaerat necessitatibus non cum ducimus quibusdam suscipit tenetur, minus culpa doloribus dolor autem!
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, doloremque, rerum. Provident, praesentium. Provident laboriosam aut nam maiores veniam, dolore et vel voluptatem sunt iste earum asperiores, cumque voluptates fugit.</p>
+    <div class="col-sm-4" id="columna1">
+      <p>columna 1</p>
+      <button id='botoncito1'>Agregar modulo</button>
+
+        <ul id="sortable1">
+          <li class="ui-state-default" id="11">Item 1</li>
+          <li class="ui-state-default" id="12">Item 2</li>
+          <li class="ui-state-default" id="13">Item 3</li>
+          <li class="ui-state-default" id="14">Item 4</li>
+          <li class="ui-state-default" id="15">Item 5</li>
+        </ul>
+        <br>
+        <h3><span id="printeo1"></span></h3>
+
     </div>
 
-    <section class="col-sm-6 col-sm-offset-1 ramos-img">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam nisi nostrum, qui reprehenderit possimus blanditiis dolorum rerum quaerat necessitatibus non cum ducimus quibusdam suscipit tenetur, minus culpa doloribus dolor autem!
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, doloremque, rerum. Provident, praesentium. Provident laboriosam aut nam maiores veniam, dolore et vel voluptatem sunt iste earum asperiores, cumque voluptates fugit.</p>
+    <section class="col-sm-4" id="columna2">
+    <p>columna 2</p>
 
-        <ul id="sortable">
-          <li class="ui-state-default">Item 1</li>
-          <li class="ui-state-default">Item 2</li>
-          <li class="ui-state-default">Item 3</li>
-          <li class="ui-state-default">Item 4</li>
-          <li class="ui-state-default">Item 5</li>
+        <ul id="sortable2">
+          <li class="ui-state-default" id="21">Item 1</li>
+          <li class="ui-state-default" id="22">Item 2</li>
+          <li class="ui-state-default" id="23">Item 3</li>
+          <li class="ui-state-default" id="24">Item 4</li>
+          <li class="ui-state-default" id="25">Item 5</li>
         </ul>
+        <br>
+        <h3><span id="printeo2"></span></h3>
 
+    </section>
 
+    <section class="col-sm-4" id="columna3">
+    <p>columna 3</p>
+
+        <ul id="sortable3">
+          <li class="ui-state-default" id="31">Item 1</li>
+          <li class="ui-state-default" id="32">Item 2</li>
+          <li class="ui-state-default" id="33">Item 3</li>
+          <li class="ui-state-default" id="34">Item 4</li>
+          <li class="ui-state-default" id="35">Item 5</li>
+        </ul>
+        <br>
+        <h3><span id="printeo3"></span></h3>
 
     </section>
 
