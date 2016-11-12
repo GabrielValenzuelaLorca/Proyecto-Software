@@ -21,6 +21,11 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     require('./menu/ramos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/administrar_u.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
 
+
+    //nico probando la pagina modulos
+    require('./admin/modulos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+
+
     // =====================================
     // LOGOUT ==============================
     // =====================================
