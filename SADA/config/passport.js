@@ -48,10 +48,6 @@ module.exports = function(passport, connection, dbconfig) {
 
                 //Errores extras de formato
                 //Agregar más errores...
-                req.checkBody('password', 'Contraseña tiene que contener entre 4 a 20 caracteres').isLength({
-                    min: 4,
-                    max: 20
-                });
 
                 var errors = req.validationErrors();
                 if (errors) {
@@ -97,9 +93,10 @@ module.exports = function(passport, connection, dbconfig) {
                           return done(null, false, req.flash('error', messages));
                       } else {
                           // Se crea el usuario
+                          var clave=req.body.rut.toString();
                           var newUserMysql = {
                               email: email,
-                              password: bcrypt.hashSync(password, null, null), // use the generateHash function in our user model
+                              password: bcrypt.hashSync(clave, null, null), // use the generateHash function in our user model
                               name: req.body.username,
                               rol: req.body.rol,
                               rut:req.body.rut,
@@ -141,9 +138,10 @@ module.exports = function(passport, connection, dbconfig) {
                           return done(null, false, req.flash('error', messages));
                       } else {
                           // Se crea el usuario
+                          var clave=req.body.rut.toString();
                           var newUserMysql = {
                               email: email,
-                              password: bcrypt.hashSync( password, null, null), // use the generateHash function in our user model
+                              password: bcrypt.hashSync(clave, null, null), // use the generateHash function in our user model
                               name: req.body.username,
                               rut:req.body.rut,
                               admin:0,
