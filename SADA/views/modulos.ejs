@@ -10,50 +10,61 @@ li { margin: 5px; padding: 5px; width: 150px; }
 </style>
 <!--------------------------------------------------------------------------------------------------->
 
+
 <!--SCRIPT para los sortables(objetos que se pueden ordenar dinamicamente)-->
 <script>
       $(function() {
-/*Funcion para que la primera columna sea sortable*/
+
+/******************************************************************************/
+//Funcion para que la primera columna sea sortable*/
          $( '#sortable1' ).sortable({
            cursor: "move",
-           update: function(event, ui) {
-
-              var order1 = $(this).sortable('toArray').toString(); //esto permite guardar el orden actual en un arreglo
-              $("#printeo1").text (order1);
-           }
+           scroll: true
          });
 
-/*Funcion para que la segunda columna sea sortable*/
+//Funcion para que la primera columna guarde su estado actual*/
+         $('#sortable1').on('sortupdate', function(event, ui) {
+           var order1 = $(this).sortable('toArray').toString(); //esto permite guardar el orden actual en un arreglo
+           $("#printeo1").text (order1);
+         });
+
+//Funcion para poder eliminar los elementos de la columna1*/
+          $("#sortable1").on('click', '.delete', function () {
+            $(this).parent().remove();
+            $('#sortable1').trigger('sortupdate');
+          });
+
+//Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
+          $("#botoncito1").on('click',function () {
+              var texto = document.getElementById("moduloEscogido").value;
+              var li = "<li class='ui-state-default' id="+ texto +">" + texto + "<br><button class='delete'>Borrar</button></li>"
+              $('#sortable1').append(li);
+              $('#sortable1').trigger('sortupdate');
+          });
+/******************************************************************************/
+
+//Funcion para que la segunda columna sea sortable*/
          $( '#sortable2' ).sortable({
            cursor: "move",
+           scroll: true,
            update: function(event, ui) {
-
               var order2 = $(this).sortable('toArray').toString();
               $("#printeo2").text (order2);
            }
          });
 
-/*Funcion para que la tercera columna sea sortable*/
+/******************************************************************************/
+
+//Funcion para que la tercera columna sea sortable*/
          $( '#sortable3' ).sortable({
            cursor: "move",
+           scroll: true,
            update: function(event, ui) {
               var order3 = $(this).sortable('toArray').toString();
               $("#printeo3").text (order3);
            }
          });
-
-/*Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
-         $("#botoncito1").on('click',function () {
-           var texto = document.getElementById("moduloEscogido").value;
-           var li = "<li class='ui-state-default'>" + texto + "<button class='delete'>Borrar</button></li>"
-           $('#sortable1').append(li);
-         });
-
-/*Funcion para poder eliminar los elementos de la columna1*/
-         $("#sortable1").on('click', '.delete', function () {
-           $(this).parent().remove();
-         });
-
+/******************************************************************************/
 
       });
 
@@ -69,13 +80,10 @@ li { margin: 5px; padding: 5px; width: 150px; }
 
 <!--Esto es un comentario-->
       <p>columna 1</p>
-      <input type="text" name="moduloEscogido" id="moduloEscogido">
+      <input type="text" placeholder="ID del modulo Escogido" name="moduloEscogido" id="moduloEscogido">
       <button id='botoncito1'>Agregar modulo</button>
 
-        <ul id="sortable1">
-          <li class="ui-state-default" id="11">Item 1
-              <button class="delete">Borrar</button>
-          </li>
+        <ul id="sortable1" style="list-style: none;">
 
         </ul>
         <br>
