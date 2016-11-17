@@ -4,26 +4,36 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
+<!--CSS para los objetos que se iran agregando-->
 <style>
 li { margin: 5px; padding: 5px; width: 150px; }
 </style>
+<!--------------------------------------------------------------------------------------------------->
 
+<!--SCRIPT para los sortables(objetos que se pueden ordenar dinamicamente)-->
 <script>
       $(function() {
+/*Funcion para que la primera columna sea sortable*/
          $( '#sortable1' ).sortable({
            cursor: "move",
            update: function(event, ui) {
-              var order1 = $(this).sortable('toArray').toString();
+
+              var order1 = $(this).sortable('toArray').toString(); //esto permite guardar el orden actual en un arreglo
               $("#printeo1").text (order1);
            }
          });
+
+/*Funcion para que la segunda columna sea sortable*/
          $( '#sortable2' ).sortable({
            cursor: "move",
            update: function(event, ui) {
+
               var order2 = $(this).sortable('toArray').toString();
               $("#printeo2").text (order2);
            }
          });
+
+/*Funcion para que la tercera columna sea sortable*/
          $( '#sortable3' ).sortable({
            cursor: "move",
            update: function(event, ui) {
@@ -31,10 +41,15 @@ li { margin: 5px; padding: 5px; width: 150px; }
               $("#printeo3").text (order3);
            }
          });
+
+/*Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
          $("#botoncito1").on('click',function () {
-           $('#sortable1').append("<li class='ui-state-default'>New fruit<button class='delete'>Borrar</button></li>");
+           var texto = document.getElementById("moduloEscogido").value;
+           var li = "<li class='ui-state-default'>" + texto + "<button class='delete'>Borrar</button></li>"
+           $('#sortable1').append(li);
          });
 
+/*Funcion para poder eliminar los elementos de la columna1*/
          $("#sortable1").on('click', '.delete', function () {
            $(this).parent().remove();
          });
@@ -43,13 +58,18 @@ li { margin: 5px; padding: 5px; width: 150px; }
       });
 
    </script>
+<!--------------------------------------------------------------------------------------------------->
+
 
 
 <div class="menu container">
 
   <div class="row">
     <div class="col-sm-4" id="columna1">
+
+<!--Esto es un comentario-->
       <p>columna 1</p>
+      <input type="text" name="moduloEscogido" id="moduloEscogido">
       <button id='botoncito1'>Agregar modulo</button>
 
         <ul id="sortable1">
@@ -57,58 +77,38 @@ li { margin: 5px; padding: 5px; width: 150px; }
               <button class="delete">Borrar</button>
           </li>
 
-          <li class="ui-state-default" id="12">Item 2
-            <button class="delete">Borrar</button>
-          </li>
-
-          <li class="ui-state-default" id="13">Item 3
-            <button class="delete">Borrar</button>
-          </li>
-
-          <li class="ui-state-default" id="14">Item 4
-            <button class="delete">Borrar</button>
-          </li>
-
-          <li class="ui-state-default" id="15">Item 5
-            <button class="delete">Borrar</button>
-          </li>
-
         </ul>
         <br>
         <h3><span id="printeo1"></span></h3>
 
     </div>
+<!--------------------------------------------------------------------------------------------------->
 
+<!--Esto es un comentario-->
     <section class="col-sm-4" id="columna2">
     <p>columna 2</p>
 
         <ul id="sortable2">
           <li class="ui-state-default" id="21">Item 1</li>
-          <li class="ui-state-default" id="22">Item 2</li>
-          <li class="ui-state-default" id="23">Item 3</li>
-          <li class="ui-state-default" id="24">Item 4</li>
-          <li class="ui-state-default" id="25">Item 5</li>
         </ul>
         <br>
         <h3><span id="printeo2"></span></h3>
 
     </section>
+<!--------------------------------------------------------------------------------------------------->
 
+<!--Esto es un comentario-->
     <section class="col-sm-4" id="columna3">
     <p>columna 3</p>
 
         <ul id="sortable3">
           <li class="ui-state-default" id="31">Item 1</li>
-          <li class="ui-state-default" id="32">Item 2</li>
-          <li class="ui-state-default" id="33">Item 3</li>
-          <li class="ui-state-default" id="34">Item 4</li>
-          <li class="ui-state-default" id="35">Item 5</li>
         </ul>
         <br>
         <h3><span id="printeo3"></span></h3>
 
     </section>
-
+<!--------------------------------------------------------------------------------------------------->
 
   </div>
 
