@@ -2,6 +2,7 @@
 module.exports = {
     'connection': {
         'host': 'localhost',
+
         'user': 'sada',
         'password': '1901'
     },
