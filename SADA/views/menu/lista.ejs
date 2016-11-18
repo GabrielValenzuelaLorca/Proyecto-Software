@@ -1,0 +1,42 @@
+<%include ../layout %>
+<%include ../nav %>
+
+<div class="lista">
+
+    <div class="container">
+
+      <div class="row">
+
+        <div>
+          <div class="col-sm-7 col-md-8">
+            <h1>Selecciona un archivo (xlsx):</h1>
+            <p class="help-block">
+                El archivo debe poseer la siguiente estructura: </br></br>
+                <strong>|   Rut |   Rol |   Nombre Completo |   Email   |</strong></br></br>
+                El rut y el rol no deben poseer guión.</br>
+                Sólo deben haber datos de alumnos, los cuales pueden estar repartidos</br>
+                en distintas páginas del archivo.</br></br>
+                Ejemplo:</br>
+                <img src="../../img/ejemplo.png">
+            </p>
+          </div>
+        </div>
+
+        <div class="col-sm-5 col-md-4">
+            <form action="/agregarLista" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Buscar Archivo:</label>
+                    <input type="file" name="archivo" class="form-control" required>
+                </div>
+                <div class="botones">
+                  <button type="submit" value="Subir" class="btn btn-primary btn-sm pull-left"> Aceptar</button>
+                </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+
+</div>
+
+<% include ../footer %>

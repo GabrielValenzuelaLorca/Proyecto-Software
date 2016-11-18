@@ -65,7 +65,7 @@ ul.nav a,button{
 }
 
 /*  */
-.index, .menu{
+.index, .menu, .lista{
   margin-top:50px;
   min-height: 100%;
   position:relative;
