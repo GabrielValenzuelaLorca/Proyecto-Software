@@ -9,6 +9,9 @@
             <%if(user.Admin == 1){%>
               <li><a href="/signup">Administrar Usuarios</a></li>
             <%}%>
+            <%if(user.Profesor==1){%>
+              <li><a href="/modulos">Administrar Plantillas</a></li>
+            <%}%>
             <li><a href="/about">About</a></li>
           </ul>
 

@@ -185,10 +185,10 @@ CREATE TABLE IF NOT EXISTS `Sada_DB`.`ensamblaje` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('1', 'Adaptador');
-INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('2', 'Divergente');
-INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('3', 'Convergente');
-INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('4', 'Asimilador');
+INSERT INTO `Sada_DB`.`perfil` (`idperfil`, `Nombre`) VALUES ('1', 'Adaptador');
+INSERT INTO `Sada_DB`.`perfil` (`idperfil`, `Nombre`) VALUES ('2', 'Divergente');
+INSERT INTO `Sada_DB`.`perfil` (`idperfil`, `Nombre`) VALUES ('3', 'Convergente');
+INSERT INTO `Sada_DB`.`perfil` (`idperfil`, `Nombre`) VALUES ('4', 'Asimilador');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
