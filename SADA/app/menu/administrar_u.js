@@ -18,4 +18,19 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
     }
   });
 
+  app.post('/editarUsuario',isLoggedIn, function(req, res){
+    connection.query('select * from usuario',function(err,rows,fields){
+      if(err) throw err;
+
+      res.redirect('/administrarUsuarios');
+    });
+  });
+
+  app.post('/eliminarUsuario',isLoggedIn, function(req, res){
+    connection.query('DELETE FROM usuario WHERE Rut = ?',[req.body.rut],function(err,rows,fields){
+      if(err) throw err;
+      res.redirect('/administrarUsuarios');
+    });
+  });
+
 }

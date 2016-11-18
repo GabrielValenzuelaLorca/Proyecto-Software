@@ -209,3 +209,21 @@ margin-top: 20px;
 .center-btn{
   text-align:center;margin-top:50px;
 }
+
+.usuario{
+  padding:10px 10px;border-radius: 10px;border:1px solid #bbb;
+}
+
+.usuario a{
+  text-decoration: none;
+  color:white;
+}
+
+.float-right{
+  display: block;
+  float: right;
+}
+
+.font-20{
+  font-size: 20px;
+}
