@@ -1,9 +1,29 @@
 <%include ../layout %>
-<%include nav %>
+<%include ../nav %>
 
 <div class="menu">
   <div class="container">
-    <h1>administrarUsuarios</h1>
+
+    <section>
+      <%for(var i=0;i<usuarios.length;i++){%>
+        <%if(usuarios[i].Admin==0){%>
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3 usuario">
+              <div class="pull-left font-20">
+                Nombre: <%=usuarios[i].Nombre%>
+                Rut: <%=usuarios[i].Rut%>
+                Perfil: <%=usuarios[i].perfil_idperfil%>
+              </div>
+              <form action="/eliminarUsuario" method="post" onsubmit="return confirm('¿Seguro que quieres eliminar dicho usuario?');">
+                <input type="hidden" value=<%=usuarios[i].Rut%> name="rut">
+                <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              </form><!-- eliminarUsuario -->
+            </div>
+          </div>
+        <%}%>
+      <%}%>
+    </section>
+
   </div>
 </div>
 

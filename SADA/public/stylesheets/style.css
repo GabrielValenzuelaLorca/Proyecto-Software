@@ -1,3 +1,6 @@
+html,body{
+  min-width: 600px;
+}
 html{
   height: 100%;
   //border: 2px solid red;
@@ -163,7 +166,8 @@ margin-top: 20px;
   text-decoration: none;
   transition: all .2s linear;
 }
-.ramos a{
+.ramos button{
+  border:none;
   background: #0077ad;
   color: #fff;
   border-bottom: 1px solid #006492;
@@ -172,8 +176,9 @@ margin-top: 20px;
   margin: 0;
   text-decoration: none;
   transition: all .2s linear;
+  min-width: 180px;
 }
-.ramos a:hover{
+.ramos button:hover{
   background: #006492;
 }
 .signup-agregar a:hover{
@@ -203,4 +208,22 @@ margin-top: 20px;
 
 .center-btn{
   text-align:center;margin-top:50px;
+}
+
+.usuario{
+  padding:10px 10px;border-radius: 10px;border:1px solid #bbb;
+}
+
+.usuario a{
+  text-decoration: none;
+  color:white;
+}
+
+.float-right{
+  display: block;
+  float: right;
+}
+
+.font-20{
+  font-size: 20px;
 }

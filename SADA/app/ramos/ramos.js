@@ -1,5 +1,8 @@
 module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
 
+  //requires
+  require('./unidades.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+
   // =====================================
   // RAMOS ===============================
   // =====================================
@@ -8,7 +11,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     connection.query('SELECT * FROM ramo', function(err, rows, fields) {
       if (err) throw err;
       //console.log('RAMO '+ rows[0].Nombre);
-      res.render('menu/ramos.ejs', {
+      res.render('ramos/ramos.ejs', {
           title: title,
           user: req.user,
           rows:rows
@@ -16,20 +19,17 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     });
   });
 
-  app.get('/ramos/120', isLoggedIn, function(req, res){
+  app.post('/ramos/u',isLoggedIn,function(req,res){
 
-    res.render('menu/ramos/120.ejs',{
-      title:title,
-      user: req.user,
-    });
+    req.session.idRamo = req.body.ramo_id;
+    res.redirect("/ramos/u");
 
   });
 
-  app.get('/ramos/120/Voltaje',isLoggedIn,function(req, res){
-    res.render('menu/ramos/unidades/120_voltaje.ejs',{
-      title:title,
-      user:req.user
-    });
+  app.post('/ramos/u/materia',isLoggedIn,function(req,res){
+
+      res.redirect("/");
+
   });
 
 }

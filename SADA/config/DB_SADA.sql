@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `Sada_DB`.`unidad` (
   `idUnidad` INT(11) NOT NULL AUTO_INCREMENT,
   `Ramo_idRamo` INT(11) NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
-  `Descripción` VARCHAR(3000) NULL DEFAULT NULL,
+  `Descripcion` VARCHAR(3000) NULL DEFAULT NULL,
   PRIMARY KEY (`idUnidad`),
   INDEX `fk_Unidad_Ramo1_idx` (`Ramo_idRamo` ASC),
   CONSTRAINT `fk_Unidad_Ramo1`
@@ -112,18 +112,18 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `Sada_DB`.`módulo`
+-- Table `Sada_DB`.`modulo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Sada_DB`.`módulo` ;
+DROP TABLE IF EXISTS `Sada_DB`.`modulo` ;
 
-CREATE TABLE IF NOT EXISTS `Sada_DB`.`módulo` (
-  `idMódulo` INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Sada_DB`.`modulo` (
+  `idModulo` INT(11) NOT NULL AUTO_INCREMENT,
   `Tipo` VARCHAR(45) NOT NULL,
-  `Información` VARCHAR(4000) NOT NULL,
+  `Informacion` VARCHAR(4000) NOT NULL,
   `Unidad_idUnidad` INT(11) NOT NULL,
-  PRIMARY KEY (`idMódulo`),
-  INDEX `fk_Módulo_Unidad1_idx` (`Unidad_idUnidad` ASC),
-  CONSTRAINT `fk_Módulo_Unidad1`
+  PRIMARY KEY (`idModulo`),
+  INDEX `fk_Modulo_Unidad1_idx` (`Unidad_idUnidad` ASC),
+  CONSTRAINT `fk_Modulo_Unidad1`
     FOREIGN KEY (`Unidad_idUnidad`)
     REFERENCES `Sada_DB`.`unidad` (`idUnidad`)
     ON DELETE NO ACTION
@@ -140,7 +140,7 @@ DROP TABLE IF EXISTS `Sada_DB`.`plantilla` ;
 CREATE TABLE IF NOT EXISTS `Sada_DB`.`plantilla` (
   `idPlantilla` INT(11) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
-  `Valoración` INT(11) NULL DEFAULT NULL,
+  `Valoracion` INT(11) NULL DEFAULT NULL,
   `perfil_idperfil` INT(11) NOT NULL,
   `Unidad_idUnidad` INT(11) NOT NULL,
   `Autor` INT(1) NOT NULL,
@@ -168,16 +168,16 @@ DROP TABLE IF EXISTS `Sada_DB`.`ensamblaje` ;
 
 CREATE TABLE IF NOT EXISTS `Sada_DB`.`ensamblaje` (
   `Plantilla_idPlantilla` INT(11) NOT NULL,
-  `Módulo_idMódulo` INT(11) NOT NULL,
-  PRIMARY KEY (`Plantilla_idPlantilla`, `Módulo_idMódulo`),
-  INDEX `fk_Plantilla_has_Módulo_Módulo1_idx` (`Módulo_idMódulo` ASC),
-  INDEX `fk_Plantilla_has_Módulo_Plantilla1_idx` (`Plantilla_idPlantilla` ASC),
-  CONSTRAINT `fk_Plantilla_has_Módulo_Módulo1`
-    FOREIGN KEY (`Módulo_idMódulo`)
-    REFERENCES `Sada_DB`.`módulo` (`idMódulo`)
+  `Modulo_idModulo` INT(11) NOT NULL,
+  PRIMARY KEY (`Plantilla_idPlantilla`, `Modulo_idModulo`),
+  INDEX `fk_Plantilla_has_Modulo_Modulo1_idx` (`Modulo_idModulo` ASC),
+  INDEX `fk_Plantilla_has_Modulo_Plantilla1_idx` (`Plantilla_idPlantilla` ASC),
+  CONSTRAINT `fk_Plantilla_has_Modulo_Modulo1`
+    FOREIGN KEY (`Modulo_idModulo`)
+    REFERENCES `Sada_DB`.`modulo` (`idModulo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Plantilla_has_Módulo_Plantilla1`
+  CONSTRAINT `fk_Plantilla_has_Modulo_Plantilla1`
     FOREIGN KEY (`Plantilla_idPlantilla`)
     REFERENCES `Sada_DB`.`plantilla` (`idPlantilla`)
     ON DELETE NO ACTION
@@ -185,10 +185,10 @@ CREATE TABLE IF NOT EXISTS `Sada_DB`.`ensamblaje` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `perfil` (`idperfil`, `Nombre`) VALUES ('1', 'Adaptador');
-INSERT INTO `perfil` (`idperfil`, `Nombre`) VALUES ('2', 'Divergente');
-INSERT INTO `perfil` (`idperfil`, `Nombre`) VALUES ('3', 'Convergente');
-INSERT INTO `perfil` (`idperfil`, `Nombre`) VALUES ('4', 'Asimilador');
+INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('1', 'Adaptador');
+INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('2', 'Divergente');
+INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('3', 'Convergente');
+INSERT INTO `sada_db`.`perfil` (`idperfil`, `Nombre`) VALUES ('4', 'Asimilador');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
