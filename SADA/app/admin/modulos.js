@@ -1,14 +1,21 @@
-module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
+module.exports = function(app, passport, connection, transporter, dbconfig, title, bcrypt, isLoggedIn) {
 
-  // =====================================
-  // ABOUT ===============================
-  // =====================================
+    app.get('/modulos', isLoggedIn, function(req, res) {
 
-  app.get('/modulos', isLoggedIn, function(req, res) {
-      res.render("modulos.ejs", {
-          title: title,
-          user: req.user
-      });
-  });
+
+        connection.query('SELECT * FROM módulo', function(err, rows, fields) {
+            if (err) throw err;
+
+            res.render("modulos.ejs", {
+                title: title,
+                user: req.user,
+                modulasos: rows
+            });
+        })
+
+
+
+
+    });
 
 }

@@ -22,24 +22,18 @@
             scroll: true
         });
 
-        //Funcion para que la primera columna guarde su estado actual*/
-        $('#sortable1').on('sortupdate', function(event, ui) {
-            var order1 = $(this).sortable('toArray').toString(); //esto permite guardar el orden actual en un arreglo
-            $("#printeo1").text (order1);
-        });
-
         //Funcion para poder eliminar los elementos de la columna1*/
         $("#sortable1").on('click', '.delete', function () {
             $(this).parent().remove();
-            $('#sortable1').trigger('sortupdate');
         });
 
         //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
         $("#botoncito1").on('click',function () {
-            var texto = document.getElementById("moduloEscogido1").value;
-            var li = "<li class='ui-state-default' id="+ texto +">" + texto + "<br><button class='delete'>Borrar</button></li>"
+            var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+            var texto1 = $('input[name=modulitos]:checked').val().slice(0,posComa);
+            var texto2 = $('input[name=modulitos]:checked').val().slice(posComa+1);
+            var li = "<li class='ui-state-default' id="+ texto1 +">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
             $('#sortable1').append(li);
-            $('#sortable1').trigger('sortupdate');
         });
         /******************************************************************************/
 
@@ -49,24 +43,18 @@
             scroll: true
         });
 
-        //Funcion para que la primera columna guarde su estado actual*/
-        $('#sortable2').on('sortupdate', function(event, ui) {
-            var order2 = $(this).sortable('toArray').toString(); //esto permite guardar el orden actual en un arreglo
-            $("#printeo2").text (order2);
-        });
-
         //Funcion para poder eliminar los elementos de la columna1*/
         $("#sortable2").on('click', '.delete', function () {
             $(this).parent().remove();
-            $('#sortable2').trigger('sortupdate');
         });
 
         //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
         $("#botoncito2").on('click',function () {
-            var texto = document.getElementById("moduloEscogido2").value;
-            var li = "<li class='ui-state-default' id="+ texto +">" + texto + "<br><button class='delete'>Borrar</button></li>"
+            var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+            var texto1 = $('input[name=modulitos]:checked').val().slice(0,posComa);
+            var texto2 = $('input[name=modulitos]:checked').val().slice(posComa+1);
+            var li = "<li class='ui-state-default' id="+ texto1 +">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
             $('#sortable2').append(li);
-            $('#sortable2').trigger('sortupdate');
         });
 
         /******************************************************************************/
@@ -76,25 +64,29 @@
             cursor: "move",
             scroll: true
         });
-
-        //Funcion para que la primera columna guarde su estado actual*/
-        $('#sortable3').on('sortupdate', function(event, ui) {
-            var order3 = $(this).sortable('toArray').toString(); //esto permite guardar el orden actual en un arreglo
-            $("#printeo3").text (order3);
-        });
         //Funcion para poder eliminar los elementos de la columna1*/
         $("#sortable3").on('click', '.delete', function () {
             $(this).parent().remove();
-            $('#sortable3').trigger('sortupdate');
         });
         //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
         $("#botoncito3").on('click',function () {
-            var texto = document.getElementById("moduloEscogido3").value;
-            var li = "<li class='ui-state-default' id="+ texto +">" + texto + "<br><button class='delete'>Borrar</button></li>"
+            var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+            var texto1 = $('input[name=modulitos]:checked').val().slice(0,posComa);
+            var texto2 = $('input[name=modulitos]:checked').val().slice(posComa+1);
+            var li = "<li class='ui-state-default' id="+ texto1 +">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
             $('#sortable3').append(li);
-            $('#sortable3').trigger('sortupdate');
         });
 
+        /***************************************************************************************/
+        $('#botonSave').click(function(){
+            var nombre = document.getElementById("plantillaSave").value;
+            var order1 = $('#sortable1').sortable('toArray').toString();
+            var order2 = $('#sortable2').sortable('toArray').toString();
+            var order3 = $('#sortable3').sortable('toArray').toString();
+            $("#printeo1").text (order1);
+            $("#printeo2").text (order2);
+            $("#printeo3").text (order3);
+        });
     });
 
 </script>
@@ -105,13 +97,17 @@
 <div class="menu container">
 
     <div class="row">
-        <div class="col-sm-4" id="columna1">
+
+        <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave">
+        <button id='botonSave'>Guardar Plantilla</button>
+        <br>
+
+        <div class="col-sm-2" id="columna1">
+
 
             <!--Primera columna-->
             <p>columna 1</p>
-            <input type="text" placeholder="ID del modulo Escogido" name="moduloEscogido" id="moduloEscogido1">
             <button id='botoncito1'>Agregar modulo</button>
-
             <ul id="sortable1" style="list-style: none;">
                 <!--Aca van los modulos-->
             </ul>
@@ -121,11 +117,10 @@
 
         </div>
 
-        <section class="col-sm-4" id="columna2">
+        <section class="col-sm-2" id="columna2">
 
             <!--Segunda columna-->
             <p>columna 2</p>
-            <input type="text" placeholder="ID del modulo Escogido" name="moduloEscogido" id="moduloEscogido2">
             <button id='botoncito2'>Agregar modulo</button>
 
             <ul id="sortable2">
@@ -136,11 +131,10 @@
 
         </section>
 
-        <section class="col-sm-4" id="columna3">
+        <section class="col-sm-1" id="columna3">
 
             <!--Tercera columna-->
             <p>columna 3</p>
-            <input type="text" placeholder="ID del modulo Escogido" name="moduloEscogido" id="moduloEscogido3">
             <button id='botoncito3'>Agregar modulo</button>
 
             <ul id="sortable3">
@@ -153,6 +147,15 @@
         </section>
 
     </div>
+
+    <p>hola</p>
+
+
+    <% for (var i = 0; i < modulasos.length; i++){ %>
+         <input type="radio" name="modulitos" value= "<%=modulasos[i].idMódulo %>,<%=modulasos[i].Información %>"> <%=modulasos[i].Información %> <br>
+
+    <%  } %>
+
 
 
 </div>
