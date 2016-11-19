@@ -1,8 +1,5 @@
 module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
 
-  //requires
-
-
   // =====================================
   // RAMOS ===============================
   // =====================================
