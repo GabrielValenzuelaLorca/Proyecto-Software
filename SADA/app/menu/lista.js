@@ -11,14 +11,14 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
         }
     });
 
-
-    app.post('/agregarLista', isLoggedIn , upload.any(), function(req, res) {
+    var XLSX = require('xlsx');
+    var fs=require('fs');
+    var multer  = require('multer')
+    var upload = multer({ dest: 'public/uploads/' })
+    app.post('/agregarLista', upload.single('archivo'),isLoggedIn,function(req, res) {
         if (req.user.Profesor != 0) {
-            var XLSX = require('xlsx');
-            var multer  = require('multer')
-            var upload = multer({ dest: 'uploads/' })
-            console.log(req.files);
-            /*var workbook = XLSX.readFile();
+            var archivo=req.file['path'];
+            var workbook = XLSX.readFile(archivo);
             var sheet_name_list = workbook.SheetNames;
             var lista = [];
             sheet_name_list.forEach(function(y) {
@@ -43,6 +43,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
                     c++;
                 }
             });
+            fs.unlinkSync(archivo);
             //Aqui empieza el verdadero viaje
             agregar(lista,1);
             res.redirect('/signup');
@@ -81,7 +82,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
                 }
                 else req.flash('exito', ['Se agregaron los alumnos exitosamente.']);
 
-            }*/
+            }
         }
         else {
             res.redirect('/menu');
