@@ -1,8 +1,5 @@
 module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
 
-  //requires
-  require('./unidades.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
-
   // =====================================
   // RAMOS ===============================
   // =====================================
@@ -19,6 +16,12 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     });
   });
 
+  app.post('/ramos/u/materia',isLoggedIn,function(req,res){
+
+      res.redirect("/");
+
+  });
+
   app.post('/ramos/u',isLoggedIn,function(req,res){
 
     req.session.idRamo = req.body.ramo_id;
@@ -26,10 +29,17 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
 
   });
 
-  app.post('/ramos/u/materia',isLoggedIn,function(req,res){
+  app.get('/ramos/u', isLoggedIn, function(req, res) {
+    connection.query('SELECT * FROM unidad WHERE Ramo_idRamo = ? ',req.session.idRamo, function(err, rows, fields) {
+      if (err) throw err;
 
-      res.redirect("/");
+      res.render("ramos/unidades.ejs",{
+        title:title,
+        user:req.user,
+        unidades:rows
+      });
 
+    });//end query
   });
 
 }
