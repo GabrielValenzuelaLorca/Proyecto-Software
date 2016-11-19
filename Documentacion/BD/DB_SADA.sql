@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `Sada_DB`.`plantilla` (
   `idPlantilla` INT(11) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `Valoracion` INT(11) NULL DEFAULT NULL,
+  `Activa` INT(1) NOT NULL DEFAULT 1,
   `perfil_idperfil` INT(11) NOT NULL,
   `Unidad_idUnidad` INT(11) NOT NULL,
   `Autor` INT(1) NOT NULL,

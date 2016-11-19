@@ -1,6 +1,6 @@
 module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
     app.get('/lista', isLoggedIn, function(req, res) {
-        if (req.user.Profesor != 0) {
+        if (req.user.Admin != 0) {
             res.render('menu/lista.ejs', {
                 title: title,
                 user: req.user,
@@ -11,19 +11,21 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
         }
     });
 
-
-    app.post('/agregarLista', isLoggedIn, function(req, res) {
-        if (req.user.Profesor != 0) {
-            var XLSX = require('xlsx');
-            //var workbook = XLSX.readFile();
+    var XLSX = require('xlsx');
+    var fs=require('fs');
+    var multer  = require('multer')
+    var upload = multer({ dest: 'public/uploads/' })
+    app.post('/agregarLista', upload.single('archivo'),isLoggedIn,function(req, res) {
+        if (req.user.Admin != 0) {
+            var archivo=req.file['path'];
+            var workbook = XLSX.readFile(archivo);
             var sheet_name_list = workbook.SheetNames;
             var lista = [];
-            sheet_name_list.forEach(function(y) { /* iterate through sheets */
+            sheet_name_list.forEach(function(y) {
                 var worksheet = workbook.Sheets[y];
                 var c=0;
                 var values=[];
                 for (z in worksheet) {
-                /* all keys that do not begin with "!" correspond to cell addresses */
                     if(z[0] === '!') continue;
                     values[4]=values[5]=0;
                     if(c%4===0){
@@ -41,6 +43,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
                     c++;
                 }
             });
+            fs.unlinkSync(archivo);
             //Aqui empieza el verdadero viaje
             agregar(lista,1);
             res.redirect('/signup');
