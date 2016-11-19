@@ -1,23 +1,30 @@
 <%include layout %>
 <%include nav%>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <form action="/modulo" method="post">
-      <input type="text" name="contenido" id="contenido" placeholder="Contenido del modulo"><br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-      <input type="radio" name="tipo" value="texto" checked> Texto<br>
-      <input type="radio" name="tipo" value="video" checked> Link a Video<br>
-      <input type="radio" name="tipo" value="imagen" checked> Link a Imagen<br>
+<div class="container menu">
+  <div class="row">
 
-      <br>
-      <% for (var i = 0; i < unidadsos.length; i++){ %>
-          <input type="radio" name="laUnidad" value=<%=unidadsos[i].idUnidad %>>
-          <%=unidadsos[i].Nombre %> <br>
-      <%  } %>
-      <br>
-      <button type="submit" id='enviar'>Guardar modulo</button>
-  </form>
-  <br>
-  <h3><span id="printeo1"></span></h3>
+    <form action="/modulo" method="post">
+      <div class="col-md-3">
+        <h4>Selecciona el tipo de formato del módulo</h4>
+        <p><input type="radio" name="tipo" value="texto" checked> Texto</p>
+        <p><input type="radio" name="tipo" value="video" checked> Link a Video</p>
+        <p><input type="radio" name="tipo" value="imagen" checked> Link a Imagen</p>
+        <br>
+        <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+        <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
+        <button type="submit" id='enviar' class="btn btn-default">Guardar módulo</button>
+      </div>
+      <div class="col-md-4">
+        Estás en la unidad <label><%=unidad_nombre%></label>
+        <textarea rows="8" cols="40" type="text" name="contenido" id="contenido" placeholder="Escriba acá el contenido del módulo acá..." required></textarea>
+      </div>
+    </form>
+    <br>
+    <h3><span id="printeo1"></span></h3>
+    </div>
+</div>
 
 <% include footer %>

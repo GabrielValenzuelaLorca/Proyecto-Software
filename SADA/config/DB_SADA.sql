@@ -178,7 +178,7 @@ CREATE TABLE `ramo` (
 
 LOCK TABLES `ramo` WRITE;
 /*!40000 ALTER TABLE `ramo` DISABLE KEYS */;
-INSERT INTO `ramo` VALUES (1,'fisica','fis130');
+INSERT INTO `ramo` VALUES (1,'FISICA120','FIS120'),(2,'FISICA140','FIS140');
 /*!40000 ALTER TABLE `ramo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +206,7 @@ CREATE TABLE `unidad` (
 
 LOCK TABLES `unidad` WRITE;
 /*!40000 ALTER TABLE `unidad` DISABLE KEYS */;
-INSERT INTO `unidad` VALUES (1,1,'voltaje','es el voltaje'),(2,1,'resistencia','viv la resistance'),(45,1,'global','probando');
+INSERT INTO `unidad` VALUES (1,1,'Voltaje','es el voltaje'),(2,1,'Resistencia','viv la resistance'),(45,1,'Global','probando');
 /*!40000 ALTER TABLE `unidad` ENABLE KEYS */;
 UNLOCK TABLES;
 

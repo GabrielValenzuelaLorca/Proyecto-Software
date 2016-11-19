@@ -38,7 +38,8 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
       res.render('ramos/adm_unidades.ejs', {
           title: title,
           user: req.user,
-          unidades:rows
+          unidades:rows,
+          ramo_nombre:req.body.ramo_nombre
       });
     });
   });
@@ -46,11 +47,11 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.post('/adm_plantilla',isLoggedIn,function(req, res){
     connection.query('SELECT * FROM modulo WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, rows, fields) {
         if (err) throw err;
-
         res.render("plantilla.ejs", {
             title: title,
             user: req.user,
-            id: req.body.unidad_id,
+            unidad_id: req.body.unidad_id,
+            unidad_nombre: req.body.unidad_nombre,
             modulasos: rows
         });
     });

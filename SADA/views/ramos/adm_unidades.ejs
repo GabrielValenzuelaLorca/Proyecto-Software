@@ -3,11 +3,12 @@
 
 <div class="menu container">
   <div class="row">
-
     <section class="col-sm-4 ramos">
+      <label>Unidad: </label> <%=ramo_nombre%>
       <%for(var i=0;i<unidades.length;i++){%>
         <form action="/adm_plantilla" method="post">
           <input type="hidden" value=<%=unidades[i].idUnidad%> name="unidad_id">
+          <input type="hidden" value=<%=unidades[i].Nombre%> name="unidad_nombre">
           <button type="submit"><i class="fa fa-wrench" aria-hidden="true"></i> <%=unidades[i].Nombre%></button>
         </form>
       <%}%>
