@@ -48,6 +48,9 @@ module.exports = function(passport, connection, dbconfig) {
 
                 //Errores extras de formato
                 //Agregar más errores...
+                req.checkBody(req.body.rut, 'Rut inválido').isLength({
+                    min: 4
+                });
 
                 var errors = req.validationErrors();
                 if (errors) {
