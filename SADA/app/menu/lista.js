@@ -1,6 +1,6 @@
 module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
     app.get('/lista', isLoggedIn, function(req, res) {
-        if (req.user.Profesor != 0) {
+        if (req.user.Admin != 0) {
             res.render('menu/lista.ejs', {
                 title: title,
                 user: req.user,
@@ -16,7 +16,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     var multer  = require('multer')
     var upload = multer({ dest: 'public/uploads/' })
     app.post('/agregarLista', upload.single('archivo'),isLoggedIn,function(req, res) {
-        if (req.user.Profesor != 0) {
+        if (req.user.Admin != 0) {
             var archivo=req.file['path'];
             var workbook = XLSX.readFile(archivo);
             var sheet_name_list = workbook.SheetNames;
