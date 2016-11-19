@@ -23,7 +23,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     require('./menu/plantilla.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
 
     //Creacion modulos
-    require('./menu/crearModulos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+    require('./menu/modulo.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
 
     //ramos
     require('./ramos/ramos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);

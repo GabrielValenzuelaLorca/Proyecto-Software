@@ -1,26 +1,23 @@
 <%include layout %>
-    <%include nav%>
+<%include nav%>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <form action="/modulo" method="post">
-            <input type="text" name="contenido" id="contenido" placeholder="Contenido del modulo"><br>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <form action="/modulo" method="post">
+      <input type="text" name="contenido" id="contenido" placeholder="Contenido del modulo"><br>
 
-            <input type="radio" name="tipo" value="texto" checked> Texto<br>
-            <input type="radio" name="tipo" value="video" checked> Link a Video<br>
-            <input type="radio" name="tipo" value="imagen" checked> Link a Imagen<br>
+      <input type="radio" name="tipo" value="texto" checked> Texto<br>
+      <input type="radio" name="tipo" value="video" checked> Link a Video<br>
+      <input type="radio" name="tipo" value="imagen" checked> Link a Imagen<br>
 
-            <br>
-            <% for (var i = 0; i < unidadsos.length; i++){ %>
-                <input type="radio" name="laUnidad" value=<%=unidadsos[i].idUnidad %>>
-                <%=unidadsos[i].Nombre %> <br>
-            <%  } %>
-            <br>
-            <button type="submit" id='enviar'>Guardar modulo</button>
-        </form>
-        <br>
-        <h3><span id="printeo1"></span></h3>
+      <br>
+      <% for (var i = 0; i < unidadsos.length; i++){ %>
+          <input type="radio" name="laUnidad" value=<%=unidadsos[i].idUnidad %>>
+          <%=unidadsos[i].Nombre %> <br>
+      <%  } %>
+      <br>
+      <button type="submit" id='enviar'>Guardar modulo</button>
+  </form>
+  <br>
+  <h3><span id="printeo1"></span></h3>
 
-
-
-
-                    <% include footer %>
+<% include footer %>
