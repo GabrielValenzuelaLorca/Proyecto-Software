@@ -20,10 +20,11 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     require('./menu/lista.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/perfil.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
     require('./menu/administrar_u.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
-    require('./menu/modulos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+    require('./menu/plantilla.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
 
     //ramos
     require('./ramos/ramos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+    require('./ramos/adm_ramos.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
 
     // =====================================
     // LOGOUT ==============================

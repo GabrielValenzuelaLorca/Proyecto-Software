@@ -13,11 +13,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
               user: req.user,
               modulasos: rows
           });
-      })
-
-
-
-
+      });
     });
 
 }

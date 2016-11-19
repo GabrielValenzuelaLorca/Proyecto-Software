@@ -1,4 +1,4 @@
-module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
+module.exports = function(app, passport, connection, transporter, dbconfig, title, bcrypt, isLoggedIn) {
 
   // =====================================
   // RAMOS ===============================
@@ -7,7 +7,6 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
   app.get('/ramos', isLoggedIn, function(req, res) {
     connection.query('SELECT * FROM ramo', function(err, rows, fields) {
       if (err) throw err;
-      //console.log('RAMO '+ rows[0].Nombre);
       res.render('ramos/ramos.ejs', {
           title: title,
           user: req.user,

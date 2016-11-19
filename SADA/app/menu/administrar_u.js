@@ -27,9 +27,12 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   });
 
   app.post('/eliminarUsuario',isLoggedIn, function(req, res){
-    connection.query('DELETE FROM usuario WHERE Rut = ?',[req.body.rut],function(err,rows,fields){
-      if(err) throw err;
-      res.redirect('/administrarUsuarios');
+    connection.query('DELETE FROM contrato WHERE usuario_Rut = ?',[req.body.rut],function(err1,rows1,fields1){
+      if(err1) throw err1;
+      connection.query('DELETE FROM usuario WHERE Rut = ?',[req.body.rut],function(err,rows,fields){
+        if(err) throw err;
+        res.redirect('/administrarUsuarios');
+      });
     });
   });
 
