@@ -12,18 +12,20 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     });
 
 
-    app.post('/agregarLista', isLoggedIn, function(req, res) {
+    app.post('/agregarLista', isLoggedIn , upload.any(), function(req, res) {
         if (req.user.Profesor != 0) {
             var XLSX = require('xlsx');
-            //var workbook = XLSX.readFile();
+            var multer  = require('multer')
+            var upload = multer({ dest: 'uploads/' })
+            console.log(req.files);
+            /*var workbook = XLSX.readFile();
             var sheet_name_list = workbook.SheetNames;
             var lista = [];
-            sheet_name_list.forEach(function(y) { /* iterate through sheets */
+            sheet_name_list.forEach(function(y) {
                 var worksheet = workbook.Sheets[y];
                 var c=0;
                 var values=[];
                 for (z in worksheet) {
-                /* all keys that do not begin with "!" correspond to cell addresses */
                     if(z[0] === '!') continue;
                     values[4]=values[5]=0;
                     if(c%4===0){
@@ -79,7 +81,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
                 }
                 else req.flash('exito', ['Se agregaron los alumnos exitosamente.']);
 
-            }
+            }*/
         }
         else {
             res.redirect('/menu');
