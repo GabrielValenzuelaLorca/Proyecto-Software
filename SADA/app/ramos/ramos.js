@@ -1,7 +1,7 @@
 module.exports = function(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn) {
 
   //requires
-  require('./unidades.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
+
 
   // =====================================
   // RAMOS ===============================

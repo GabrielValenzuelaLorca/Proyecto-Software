@@ -1,0 +1,170 @@
+<%include layout %>
+    <%include nav %>
+
+        <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+        <!--CSS para los objetos que se iran agregando----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+        <style>
+            .ui-state-default {
+                margin: 5px;
+                padding: 5px;
+                width: 150px;
+            }
+        </style>
+
+        <!--SCRIPT para los sortables(objetos que se pueden ordenar dinamicamente)-------------------------------------------------------------------------->
+
+        <script>
+            $(function() {
+
+                /******************************************************************************/
+                //Funcion para que la primera columna sea sortable*/
+                $('#sortable1').sortable({
+                    cursor: "move",
+                    scroll: true
+                });
+
+                //Funcion para poder eliminar los elementos de la columna1*/
+                $("#sortable1").on('click', '.delete', function() {
+                    $(this).parent().remove();
+                });
+
+                //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
+                $("#botoncito1").on('click', function() {
+                    var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+                    var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
+                    var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1);
+                    var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
+                    $('#sortable1').append(li);
+                });
+                /******************************************************************************/
+
+                //Funcion para que la segunda columna sea sortable*/
+                $('#sortable2').sortable({
+                    cursor: "move",
+                    scroll: true
+                });
+
+                //Funcion para poder eliminar los elementos de la columna1*/
+                $("#sortable2").on('click', '.delete', function() {
+                    $(this).parent().remove();
+                });
+
+                //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
+                $("#botoncito2").on('click', function() {
+                    var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+                    var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
+                    var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1);
+                    var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
+                    $('#sortable2').append(li);
+                });
+
+                /******************************************************************************/
+
+                //Funcion para que la tercera columna sea sortable*/
+                $('#sortable3').sortable({
+                    cursor: "move",
+                    scroll: true
+                });
+                //Funcion para poder eliminar los elementos de la columna1*/
+                $("#sortable3").on('click', '.delete', function() {
+                    $(this).parent().remove();
+                });
+                //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
+                $("#botoncito3").on('click', function() {
+                    var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+                    var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
+                    var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1);
+                    var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
+                    $('#sortable3').append(li);
+                });
+
+                /***************************************************************************************/
+
+                //Funcion para guardar los cambios
+                $('#botonSave').click(function() {
+                    var nombre = document.getElementById("plantillaSave").value;
+                    var order1 = $('#sortable1').sortable('toArray').toString();
+                    var order2 = $('#sortable2').sortable('toArray').toString();
+                    var order3 = $('#sortable3').sortable('toArray').toString();
+                    $("#printeo1").text(order1);
+                    $("#printeo2").text(order2);
+                    $("#printeo3").text(order3);
+                });
+            });
+        </script>
+        <!--HTML de la pagina------------------------------------------------------------------------------------------------------------------>
+
+
+
+        <div class="menu container">
+
+            <div class="row">
+
+                <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave">
+                <button id='botonSave'>Guardar Plantilla</button>
+                <br>
+
+                <div class="col-sm-2" id="columna1">
+
+
+                    <!--Primera columna-->
+                    <p>columna 1</p>
+                    <button id='botoncito1'>Agregar modulo</button>
+                    <ul id="sortable1" style="list-style: none;">
+                        <!--Aca van los modulos-->
+                    </ul>
+
+                    <br>
+                    <h3><span id="printeo1"></span></h3>
+
+                </div>
+
+                <section class="col-sm-2" id="columna2">
+
+                    <!--Segunda columna-->
+                    <p>columna 2</p>
+                    <button id='botoncito2'>Agregar modulo</button>
+
+                    <ul id="sortable2">
+                        <!--Aca van los modulos-->
+                    </ul>
+                    <br>
+                    <h3><span id="printeo2"></span></h3>
+
+                </section>
+
+                <section class="col-sm-1" id="columna3">
+
+                    <!--Tercera columna-->
+                    <p>columna 3</p>
+                    <button id='botoncito3'>Agregar modulo</button>
+
+                    <ul id="sortable3">
+                        <!--Aca van los modulos-->
+                    </ul>
+
+                    <br>
+                    <h3><span id="printeo3"></span></h3>
+
+                </section>
+
+            </div>
+
+            <p>hola</p>
+
+
+            <% for (var i = 0; i < modulasos.length; i++){ %>
+                <input type="radio" name="modulitos" value="<%=modulasos[i].idMódulo %>,<%=modulasos[i].Información %>">
+                <%=modulasos[i].Información %> <br>
+
+            <%  } %>
+
+
+
+        </div>
+
+        <% include footer %>
