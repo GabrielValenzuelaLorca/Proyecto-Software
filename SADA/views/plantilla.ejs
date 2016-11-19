@@ -39,8 +39,8 @@
             $("#botoncito1").on('click', function() {
                 var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
                 var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
-                var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1);
-                var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
+                var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1, posComa+10);
+                var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + " ...<br><button class='delete btn btn-default'><i class='fa fa-trash' aria-hidden='true'></i></button></li>"
                 $('#sortable1').append(li);
             });
             /******************************************************************************/
@@ -60,8 +60,8 @@
             $("#botoncito2").on('click', function() {
                 var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
                 var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
-                var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1);
-                var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
+                var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1, posComa+10);
+                var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + " ...<br><button class='delete btn btn-default'><i class='fa fa-trash' aria-hidden='true'></i></button></li>"
                 $('#sortable2').append(li);
             });
 
@@ -80,8 +80,8 @@
             $("#botoncito3").on('click', function() {
                 var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
                 var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
-                var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1);
-                var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + "<br><button class='delete'>Borrar</button></li>"
+                var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1, posComa+10);
+                var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + " ...<br><button class='delete btn btn-default'><i class='fa fa-trash' aria-hidden='true'></i></button></li>"
                 $('#sortable3').append(li);
             });
 

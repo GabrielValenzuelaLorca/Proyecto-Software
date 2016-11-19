@@ -10,13 +10,13 @@
               <li><a href="/signup">Administrar Usuarios</a></li>
             <%}%>
             <%if(user.Profesor==1){%>
-              <li><a href="/modulos">Administrar Plantillas</a></li>
+              <li><a href="/administrar_ramos">Administrar Ramos</a></li>
             <%}%>
             <li><a href="/about">About</a></li>
           </ul>
 
           <ul class="nav navbar-right">
-            <li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> <%= user.Nombre %></a></li>
+            <li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i><strong><%= user.Nombre %></strong></a></li>
             <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> <strong>Logout</strong></a></li>
           </ul>
 
