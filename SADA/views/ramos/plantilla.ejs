@@ -1,0 +1,27 @@
+<%include ../layout%>
+<%include ../nav %>
+
+<div class="menu container">
+    <div class="row">
+        <%var i=0;%>
+        <%for(var j=1;j<4;j++){%>
+            <div class="col-md-4">
+                <%for(i;i<modulos.length;i++){%>
+                    <%if(modulos[i].Columna==j){%>
+                        <%if(modulos[i].Tipo=='video'){%>
+                            <iframe width=355 height=360 src=<%=modulos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
+                        <%}else if(modulos[i].Tipo=='imagen') {%>
+                            <img src= <%=modulos[i].Informacion%> width=355 height=360 style="margin-top:10px;" />
+                        <%}else if(modulos[i].Tipo=='texto') {%>
+                            <p><%=modulos[i].Informacion%></p>
+                        <%}%>
+                    <%}else {%>
+                        <%break; %>
+                    <%}%>
+                <%}%>
+            </div>
+        <%}%>
+    </div>
+</div>
+
+<% include ../footer %>
