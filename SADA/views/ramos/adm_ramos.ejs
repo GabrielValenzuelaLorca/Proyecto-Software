@@ -4,7 +4,6 @@
 <div class="menu container">
   <div class="row">
     <section class="col-sm-4 ramos">
-      <h4>Elija una asignatura</h4>
       <%for(var i=0;i<rows.length;i++){%>
         <form action="/adm_unidades" method="post">
           <input type="hidden" value=<%=rows[i].idRamo%> name="ramo_id">

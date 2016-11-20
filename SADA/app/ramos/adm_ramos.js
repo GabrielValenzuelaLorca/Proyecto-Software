@@ -56,4 +56,16 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
         });
     });
   });
+
+  app.post('/agregarPlantilla', isLoggedIn, function(req, res){
+    var sort1 = req.body.sort1.split(",");
+    var sort2 = req.body.sort2.split(",");
+    var sort3 = req.body.sort3.split(",");
+
+    console.log("AAAA: "+sort1);
+    console.log("AAAA: "+sort2);
+    console.log("AAAA: "+sort3);
+    res.redirect('/');
+  });
+
 }

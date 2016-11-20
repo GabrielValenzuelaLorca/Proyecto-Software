@@ -82,6 +82,9 @@
               $("#printeo1").text(order1);
               $("#printeo2").text(order2);
               $("#printeo3").text(order3);
+              document.formu.sort1.value = $('#sortable1').sortable('toArray').toString();
+              document.formu.sort2.value = $('#sortable2').sortable('toArray').toString();
+              document.formu.sort3.value = $('#sortable3').sortable('toArray').toString();
           });
       });
   </script>
@@ -93,14 +96,19 @@
           <label>Unidad: </label> <%=unidad_nombre%>
         </div>
         <div class="col-md-4">
-          <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave">
-          <button class="btn btn-default" id='botonSave'>Guardar Plantilla</button>
+          <form action="/agregarPlantilla" method="post" name="formu">
+            <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave" required>
+            <input type="hidden" name="sort1">
+            <input type="hidden" name="sort2">
+            <input type="hidden" name="sort3">
+            <button type="submit" class="btn btn-default" id='botonSave'>Guardar Plantilla</button>
+          </form><!-- Guardar plantilla-->
         </div>
         <form class="pull-right" action="/crearModulos" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
           <input type="hidden" value=<%=unidad_id%> name="unidad_id">
           <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
           <button type="submit" class="btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar nuevo módulo</button>
-        </form>
+        </form><!-- Agregar modulo -->
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -113,7 +121,6 @@
                   <!--Aca van los modulos-->
               </ul>
               <h3><span id="printeo1"></span></h3>
-
           </div>
 
           <section class="col-sm-4" id="columna2">
@@ -154,10 +161,6 @@
         </div>
 
     </div><!-- end row-->
-
-    <div class="row">
-
-    </div>
 
   </div>
 
