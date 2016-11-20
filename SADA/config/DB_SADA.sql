@@ -178,7 +178,7 @@ CREATE TABLE `ramo` (
 
 LOCK TABLES `ramo` WRITE;
 /*!40000 ALTER TABLE `ramo` DISABLE KEYS */;
-INSERT INTO `ramo` VALUES (1,'fisica','fis130');
+INSERT INTO `ramo` VALUES (1,'fisica 100','fis100'),(2'fisica 110','fis110'),(3,'fisica 120','fis120'),(4,'fisica 130','fis130'),(5,'fisica 140','fis140');
 /*!40000 ALTER TABLE `ramo` ENABLE KEYS */;
 UNLOCK TABLES;
 
