@@ -47,7 +47,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.post('/adm_plantilla',isLoggedIn,function(req, res){
     connection.query('SELECT * FROM modulo WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, rows, fields) {
         if (err) throw err;
-        res.render("plantilla.ejs", {
+        res.render("ramos/crearPlantilla.ejs", {
             title: title,
             user: req.user,
             unidad_id: req.body.unidad_id,
@@ -58,14 +58,63 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   });
 
   app.post('/agregarPlantilla', isLoggedIn, function(req, res){
-    var sort1 = req.body.sort1.split(",");
-    var sort2 = req.body.sort2.split(",");
-    var sort3 = req.body.sort3.split(",");
+    var col1 = req.body.sort1.split(",");
+    var col2 = req.body.sort2.split(",");
+    var col3 = req.body.sort3.split(",");
 
-    console.log("AAAA: "+sort1);
-    console.log("AAAA: "+sort2);
-    console.log("AAAA: "+sort3);
-    res.redirect('/');
+    var noentrar = false;
+
+    var exito = 1;
+    var mensaje = "La plantilla fue agregada con éxito."
+
+    //Ve si ya existe una plantilla con el mismo nombre
+    connection.query('SELECT * FROM plantilla WHERE Nombre = ?',[req.body.plantillaSave],function(err, filas, fields){
+      if(err) throw err;
+      if(filas.length>0){
+        noentrar=true;
+        exito=0;
+        mensaje = "No puede haber otra plantilla con el mismo nombre."
+      };
+
+      //Agrega plantilla
+      if(!noentrar){
+        connection.query('INSERT INTO plantilla (Nombre, perfil_idperfil, Unidad_idUnidad) VALUES (?, ?, ?) ',[req.body.plantillaSave, req.body.perfil, req.body.unidad_id],function(err, rows, fields){
+          if(err) throw err;
+        });
+
+        //Busca id plantilla agregada para luego agregar a ensamblaje
+        connection.query('SELECT * FROM plantilla WHERE Nombre = ?',[req.body.plantillaSave],function(err, rows, fields){
+          if(err) throw err;
+          if(col1!=''){
+            for(var i = 0;i<col1.length;i++){
+              connection.query('INSERT INTO ensamblaje VALUES (?,?,?,?)',[rows[0].idPlantilla,col1[i],1,i],function(err1, rows1, fields1){
+                if(err1) throw err1;
+              });
+            }
+          }
+          if(col2!=''){
+            for(var i = 0;i<col2.length;i++){
+              connection.query('INSERT INTO ensamblaje VALUES (?,?,?,?)',[rows[0].idPlantilla,col2[i],2,i],function(err1, rows1, fields1){
+                if(err1) throw err1;
+              });
+            }
+          }
+          if(col3!=''){
+            for(var i = 0;i<col3.length;i++){
+              connection.query('INSERT INTO ensamblaje VALUES (?,?,?,?)',[rows[0].idPlantilla,col3[i],3,i],function(err1, rows1, fields1){
+                if(err1) throw err1;
+              });
+            }
+          }
+        });
+      }
+      res.render('ramos/exito.ejs',{
+        title: title,
+        user: req.user,
+        mensaje: mensaje,
+        exito: exito
+      });
+    });//end query grande
   });
 
 }

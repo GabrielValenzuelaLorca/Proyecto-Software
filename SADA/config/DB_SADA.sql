@@ -56,9 +56,6 @@ CREATE TABLE `ensamblaje` (
   `Modulo_idModulo` int(11) NOT NULL,
   `Columna` int(11) NOT NULL,
   `Posicion` int(11) NOT NULL,
-  PRIMARY KEY (`Plantilla_idPlantilla`,`Modulo_idModulo`),
-  KEY `fk_Plantilla_has_Modulo_Modulo1_idx` (`Modulo_idModulo`),
-  KEY `fk_Plantilla_has_Modulo_Plantilla1_idx` (`Plantilla_idPlantilla`),
   CONSTRAINT `fk_Plantilla_has_Modulo_Modulo1` FOREIGN KEY (`Modulo_idModulo`) REFERENCES `modulo` (`idModulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Plantilla_has_Modulo_Plantilla1` FOREIGN KEY (`Plantilla_idPlantilla`) REFERENCES `plantilla` (`idPlantilla`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -138,8 +135,9 @@ CREATE TABLE `plantilla` (
   `Valoracion` int(11) DEFAULT NULL,
   `perfil_idperfil` int(11) NOT NULL,
   `Unidad_idUnidad` int(11) NOT NULL,
-  `Autor` int(1) NOT NULL,
+  `Activo` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idPlantilla`),
+  UNIQUE KEY `Nombre_UNIQUE` (`Nombre`),
   KEY `fk_Plantilla_perfil1_idx` (`perfil_idperfil`),
   KEY `fk_Plantilla_Unidad1_idx` (`Unidad_idUnidad`),
   CONSTRAINT `fk_Plantilla_Unidad1` FOREIGN KEY (`Unidad_idUnidad`) REFERENCES `unidad` (`idUnidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -178,7 +176,7 @@ CREATE TABLE `ramo` (
 
 LOCK TABLES `ramo` WRITE;
 /*!40000 ALTER TABLE `ramo` DISABLE KEYS */;
-INSERT INTO `ramo` VALUES (1,'fisica 100','fis100'),(2'fisica 110','fis110'),(3,'fisica 120','fis120'),(4,'fisica 130','fis130'),(5,'fisica 140','fis140');
+INSERT INTO `ramo` VALUES (1,'fisica 100','fis100'),(2,'fisica 110','fis110'),(3,'fisica 120','fis120'),(4,'fisica 130','fis130'),(5,'fisica 140','fis140');
 /*!40000 ALTER TABLE `ramo` ENABLE KEYS */;
 UNLOCK TABLES;
 
