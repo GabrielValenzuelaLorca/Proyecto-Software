@@ -64,11 +64,16 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
 
     var noentrar = false;
 
+    var exito = 1;
+    var mensaje = "La plantilla fue agregada con éxito."
+
     //Ve si ya existe una plantilla con el mismo nombre
     connection.query('SELECT * FROM plantilla WHERE Nombre = ?',[req.body.plantillaSave],function(err, filas, fields){
       if(err) throw err;
       if(filas.length>0){
         noentrar=true;
+        exito=0;
+        mensaje = "No puede haber otra plantilla con el mismo nombre."
       };
 
       //Agrega plantilla
@@ -103,8 +108,13 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
           }
         });
       }
+      res.render('ramos/exito.ejs',{
+        title: title,
+        user: req.user,
+        mensaje: mensaje,
+        exito: exito
+      });
     });//end query grande
-    res.redirect('/');
   });
 
 }
