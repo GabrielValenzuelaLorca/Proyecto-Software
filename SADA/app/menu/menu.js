@@ -14,13 +14,13 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
           }
       } //Es profe, manda directamente a menu
       else {
-          res.render("menu/menu.ejs", { title:title, user: req.user });
+        res.render("menu/menu.ejs", { title:title, user: req.user });
       }
   });
 
   app.post('/menu', function(req, res) { //Respondiendo encuesta
 
-      connection.query('UPDATE usuario SET perfil_idperfil= ? WHERE Rut = ?', [req.body.result, req.user.Rut], function(err, rows, fields) {
+      connection.query('UPDATE usuario SET perfil_idperfil = ? WHERE Rut = ?', [req.body.result, req.user.Rut], function(err, rows, fields) {
           if (err) throw err;
       });
 
@@ -34,5 +34,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
       }); //
   });
 
+  app.post('/perfilTemp',function(req, res){
+    req.session.perfilTemp = req.body.perfilTemp;
+    res.redirect('/');
+  });
 
 }

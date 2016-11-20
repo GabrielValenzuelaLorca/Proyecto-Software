@@ -35,17 +35,25 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   });
 
   app.post('/ramos/u/materia',isLoggedIn,function(req,res){
-      connection.query('SELECT * FROM plantilla WHERE Activo=1 AND  perfil_idperfil = ? AND Unidad_idUnidad = ?',[req.user.perfil_idperfil,req.body.idUnidad], function(err, plantilla) {
-        connection.query('SELECT * FROM ensamblaje INNER JOIN modulo ON ensamblaje.Modulo_idModulo=modulo.idModulo WHERE Plantilla_idPlantilla=? ORDER BY columna ASC, posicion ASC',[plantilla[0].idPlantilla], function(err, modulos) {
-            if (err) throw err;
-            res.render("ramos/plantilla.ejs",{
-              title:title,
-              user:req.user,
-              plantilla:plantilla[0],
-              modulos:modulos
-            });
+    var perfilAux;
 
-        });
-      });//end query
+    if(req.user.Profesor==1){
+      perfilAux = req.session.perfilTemp;
+    }
+    else{
+      perfilAux = req.user.perfil_idperfil;
+    }
+    connection.query('SELECT * FROM plantilla WHERE Activo=1 AND perfil_idperfil = ? AND Unidad_idUnidad = ?',[perfilAux,req.body.idUnidad], function(err, plantilla) {
+      connection.query('SELECT * FROM ensamblaje INNER JOIN modulo ON ensamblaje.Modulo_idModulo = modulo.idModulo WHERE Plantilla_idPlantilla = ? ORDER BY columna ASC, posicion ASC',[plantilla[0].idPlantilla], function(err, modulos) {
+          if (err) throw err;
+          res.render("ramos/plantilla.ejs",{
+            title:title,
+            user:req.user,
+            plantilla:plantilla[0],
+            modulos:modulos
+          });
+
+      });
+    });//end query
   });
 }

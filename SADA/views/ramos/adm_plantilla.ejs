@@ -1,0 +1,21 @@
+<%include ../layout %>
+<%include ../nav %>
+
+<div class="menu container">
+
+  <div class="row">
+    <form action="/ver_plantillas">
+      <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+      <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
+      <button class="btn btn-default" type="submit">Ver plantillas para <label><%=unidad_nombre%></label></button>
+    </form>
+    <form action="/crear_plantilla" method="post">
+      <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+      <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
+      <button class="btn btn-default" type="submit">Crear plantilla</button>
+    </form>
+  </div>
+
+</div>
+
+<%include ../footer %>

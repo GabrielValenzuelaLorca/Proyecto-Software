@@ -32,8 +32,9 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     // =====================================
 
     app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
+      req.session.perfilTemp = 1;
+      req.logout();
+      res.redirect('/');
     });
 
     // =====================================
