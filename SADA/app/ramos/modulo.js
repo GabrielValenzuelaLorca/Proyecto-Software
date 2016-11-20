@@ -11,7 +11,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
 
             console.log('holaza');
         });
-        res.render("crearModulos.ejs", {
+        res.render("ramos/crearModulos.ejs", {
             title: title,
             user: req.user,
             unidad_id:req.body.unidad_id,
@@ -21,7 +21,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
     });
 
     app.post('/crearModulos', isLoggedIn, function(req, res) {
-        res.render("crearModulos.ejs", {
+        res.render("ramos/crearModulos.ejs", {
             title: title,
             user: req.user,
             unidad_id:req.body.unidad_id,

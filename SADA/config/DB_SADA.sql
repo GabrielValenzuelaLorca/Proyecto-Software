@@ -138,7 +138,7 @@ CREATE TABLE `plantilla` (
   `Valoracion` int(11) DEFAULT NULL,
   `perfil_idperfil` int(11) NOT NULL,
   `Unidad_idUnidad` int(11) NOT NULL,
-  `Autor` int(1) NOT NULL,
+  `Activo` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idPlantilla`),
   KEY `fk_Plantilla_perfil1_idx` (`perfil_idperfil`),
   KEY `fk_Plantilla_Unidad1_idx` (`Unidad_idUnidad`),
@@ -178,7 +178,7 @@ CREATE TABLE `ramo` (
 
 LOCK TABLES `ramo` WRITE;
 /*!40000 ALTER TABLE `ramo` DISABLE KEYS */;
-INSERT INTO `ramo` VALUES (1,'fisica 100','fis100'),(2'fisica 110','fis110'),(3,'fisica 120','fis120'),(4,'fisica 130','fis130'),(5,'fisica 140','fis140');
+INSERT INTO `ramo` VALUES (1,'fisica 100','fis100'),(2,'fisica 110','fis110'),(3,'fisica 120','fis120'),(4,'fisica 130','fis130'),(5,'fisica 140','fis140');
 /*!40000 ALTER TABLE `ramo` ENABLE KEYS */;
 UNLOCK TABLES;
 

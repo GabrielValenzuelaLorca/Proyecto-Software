@@ -15,12 +15,6 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
     });
   });
 
-  app.post('/ramos/u/materia',isLoggedIn,function(req,res){
-
-      res.redirect("/");
-
-  });
-
   app.post('/ramos/u',isLoggedIn,function(req,res){
 
     req.session.idRamo = req.body.ramo_id;
@@ -31,7 +25,6 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.get('/ramos/u', isLoggedIn, function(req, res) {
     connection.query('SELECT * FROM unidad WHERE Ramo_idRamo = ? ',req.session.idRamo, function(err, rows, fields) {
       if (err) throw err;
-
       res.render("ramos/unidades.ejs",{
         title:title,
         user:req.user,
@@ -41,4 +34,19 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
     });//end query
   });
 
+  app.post('/ramos/u/materia',isLoggedIn,function(req,res){
+      connection.query('SELECT * FROM plantilla WHERE Activo=1 AND  perfil_idperfil = ? AND Unidad_idUnidad = ?',[req.user.perfil_idperfil,req.body.idUnidad], function(err, plantilla) {
+        connection.query('SELECT * FROM ensamblaje INNER JOIN modulo ON ensamblaje.Modulo_idModulo=modulo.idModulo WHERE Plantilla_idPlantilla=?',[plantilla[0].idPlantilla], function(err, modulos) {
+
+            if (err) throw err;
+            res.render("ramos/plantilla.ejs",{
+              title:title,
+              user:req.user,
+              plantilla:plantilla[0],
+              modulos=modulos
+            });
+
+        });
+      });//end query
+  });
 }

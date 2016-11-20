@@ -3,15 +3,6 @@
 
 <div class="menu container">
   <div class="row">
-    <section class="col-sm-4 ramos">
-      <%for(var i=0;i<unidades.length;i++){%>
-        <form action="/ramos/u/materia" method="post">
-          <input type="hidden" value=<%=unidades[i].idUnidad%> name="idUnidad">
-          <input type="hidden" value=<%=unidades[i].Nombre%> name="nombreUnidad">
-          <button type="submit"><%= unidades[i].Nombre%></button>
-        </form>
-      <%}%>
-    </section>
     <section class="col-sm-6 col-sm-offset-1 ramos-img">
       <%if(user.Admin==1){%>
         <img src="http://adminweapon.com/wp-content/uploads/2012/06/logo-admin-weapon.jpg" alt="">
@@ -29,5 +20,9 @@
     </section>
   </div>
 </div>
+
+
+
+
 
 <% include ../footer %>
