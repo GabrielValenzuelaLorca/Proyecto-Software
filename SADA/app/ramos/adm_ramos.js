@@ -47,7 +47,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.post('/adm_plantilla',isLoggedIn,function(req, res){
     connection.query('SELECT * FROM modulo WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, rows, fields) {
         if (err) throw err;
-        res.render("plantilla.ejs", {
+        res.render("ramos/crearPlantilla.ejs", {
             title: title,
             user: req.user,
             unidad_id: req.body.unidad_id,
@@ -65,6 +65,12 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
     console.log("AAAA: "+sort1);
     console.log("AAAA: "+sort2);
     console.log("AAAA: "+sort3);
+
+    connection.query('INSERT INTO plantilla (Nombre, perfil_idperfil, Unidad_idUnidad) VALUES (?, ?, ?) ',[req.body.plantillaSave, 1, req.body.unidad_id],function(err, rows, fields){
+      if(err) throw err;
+    });
+
+
     res.redirect('/');
   });
 

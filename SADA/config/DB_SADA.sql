@@ -138,7 +138,7 @@ CREATE TABLE `plantilla` (
   `Valoracion` int(11) DEFAULT NULL,
   `perfil_idperfil` int(11) NOT NULL,
   `Unidad_idUnidad` int(11) NOT NULL,
-  `Autor` int(1) NOT NULL,
+  `Activo` int(1) NOT NULL DEFAULT 1, 
   PRIMARY KEY (`idPlantilla`),
   KEY `fk_Plantilla_perfil1_idx` (`perfil_idperfil`),
   KEY `fk_Plantilla_Unidad1_idx` (`Unidad_idUnidad`),
