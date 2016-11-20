@@ -227,3 +227,19 @@ margin-top: 20px;
 .font-20{
   font-size: 20px;
 }
+
+textarea{
+  resize: none;
+  /*width: 100%;*/
+  height: 100%;
+}
+
+.ui-state-default {
+    margin: 5px;
+    padding: 5px;
+    width: 150px;
+}
+.modulos ul{
+  padding: 0;
+  list-style-type: none;
+}

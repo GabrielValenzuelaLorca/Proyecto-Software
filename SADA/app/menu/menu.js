@@ -5,7 +5,6 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
   // =====================================
 
   app.get('/menu', isLoggedIn_Encuesta, function(req, res) {
-
       if (req.user.Profesor == 0) { //Es alumno
           if (req.user.perfil_idperfil == null) {
               res.render('menu/encuesta.ejs', { title: title }); //Te manda a encuesta
