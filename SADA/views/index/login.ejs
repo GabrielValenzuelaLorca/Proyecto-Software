@@ -7,11 +7,11 @@
 <h3 class="page-header">Login</h3>
 
 <% if (messages.length > 0){%>
-<% for(var i=0;i<messages.length;i++){%>
-<div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close">
-  <%= messages[i] %> <button class="close">&times;</button>
-</div>
-<% } %>
+  <% for(var i=0;i<messages.length;i++){%>
+    <div class="alert alert-danger fade in" data-dismiss="alert" aria-label="close">
+      <%= messages[i] %> <button class="close">&times;</button>
+    </div>
+  <% } %>
 <% } %>
 
 <form action="/login" method="post">
