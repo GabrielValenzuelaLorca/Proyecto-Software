@@ -48,6 +48,11 @@ module.exports = function(passport, connection, dbconfig) {
 
                 //Errores extras de formato
                 //Agregar más errores...
+                if(req.body.rut.length<=4){
+                  req.checkBody(req.body.rut.toString(), 'Rut inválido').isLength({
+                      min: 4
+                  });
+                };
 
                 var errors = req.validationErrors();
                 if (errors) {
@@ -66,7 +71,7 @@ module.exports = function(passport, connection, dbconfig) {
                 }
 
                 //Aquí empieza el viaje.
-                if(req.body.isAlumno==='true'){//Alumno
+                if(req.body.isAlumno=='true'){//Alumno
                   console.log("ENTRO QUERY ALUMNO");
                   connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ? OR Rol = ?", [email, req.body.rut,req.body.rol], function(err, rows) {
                       if (err)
@@ -96,7 +101,7 @@ module.exports = function(passport, connection, dbconfig) {
                           var clave=req.body.rut.toString();
                           var newUserMysql = {
                               email: email,
-                              password: bcrypt.hashSync(clave, null, null), // use the generateHash function in our user model
+                              password: bcrypt.hashSync(req.body.rut, null, null), // use the generateHash function in our user model
                               name: req.body.username,
                               rol: req.body.rol,
                               rut:req.body.rut,
@@ -141,7 +146,7 @@ module.exports = function(passport, connection, dbconfig) {
                           var clave=req.body.rut.toString();
                           var newUserMysql = {
                               email: email,
-                              password: bcrypt.hashSync(clave, null, null), // use the generateHash function in our user model
+                              password: bcrypt.hashSync(req.body.rut, null, null), // use the generateHash function in our user model
                               name: req.body.username,
                               rut:req.body.rut,
                               admin:0,

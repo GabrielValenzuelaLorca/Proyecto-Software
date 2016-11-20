@@ -206,7 +206,7 @@ CREATE TABLE `unidad` (
 
 LOCK TABLES `unidad` WRITE;
 /*!40000 ALTER TABLE `unidad` DISABLE KEYS */;
-INSERT INTO `unidad` VALUES (1,1,'voltaje','es el voltaje'),(2,1,'resistencia','viv la resistance'),(45,1,'global','probando');
+INSERT INTO `unidad` VALUES (1,1,'Voltaje','es el voltaje'),(2,1,'Resistencia','viv la resistance'),(45,1,'Global','probando');
 /*!40000 ALTER TABLE `unidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
