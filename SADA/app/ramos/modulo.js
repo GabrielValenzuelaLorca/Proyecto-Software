@@ -101,7 +101,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
         });
 
     });
-
+/*
     app.post('/revisarPlantillas', isLoggedIn, function(req, res) {
 
         var id = req.body.unidad_id;
@@ -120,4 +120,5 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
         });
 
     });
+    */
 }
