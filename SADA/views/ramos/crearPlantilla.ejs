@@ -92,10 +92,10 @@
 
   <div class="menu container modulos">
       <div class="row">
-        <div class="col-md-2">
-          <label>Unidad: </label> <%=unidad_nombre%>
+        <div class="col-md-3">
+          <h4><label>Unidad: </label> <%=unidad_nombre%></h4>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-9">
           <form action="/agregar_plantilla" method="post" name="formu">
             <input type="hidden" name="sort1">
             <input type="hidden" name="sort2">
@@ -110,14 +110,9 @@
             <button type="submit" class="btn btn-default" id='botonSave'>Guardar Plantilla</button>
           </form><!-- Guardar plantilla-->
         </div>
-        <form class="col-md-6" action="/crearModulos" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
-          <input type="hidden" value=<%=unidad_id%> name="unidad_id">
-          <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
-          <button type="submit" class="pull-right btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar nuevo módulo</button>
-        </form><!-- Agregar modulo nuevo-->
-      </div>
+      </div><!-- end row -->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 usuario">
           <div class="col-sm-4" id="columna1">
 
               <!--Primera columna-->
@@ -167,6 +162,23 @@
         </div>
 
     </div><!-- end row-->
+
+    <div class="row">
+
+      <div class="pull-right">
+        <form action="/adm_plantilla" method="post">
+          <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+          <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
+          <button type="submit" class="btn btn-default">Volver</button>
+        </form>
+      </div>
+      <form class="pull-right" action="/crearModulos" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
+        <input type="hidden" value=<%=unidad_id%> name="unidad_id">
+        <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
+        <button type="submit" class="pull-right btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo módulo</button>
+      </form><!-- Agregar modulo nuevo-->
+
+    </div><!-- end row -->
 
   </div>
 

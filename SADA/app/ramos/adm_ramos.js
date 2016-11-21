@@ -128,6 +128,43 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
 
   app.post('/ver_plantillas', isLoggedIn, function(req, res){
 
+    if(req.body.activar=='1'){
+      connection.query('UPDATE plantilla SET Activo = 0 WHERE perfil_idperfil = ?',[req.body.profile],function(err, rows, fields){
+        if(err) throw err;
+        connection.query('UPDATE plantilla SET Activo = 1 WHERE idPlantilla = ?',[req.body.plantilla_id],function(err, rows, fields){
+          if(err) throw err;
+          connection.query('SELECT * FROM plantilla WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, filas, fields){
+            if(err) throw err;
+
+            res.render('ramos/ver_plantillas.ejs',{
+              title: title,
+              user: req.user,
+              plantillas: filas,
+              unidad_id:req.body.unidad_id,
+              unidad_nombre:req.body.unidad_nombre,
+              profile:req.body.profile,
+            });
+            
+          });
+        });
+      });
+    }//poca pajitae
+
+    else{
+      connection.query('SELECT * FROM plantilla WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, filas, fields){
+        if(err) throw err;
+
+        res.render('ramos/ver_plantillas.ejs',{
+          title: title,
+          user: req.user,
+          plantillas: filas,
+          unidad_id:req.body.unidad_id,
+          unidad_nombre:req.body.unidad_nombre,
+          profile:req.body.profile,
+        });
+
+      });
+    }
   });
 
 }
