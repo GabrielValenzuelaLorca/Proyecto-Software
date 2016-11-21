@@ -153,18 +153,28 @@
         </div>
         <div class="col-md-6">
           <h4>Módulos</h4>
-          <div class="well">
-            <% for (var i = 0; i < modulasos.length; i++){ %>
-              <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
-              <%if(modulasos[i].Tipo=='video'){%>
-                  <iframe width=355 height=360 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
-              <%}else if(modulasos[i].Tipo=='imagen') {%>
-                  <img src= <%=modulasos[i].Informacion%> width=100 height=150 style="margin-top:10px;" />
-              <%}else if(modulasos[i].Tipo=='texto') {%>
-                  <%=modulasos[i].Informacion%>
-              <%}%></p>
-            <%}%>
-          </div>
+          <form action="/editarModulo" method="post" name="formu" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
+            <div class="well" style="overflow: auto; height: 300px;">
+              <% for (var i = 0; i < modulasos.length; i++){ %>
+                <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
+                <%if(modulasos[i].Tipo=='video'){%>
+                    <iframe width=355 height=360 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
+                <%}else if(modulasos[i].Tipo=='imagen') {%>
+                    <img src= <%=modulasos[i].Informacion%> width=100 height=150 style="margin-top:10px;" />
+                <%}else if(modulasos[i].Tipo=='texto') {%>
+                    <%=modulasos[i].Informacion%>
+                <%}%></p>
+              <%}%>
+            </div>
+            <input type="hidden" value=<%=unidad_id%> name="unidad_id">
+            <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
+            <button type="submit" class="btn btn-default" id='botonSave'>Editar Modulo</button>
+          </form>
+          <!---<form action="/revisarPlantillas" method="post" name="Propuestos" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
+              <input type="hidden" value=<%=unidad_id%> name="unidad_id">
+              <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
+              <button type="submit" class="btn btn-default" id='botonPropuesta'>Ver modulos propuestos</button>
+          </form>-->
         </div>
 
     </div><!-- end row-->
