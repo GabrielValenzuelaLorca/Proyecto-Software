@@ -4,7 +4,7 @@
 <div class="menu container">
   <div class="row">
     <section class="col-sm-4 ramos">
-      <label>Unidad: </label> <%=ramo_nombre%>
+      <h4>Unidad: <label> <%=ramo_nombre%></label></h4>
       <%for(var i=0;i<unidades.length;i++){%>
         <form action="/adm_plantilla" method="post">
           <input type="hidden" value=<%=unidades[i].idUnidad%> name="unidad_id">

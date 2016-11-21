@@ -69,12 +69,14 @@
         <%}%>
     </div>
     <div class="row">
+      <%if(user.Profesor==0){%>
         <div style="text-align: center;">
             <form method="post" action="/proponerPlantilla">
                 <input type="hidden" name="idPlantilla" value=<%=plantilla.idPlantilla%>>
-                <button type="submit" name="button" class="btn btn-success">Propón tu propia página!</button>
+                <button type="submit" name="button" class="btn btn-success">Propone tu propia página!</button>
             </form>
         </div>
+      <%}%>
     </div>
 </div>
 

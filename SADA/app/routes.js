@@ -27,13 +27,16 @@ module.exports = function(app, passport, connection, transporter,dbconfig) {
     //Creacion modulos
     require('./ramos/modulo.js')(app, passport, connection, transporter,dbconfig,title,bcrypt,isLoggedIn);
 
+
+
     // =====================================
     // LOGOUT ==============================
     // =====================================
 
     app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
+      req.session.perfilTemp = 1;
+      req.logout();
+      res.redirect('/');
     });
 
     // =====================================

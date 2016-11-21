@@ -213,7 +213,7 @@ module.exports = function(passport, connection, dbconfig) {
                       return done(null, false, {
                         message: 'Contraseña incorrecta.'
                     })};
-
+                    req.session.perfilTemp = 1;
                     // all is well, return successful user
                     return done(null, rows[0]);
                 });
