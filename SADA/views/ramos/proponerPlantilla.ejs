@@ -92,27 +92,23 @@
 
   <div class="menu container modulos">
       <div class="row">
-        <div class="col-md-3">
-          <h4><label>Unidad: </label> <%=unidad_nombre%></h4>
+        <div class="col-md-2">
+          <label>Unidad: </label> <font size=4><strong><%=nombreUnidad%></strong></font>
         </div>
-        <div class="col-md-9">
-          <form action="/agregar_plantilla" method="post" name="formu">
+        <div class="col-md-4">
+          <form action="/enviarProposicion" method="post" name="formu">
             <input type="hidden" name="sort1">
             <input type="hidden" name="sort2">
             <input type="hidden" name="sort3">
-            <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
-            <label>Seleccione Perfil</label>
-            <input type="radio" name="perfil" value='1' checked> 1 /
-            <input type="radio" name="perfil" value='2'> 2 /
-            <input type="radio" name="perfil" value='3'> 3 /
-            <input type="radio" name="perfil" value='4'> 4
-            <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave" required>
-            <button type="submit" class="btn btn-primary" id='botonSave'>Guardar Plantilla</button>
+            <input type="hidden" name="unidad_id" value=<%=idUnidad%>>
+            <input type="hidden" name="perfil" value=<%=user.perfil_idperfil%>>
+            <input type="hidden" name="plantillaSave" id="plantillaSave" value=<%=user.Nombre%>>
+            <button type="submit" class="btn btn-primary" id='botonSave'>Enviar Propuesta</button>
           </form><!-- Guardar plantilla-->
         </div>
-      </div><!-- end row -->
+      </div>
       <div class="row">
-        <div class="col-md-6 usuario">
+        <div class="col-md-6">
           <div class="col-sm-4" id="columna1">
 
               <!--Primera columna-->
@@ -153,48 +149,21 @@
         </div>
         <div class="col-md-6">
           <h4>Módulos</h4>
-          <form action="/editarModulo" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
-            <div class="well" style="overflow: auto; height: 300px;">
-              <% for (var i = 0; i < modulasos.length; i++){ %>
-                <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
-                <%if(modulasos[i].Tipo=='video'){%>
-                    <iframe width=355 height=360 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
-                <%}else if(modulasos[i].Tipo=='imagen') {%>
-                    <img src= <%=modulasos[i].Informacion%> width=100 height=150 style="margin-top:10px;" />
-                <%}else if(modulasos[i].Tipo=='texto') {%>
-                    <%=modulasos[i].Informacion%>
-                <%}%></p>
-              <%}%>
-            </div>
-            <input type="hidden" value=<%=unidad_id%> name="unidad_id">
-            <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
-            <button type="submit" class="btn btn-default" id='botonSave'>Editar Modulo</button>
-          </form>
-          <!---<form action="/revisarPlantillas" method="post" name="Propuestos" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
-              <input type="hidden" value=<%=unidad_id%> name="unidad_id">
-              <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
-              <button type="submit" class="btn btn-default" id='botonPropuesta'>Ver modulos propuestos</button>
-          </form>-->
+          <div class="well">
+            <% for (var i = 0; i < modulasos.length; i++){ %>
+              <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
+              <%if(modulasos[i].Tipo=='video'){%>
+                  <iframe width=355 height=360 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
+              <%}else if(modulasos[i].Tipo=='imagen') {%>
+                  <img src= <%=modulasos[i].Informacion%> width=100 height=150 style="margin-top:10px;" />
+              <%}else if(modulasos[i].Tipo=='texto') {%>
+                  <%=modulasos[i].Informacion%>
+              <%}%></p>
+            <%}%>
+          </div>
         </div>
 
     </div><!-- end row-->
-
-    <div class="row">
-
-      <div class="pull-right">
-        <form action="/adm_plantilla" method="post">
-          <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
-          <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
-          <button type="submit" class="btn btn-default">Volver</button>
-        </form>
-      </div>
-      <form class="pull-right" action="/crearModulos" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
-        <input type="hidden" value=<%=unidad_id%> name="unidad_id">
-        <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
-        <button type="submit" class="pull-right btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo módulo</button>
-      </form><!-- Agregar modulo nuevo-->
-
-    </div><!-- end row -->
 
   </div>
 
