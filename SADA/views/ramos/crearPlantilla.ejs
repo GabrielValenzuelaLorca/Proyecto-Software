@@ -161,7 +161,13 @@
           <div class="well">
             <% for (var i = 0; i < modulasos.length; i++){ %>
               <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
-              <%=modulasos[i].Informacion %></p>
+              <%if(modulasos[i].Tipo=='video'){%>
+                  <iframe width=355 height=360 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
+              <%}else if(modulasos[i].Tipo=='imagen') {%>
+                  <img src= <%=modulasos[i].Informacion%> width=100 height=150 style="margin-top:10px;" />
+              <%}else if(modulasos[i].Tipo=='texto') {%>
+                  <%=modulasos[i].Informacion%>
+              <%}%></p>
             <%}%>
           </div>
         </div>
