@@ -68,7 +68,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
     var mensaje = "La plantilla fue agregada con éxito."
 
     //Ve si ya existe una plantilla con el mismo nombre
-    connection.query('SELECT * FROM plantilla WHERE Nombre = ?',[req.body.plantillaSave],function(err, filas, fields){
+    connection.query('SELECT * FROM plantilla WHERE Nombre = ? AND Unidad_idUnidad = ?',[req.body.plantillaSave,req.body.unidad_id],function(err, filas, fields){
       if(err) throw err;
       if(filas.length>0){
         noentrar=true;
@@ -83,7 +83,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
         });
 
         //Busca id plantilla agregada para luego agregar a ensamblaje
-        connection.query('SELECT * FROM plantilla WHERE Nombre = ?',[req.body.plantillaSave],function(err, rows, fields){
+        connection.query('SELECT * FROM plantilla WHERE Nombre = ? AND Unidad_idUnidad = ?',[req.body.plantillaSave,req.body.unidad_id],function(err, rows, fields){
           if(err) throw err;
           if(col1!=''){
             for(var i = 0;i<col1.length;i++){

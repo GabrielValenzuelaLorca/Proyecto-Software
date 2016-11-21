@@ -93,28 +93,19 @@
   <div class="menu container modulos">
       <div class="row">
         <div class="col-md-2">
-          <label>Unidad: </label> <font size=4><strong><%=unidad_nombre%></strong></font>
+          <label>Unidad: </label> <font size=4><strong><%=nombreUnidad%></strong></font>
         </div>
         <div class="col-md-4">
-          <form action="/agregarPlantilla" method="post" name="formu">
+          <form action="/enviarProposicion" method="post" name="formu">
             <input type="hidden" name="sort1">
             <input type="hidden" name="sort2">
             <input type="hidden" name="sort3">
-            <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
-            <label>Seleccione Perfil</label>
-            <input type="radio" name="perfil" value='1' checked> 1 /
-            <input type="radio" name="perfil" value='2'> 2 /
-            <input type="radio" name="perfil" value='3'> 3 /
-            <input type="radio" name="perfil" value='4'> 4
-            <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave" required>
-            <button type="submit" class="btn btn-primary" id='botonSave'>Guardar Plantilla</button>
+            <input type="hidden" name="unidad_id" value=<%=idUnidad%>>
+            <input type="hidden" name="perfil" value=<%=user.perfil_idperfil%>>
+            <input type="hidden" name="plantillaSave" id="plantillaSave" value=<%=user.Nombre%>>
+            <button type="submit" class="btn btn-primary" id='botonSave'>Enviar Propuesta</button>
           </form><!-- Guardar plantilla-->
         </div>
-        <form class="col-md-6" action="/crearModulos" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
-          <input type="hidden" value=<%=unidad_id%> name="unidad_id">
-          <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
-          <button type="submit" class="pull-right btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar nuevo módulo</button>
-        </form><!-- Agregar modulo nuevo-->
       </div>
       <div class="row">
         <div class="col-md-6">

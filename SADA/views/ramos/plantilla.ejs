@@ -2,20 +2,6 @@
 <%include ../nav %>
 
 <style>
-    #form {
-      width: 250px;
-      margin: 0 auto;
-      height: 50px;
-    }
-
-    #form p {
-      text-align: center;
-    }
-
-    #form label {
-      font-size: 20px;
-    }
-
     input[type="radio"] {
       display: none;
     }
@@ -41,7 +27,7 @@
 
 <div class="menu container">
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
+        <div>
             <form method="post" action="/valorar">
                   <p class="clasificacion">
                     <input type="hidden" name="idPlantilla" value=<%=plantilla.idPlantilla%>>
@@ -56,14 +42,13 @@
                     <label for="radio4">&#9733;</label>
                     <input id="radio5" type="radio" name="estrellas" value=1>
                     <label for="radio5">&#9733;</label>
-                    <strong>!anigáp atse arolaV</strong>
+                    <strong>!anigáp atse acifilaC</strong>
                   </p>
             </form>
         </div>
     </div>
     </br>
     <div class="row">
-
         <%var i=0;%>
         <%for(var j=1;j<4;j++){%>
             <div class="col-md-4">
@@ -82,6 +67,14 @@
                 <%}%>
             </div>
         <%}%>
+    </div>
+    <div class="row">
+        <div style="text-align: center;">
+            <form method="post" action="/proponerPlantilla">
+                <input type="hidden" name="idPlantilla" value=<%=plantilla.idPlantilla%>>
+                <button type="submit" name="button" class="btn btn-success">Propón tu propia página!</button>
+            </form>
+        </div>
     </div>
 </div>
 
