@@ -101,4 +101,23 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
         });
 
     });
+
+    app.post('/revisarPlantillas', isLoggedIn, function(req, res) {
+
+        var id = req.body.unidad_id;
+
+        connection.query('Select * FROM plantilla WHERE Unidad_idUnidad = ? AND plantilla.propuesta=1 ;', id ,function (err, rows) {
+            if (err) throw err;
+
+            res.render("ramos/crearPlantilla.ejs", {
+                title: title,
+                user: req.user,
+                unidad_id: req.body.unidad_id,
+                unidad_nombre: req.body.unidad_nombre,
+                plantilla: rows
+            });
+
+        });
+
+    });
 }

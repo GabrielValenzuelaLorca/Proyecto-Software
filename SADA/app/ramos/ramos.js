@@ -48,4 +48,5 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
         });
       });//end query
   });
+ 
 }

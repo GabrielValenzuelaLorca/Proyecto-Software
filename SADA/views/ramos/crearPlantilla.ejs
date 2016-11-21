@@ -86,7 +86,7 @@
               document.formu.sort2.value = $('#sortable2').sortable('toArray').toString();
               document.formu.sort3.value = $('#sortable3').sortable('toArray').toString();
           });
-          
+
       });
   </script>
   <!--HTML de la pagina------------------------------------------------------------------------------------------------------------------>
@@ -160,7 +160,7 @@
         <div class="col-md-6">
           <h4>Módulos</h4>
           <form action="/editarModulo" method="post" name="formu" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
-            <div class="well">
+            <div class="well" style="overflow: auto; height: 300px;">
 
               <% for (var i = 0; i < modulasos.length; i++){ %>
                 <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
@@ -171,6 +171,14 @@
             <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
             <button type="submit" class="btn btn-default" id='botonSave'>Editar Modulo</button>
         </form>
+
+
+        <form action="/revisarPlantillas" method="post" name="Propuestos" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
+            <input type="hidden" value=<%=unidad_id%> name="unidad_id">
+            <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
+            <button type="submit" class="btn btn-default" id='botonPropuesta'>Ver modulos propuestos</button>
+        </form>
+
         </div>
 
     </div><!-- end row-->
