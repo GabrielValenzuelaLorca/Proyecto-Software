@@ -30,13 +30,20 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
     });
 
     app.post('/editarModulo', isLoggedIn, function(req, res) {
-
+      if(typeof req.body.modulitos == 'undefined'){
+        res.render('ramos/exito.ejs',{
+          title:title,
+          user:req.user,
+          exito:0,
+          mensaje:'Debes seleccionar un modulo'
+        });
+      }
+      else{
         var posComa = req.body.modulitos.indexOf(",");
         var id = req.body.modulitos.slice(0, posComa);
         console.log(id);
-        connection.query('SELECT * FROM modulo WHERE idModulo =?;',id ,function (err, rows) {
+        connection.query('SELECT * FROM modulo WHERE idModulo = ?',[id],function (err, rows) {
             if (err) throw err;
-
 
             console.log('holaza');
 
@@ -47,17 +54,17 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
                 unidad_id:req.body.unidad_id,
                 unidad_nombre:req.body.unidad_nombre
             });
-
         });
-
+      }
     });
+
     app.post('/editModulo', isLoggedIn, function(req, res) {
 
         var tipo = req.body.tipo;
         var id = req.body.modulo_id;
         var contenido = req.body.contenido;
 
-        connection.query('UPDATE modulo SET Tipo=?,Informacion=? WHERE idModulo =?;',[tipo, contenido, id] ,function (err, rows) {
+        connection.query('UPDATE modulo SET Tipo=?,Informacion=? WHERE idModulo = ?',[tipo, contenido, id] ,function (err, rows) {
             if (err) throw err;
 
             connection.query('SELECT * FROM modulo WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, rows, fields) {
@@ -79,27 +86,20 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
 
         connection.query('DELETE FROM ensamblaje WHERE Modulo_idModulo =?;',id ,function (err, rows) {
             if (err) throw err;
-        });
-
-        connection.query('DELETE FROM plantilla WHERE NOT EXISTS (SELECT 1 FROM ensamblaje WHERE ensamblaje.plantilla_idPlantilla = plantilla.idPlantilla);',function (err, rows) {
-            if (err) throw err;
-        });
-
-        connection.query('DELETE FROM modulo WHERE idModulo =?;',id ,function (err, rows) {
-            if (err) throw err;
-        });
-
-        connection.query('SELECT * FROM modulo WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, rows, fields) {
-            if (err) throw err;
-            res.render("ramos/crearPlantilla.ejs", {
-                title: title,
-                user: req.user,
-                unidad_id: req.body.unidad_id,
-                unidad_nombre: req.body.unidad_nombre,
-                modulasos: rows
+            connection.query('DELETE FROM modulo WHERE idModulo =?;',id ,function (err, rows) {
+                if (err) throw err;
+                connection.query('SELECT * FROM modulo WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, rows, fields) {
+                    if (err) throw err;
+                    res.render("ramos/crearPlantilla.ejs", {
+                        title: title,
+                        user: req.user,
+                        unidad_id: req.body.unidad_id,
+                        unidad_nombre: req.body.unidad_nombre,
+                        modulasos: rows
+                    });
+                });
             });
         });
-
     });
 /*
     app.post('/revisarPlantillas', isLoggedIn, function(req, res) {
