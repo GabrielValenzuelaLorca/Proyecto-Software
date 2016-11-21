@@ -74,21 +74,29 @@ module.exports = function(passport, connection, dbconfig) {
                 if(req.body.isAlumno=='true'){//Alumno
                   console.log("ENTRO QUERY ALUMNO");
                   connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ? OR Rol = ?", [email, req.body.rut,req.body.rol], function(err, rows) {
+                      var re = /@(sansano\.usm\.cl|usm\.cl|alumnos\.usm\.cl)/;
+                      var flag = email.search(re);
                       if (err)
                           return done(err);
-                      if (rows.length) { //Busca si ya hay un email o rol o rut registrado del form. Agrega errores correspondientes
+                      if (flag==-1 || rows.length) { //Busca si ya hay un email o rol o rut registrado del form. Agrega errores correspondientes
                           var messages2 = [];
-                          for (var j = 0; j < rows.length; j++) {
-                              if (rows[j].Correo == email) {
-                                  messages2.push('Este Email ya está en uso.');
-                              }
-                              if (rows[j].Rut == req.body.rut) {
-                                  messages2.push('Ya hay una cuenta asociada a este Rut');
-                              }
-                              if (rows[j].Rol == req.body.rol) {
-                                  messages2.push('Ya hay una cuenta asociada a este Rol');
+                          if (flag==-1){
+                              messages2.push('Formato de Email incorrecto.');
+                          }
+                          if(rows.length){
+                              for (var j = 0; j < rows.length; j++) {
+                                  if (rows[j].Correo == email) {
+                                      messages2.push('Este Email ya está en uso.');
+                                  }
+                                  if (rows[j].Rut == req.body.rut) {
+                                      messages2.push('Ya hay una cuenta asociada a este Rut');
+                                  }
+                                  if (rows[j].Rol == req.body.rol) {
+                                      messages2.push('Ya hay una cuenta asociada a este Rol');
+                                  }
                               }
                           }
+
 
                           //Filtra mensajes de error repetidos
                           var messages = messages2.filter(function(elem, index, self) {
@@ -122,16 +130,23 @@ module.exports = function(passport, connection, dbconfig) {
                 else{//Profesor
                   console.log("ENTRO QUERY PROFE");
                   connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ?", [email, req.body.rut], function(err, rows) {
+                      var re = /@(sansano\.usm\.cl|usm\.cl|alumnos\.usm\.cl)/;
+                      var flag = email.search(re);
                       if (err)
                           return done(err);
-                      if (rows.length) { //Busca si ya hay un email o rol registrado del form. Agrega errores correspondientes
+                      if (rows.length || flag==-1) { //Busca si ya hay un email o rol registrado del form. Agrega errores correspondientes
                           var messages2 = [];
-                          for (var j = 0; j < rows.length; j++) {
-                              if (rows[j].Correo == email) {
-                                  messages2.push('Este Email ya está en uso.');
-                              }
-                              if (rows[j].Rut == req.body.rut) {
-                                  messages2.push('Ya hay una cuenta asociada a este Rut');
+                          if (flag==-1){
+                              messages2.push('Formato de Email incorrecto.');
+                          }
+                          if(rows.length){
+                              for (var j = 0; j < rows.length; j++) {
+                                  if (rows[j].Correo == email) {
+                                      messages2.push('Este Email ya está en uso.');
+                                  }
+                                  if (rows[j].Rut == req.body.rut) {
+                                      messages2.push('Ya hay una cuenta asociada a este Rut');
+                                  }
                               }
                           }
 
@@ -183,9 +198,11 @@ module.exports = function(passport, connection, dbconfig) {
             },
             function(req, email, password, done) { // callback with email and password from our form
                 connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ?", [email], function(err, rows) {
+                    var re = /@(sansano\.usm\.cl|usm\.cl|alumnos\.usm\.cl)/;
+                    var flag = email.search(re);
                     if (err)
                         return done(err);
-                    if (!rows.length) {
+                    if (!rows.length || flag==-1) {
                         return done(null, false, {
                             message: 'Email inválido.'
                         }); // req.flash is the way to set flashdata using connect-flash
