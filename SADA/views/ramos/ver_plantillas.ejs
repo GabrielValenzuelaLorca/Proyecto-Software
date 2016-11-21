@@ -30,7 +30,7 @@
         <div class="col-xs-4 col-xs-offset-4 usuario">
             <h4 class="pull-left"><%= plantillas[i].Nombre%></h4>
             <%if(plantillas[i].Activo=='1'){%>
-              <i class="pull-left fa fa-check-circle" aria-hidden="true"></i>
+              <h4><i style="color:green;" class="pull-left fa fa-check-circle" aria-hidden="true"></i></h4>
             <%}%><!-- activo -->
             <form action="/ver_plantillas" method="post">
               <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>

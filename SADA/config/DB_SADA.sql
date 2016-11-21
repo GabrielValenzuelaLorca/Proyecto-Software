@@ -94,7 +94,7 @@ CREATE TABLE `modulo` (
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
-INSERT INTO `modulo` VALUES (1,'12312','sdfda',1),(2,'video','jkasdjksadjkjk',45),(3,'imagen','32r2q',1),(4,'imagen','SELECT * FROM *',2);
+
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,10 +132,12 @@ DROP TABLE IF EXISTS `plantilla`;
 CREATE TABLE `plantilla` (
   `idPlantilla` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) NOT NULL,
-  `Valoracion` int(11) DEFAULT NULL,
+  `Valoracion` float(1) DEFAULT 0,
+  `Conteo` int(11) DEFAULT 0,
   `perfil_idperfil` int(11) NOT NULL,
   `Unidad_idUnidad` int(11) NOT NULL,
   `Activo` int(1) NOT NULL DEFAULT 0,
+  `Propuesta` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idPlantilla`),
   UNIQUE KEY `Nombre_UNIQUE` (`Nombre`),
   KEY `fk_Plantilla_perfil1_idx` (`perfil_idperfil`),
@@ -204,7 +206,7 @@ CREATE TABLE `unidad` (
 
 LOCK TABLES `unidad` WRITE;
 /*!40000 ALTER TABLE `unidad` DISABLE KEYS */;
-INSERT INTO `unidad` VALUES (1,1,'Voltaje','es el voltaje'),(2,1,'Resistencia','viv la resistance'),(45,1,'Global','probando');
+INSERT INTO `unidad` VALUES (1,3,'Voltaje','es el voltaje'),(2,3,'Resistencia','viv la resistance'),(45,3,'Global','probando');
 /*!40000 ALTER TABLE `unidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
