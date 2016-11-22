@@ -26,6 +26,7 @@
 </style>
 
 <div class="menu container">
+  <%if(ok==1){%>
     <div class="row">
         <div>
             <form method="post" action="/valorar">
@@ -78,6 +79,11 @@
         </div>
       <%}%>
     </div>
+  <%}else{%>
+    <div class="row">
+      <h4>No hay plantillas activas para <strong><%=nombreUnidad%></strong></h4>
+    </div>
+  <%}%>
 </div>
 
 <% include ../footer %>

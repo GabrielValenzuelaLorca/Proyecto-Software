@@ -14,7 +14,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
           }
       } //Es profe, manda directamente a menu
       else {
-        res.render("menu/menu.ejs", { title:title, user: req.user });
+        res.render("menu/menu.ejs", { title:title, user: req.user, perfilTemp:req.session.perfilTemp });
       }
   });
 
