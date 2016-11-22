@@ -35,9 +35,9 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   });
 
   app.post('/ramos/u/materia',isLoggedIn,function(req,res){
-      req.session.idUnidad = req.body.idUnidad;
-      req.session.nombreUnidad = req.body.nombreUnidad;
-      res.redirect("/ramos/u/materia");
+          req.session.idUnidad = req.body.idUnidad;
+          req.session.nombreUnidad = req.body.nombreUnidad;
+          res.redirect("/ramos/u/materia");
   });
 
   app.get('/ramos/u/materia',isLoggedIn,function(req,res){
@@ -62,14 +62,17 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
       }
       else{
         connection.query('SELECT * FROM ensamblaje INNER JOIN modulo ON ensamblaje.Modulo_idModulo=modulo.idModulo WHERE Plantilla_idPlantilla=? ORDER BY columna ASC, posicion ASC',[plantilla[0].idPlantilla], function(err, modulos) {
-            if (err) throw err;
-            res.render("ramos/plantilla.ejs",{
-              title:title,
-              user:req.user,
-              plantilla:plantilla[0],
-              modulos:modulos,
-              nombreUnidad:req.session.nombreUnidad,
-              ok:1
+            connection.query('SELECT * FROM valoracion WHERE Plantilla_idPlantilla=? AND usuario_Rut=?',[plantilla[0].idPlantilla,req.user.Rut],function(err, valor) {
+                if (err) throw err;
+                res.render("ramos/plantilla.ejs",{
+                  title:title,
+                  user:req.user,
+                  plantilla:plantilla[0],
+                  modulos:modulos,
+                  nombreUnidad:req.session.nombreUnidad,
+                  ok:1
+                  valor:valor
+                });
             });
         });
       }
@@ -80,8 +83,10 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
 
   app.post('/valorar',isLoggedIn,function(req,res){
       var plantilla=parseInt(req.body.idPlantilla), estrellas=parseInt(req.body.estrellas);
-      connection.query('UPDATE plantilla SET valoracion=((valoracion*conteo)+?)/(conteo+1),conteo=conteo+1 WHERE idPlantilla=?',[estrellas,plantilla], function(err, plantilla) {
-          res.redirect("/ramos/u/materia");
+      connection.query('UPDATE plantilla SET valoracion=((valoracion*conteo)+?)/(conteo+1),conteo=conteo+1 WHERE idPlantilla=?',[estrellas,plantilla], function(err, rows) {
+          connection.query('INSERT INTO valoracion VALUES (?,?)',[plantilla,req.user.Rut], function(err, rows) {
+            res.redirect("/ramos/u/materia");
+          });
       });
 
   });
