@@ -1,10 +1,70 @@
 <%include ../layout %>
-<%include nav %>
+<%include ../nav %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<div>
+    <div class="menu">
 
-<div class="menu">
-  <div class="container">
-    <h1>administrarUsuarios</h1>
-  </div>
+      <div class="container">
+        <section>
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3" style="margin-bottom:5px">
+                <div class="pull-left font-20">
+                    <form action="/ordenarUsuario" method="post">
+                        Ordenar por:
+                        <button type="submit" value="nombre" class="btn btn-primary" name="indice">Nombre</button>
+                        <button type="submit" value="rut" class="btn btn-primary" name="indice">Rut</button>
+                        <button type="submit" value="profesores" class="btn btn-primary" name="indice">Profesores</button>
+                        <button type="submit" value="alumnos" class="btn btn-primary" name="indice">Alumnos</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          <%for(var i=0;i<usuarios.length;i++){%>
+            <%if(usuarios[i].Admin==0){%>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 usuario">
+                  <div class="pull-left font-20">
+                    <strong>Nombre:</strong> <font size="3px"><%=usuarios[i].Nombre%></font>
+                    <strong>Rut:</strong> <font size="3px"><%=usuarios[i].Rut%></font>
+                    <%if(usuarios[i].Profesor==0){%> <strong>Perfil:</strong>
+                        <font size="3px">
+                            <%if(usuarios[i].perfil_idperfil==1){%>Adaptador
+                            <%} else if(usuarios[i].perfil_idperfil==2){%> Divergente
+                            <%} else if(usuarios[i].perfil_idperfil==3){%> Convergente
+                            <%} else if(usuarios[i].perfil_idperfil==4){%> Asimilador
+                            <%} else{%> Sin Encuesta <%}%>
+                        </font>
+                    <%} else{%> <strong>Profesor</strong> <%}%>
+                  </div>
+                  <form action="/eliminarUsuario" method="post" onsubmit="return confirm('¿Seguro que quieres eliminar dicho usuario?');">
+                    <input type="hidden" value=<%=usuarios[i].Rut%> name="rut">
+                    <button type="submit" class="btn btn-danger pull-right"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </form><!-- eliminarUsuario -->
+
+                  <%if(usuarios[i].Profesor==1){%>
+                      <form action="/enlazarRamo"  method="post" class="btn-group pull-right" onsubmit="return confirm('¿Seguro que quieres asignar este ramo?');" >
+                        <input type="hidden" value=<%=usuarios[i].Rut%> name="rut">
+                        <%for(var j=0;j<ramos.length;j++){%>
+                            <%var flag=1;%>
+                            <%for(var k=0;k<contrato.length;k++){%>
+                                <%if(contrato[k].ramo_idRamo==ramos[j].idRamo && usuarios[i].Rut==contrato[k].usuario_Rut){%>
+                                    <%flag=0;%>
+                                <%}%>
+                            <%}%>
+                            <%if(flag==1){%>
+                                <button type="submit" value=<%=ramos[j].idRamo%> name="ramo" class="btn btn-success"><%=ramos[j].Sigla%></button>
+                            <%}%>
+                        <%}%>
+                      </form>
+                  <%}%>
+
+                </div>
+              </div>
+            <%}%>
+          <%}%>
+        </section>
+
+      </div>
+    </div>
 </div>
-
 <% include ../footer %>

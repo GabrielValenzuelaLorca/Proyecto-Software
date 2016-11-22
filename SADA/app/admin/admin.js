@@ -17,6 +17,8 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
 
   app.post('/admin',function(req,res){
         // Se crea el usuario
+        var re = /@(sansano\.usm\.cl|usm\.cl|alumnos\.usm\.cl)/;
+        var flag = req.body.email.search(re);
         var newUserMysql = {
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, null, null), // use the generateHash function in our user model
@@ -25,10 +27,15 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
             admin:1,
             profesor:1
         };
-        var insertQuery = "INSERT INTO " + dbconfig.users_table + " ( Rut, Nombre, Correo, Clave, Admin, Profesor) values (?,?,?,?,?,?)";
-        connection.query(insertQuery, [newUserMysql.rut, newUserMysql.name, newUserMysql.email, newUserMysql.password, newUserMysql.admin, newUserMysql.profesor], function(err, rows) {
-        });
-        res.send('Se agregó Admin correctamente');
+        if(flag!=-1){
+            var insertQuery = "INSERT INTO " + dbconfig.users_table + " ( Rut, Nombre, Correo, Clave, Admin, Profesor) values (?,?,?,?,?,?)";
+            connection.query(insertQuery, [newUserMysql.rut, newUserMysql.name, newUserMysql.email, newUserMysql.password, newUserMysql.admin, newUserMysql.profesor], function(err, rows) {
+            });
+            res.send('Se agregó Admin correctamente');
+        }
+        else{
+            res.send('Email no válido');
+        }
   });
 
 }

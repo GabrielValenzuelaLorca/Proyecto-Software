@@ -1,0 +1,201 @@
+<%include ../layout %>
+<%include ../nav %>
+
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+  <!--SCRIPT para los sortables(objetos que se pueden ordenar dinamicamente)------------------------------------------------------------->
+  <script>
+      $(function() {
+
+          /******************************************************************************/
+          //Funcion para que la primera columna sea sortable*/
+          $('#sortable1').sortable({
+              cursor: "move",
+              scroll: true
+          });
+
+          //Funcion para poder eliminar los elementos de la columna1*/
+          $("#sortable1").on('click', '.delete', function() {
+              $(this).parent().remove();
+          });
+
+          //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
+          $("#botoncito1").on('click', function() {
+              var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+              var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
+              var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1, posComa+15);
+              var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + " ...<br><button class='delete btn btn-default'><i class='fa fa-trash' aria-hidden='true'></i></button></li>"
+              $('#sortable1').append(li);
+          });
+          /******************************************************************************/
+
+          //Funcion para que la segunda columna sea sortable*/
+          $('#sortable2').sortable({
+              cursor: "move",
+              scroll: true
+          });
+
+          //Funcion para poder eliminar los elementos de la columna1*/
+          $("#sortable2").on('click', '.delete', function() {
+              $(this).parent().remove();
+          });
+
+          //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
+          $("#botoncito2").on('click', function() {
+              var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+              var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
+              var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1, posComa+15);
+              var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + " ...<br><button class='delete btn btn-default'><i class='fa fa-trash' aria-hidden='true'></i></button></li>"
+              $('#sortable2').append(li);
+          });
+
+          /******************************************************************************/
+
+          //Funcion para que la tercera columna sea sortable*/
+          $('#sortable3').sortable({
+              cursor: "move",
+              scroll: true
+          });
+          //Funcion para poder eliminar los elementos de la columna1*/
+          $("#sortable3").on('click', '.delete', function() {
+              $(this).parent().remove();
+          });
+          //Funcion para que al apretar el botoncito1 de la columna 1 se agregue otro elemento*/
+          $("#botoncito3").on('click', function() {
+              var posComa = $('input[name=modulitos]:checked').val().indexOf(",");
+              var texto1 = $('input[name=modulitos]:checked').val().slice(0, posComa);
+              var texto2 = $('input[name=modulitos]:checked').val().slice(posComa + 1, posComa+15);
+              var li = "<li class='ui-state-default' id=" + texto1 + ">" + texto2 + " ...<br><button class='delete btn btn-default'><i class='fa fa-trash' aria-hidden='true'></i></button></li>"
+              $('#sortable3').append(li);
+          });
+
+          /***************************************************************************************/
+
+          //Funcion para guardar los cambios
+          $('#botonSave').click(function() {
+              var nombre = document.getElementById("plantillaSave").value;
+              var order1 = $('#sortable1').sortable('toArray').toString();
+              var order2 = $('#sortable2').sortable('toArray').toString();
+              var order3 = $('#sortable3').sortable('toArray').toString();
+              $("#printeo1").text(order1);
+              $("#printeo2").text(order2);
+              $("#printeo3").text(order3);
+              document.formu.sort1.value = $('#sortable1').sortable('toArray').toString();
+              document.formu.sort2.value = $('#sortable2').sortable('toArray').toString();
+              document.formu.sort3.value = $('#sortable3').sortable('toArray').toString();
+          });
+      });
+  </script>
+  <!--HTML de la pagina------------------------------------------------------------------------------------------------------------------>
+
+  <div class="menu container modulos">
+      <div class="row">
+        <div class="col-md-2">
+          <h4><label>Unidad: </label> <%=unidad_nombre%></h4>
+        </div>
+        <div class="col-md-10">
+          <form action="/agregar_plantilla" method="post" name="formu">
+            <input type="hidden" name="sort1">
+            <input type="hidden" name="sort2">
+            <input type="hidden" name="sort3">
+            <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+            <label>Seleccione Perfil</label>
+            <input type="radio" name="perfil" value='1' checked> Adaptador /
+            <input type="radio" name="perfil" value='2'> Divergente /
+            <input type="radio" name="perfil" value='3'> Convergente /
+            <input type="radio" name="perfil" value='4'> Asimilador
+            <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave" required>
+            <button type="submit" class="btn btn-primary" id='botonSave'>Guardar Plantilla</button>
+          </form><!-- Guardar plantilla-->
+        </div>
+      </div><!-- end row -->
+      <div class="row">
+        <div class="col-md-6 usuario">
+          <div class="col-sm-4" id="columna1">
+
+              <!--Primera columna-->
+              <h4>Columna 1</h4>
+              <button class="btn btn-danger" id='botoncito1'>Agregar modulo</button>
+              <ul id="sortable1" style="list-style: none;">
+                  <!--Aca van los modulos-->
+              </ul>
+              <!--<h3><span id="printeo1"></span></h3>-->
+          </div>
+
+          <section class="col-sm-4" id="columna2">
+
+              <!--Segunda columna-->
+              <h4>Columna 2</h4>
+              <button class="btn btn-danger" id='botoncito2'>Agregar modulo</button>
+
+              <ul id="sortable2">
+                  <!--Aca van los modulos-->
+              </ul>
+              <!--<h3><span id="printeo2"></span></h3>-->
+
+          </section>
+
+          <section class="col-sm-4" id="columna3">
+
+              <!--Tercera columna-->
+              <h4>Columna 3</h4>
+              <button class="btn btn-danger" id='botoncito3'>Agregar modulo</button>
+
+              <ul id="sortable3">
+                  <!--Aca van los modulos-->
+              </ul>
+
+              <!--<h3><span id="printeo3"></span></h3>-->
+
+          </section>
+        </div>
+        <div class="col-md-6">
+          <h4>Módulos</h4>
+          <form action="/editarModulo" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
+            <div class="well" style="overflow: auto; height: 300px;">
+              <% for (var i = 0; i < modulasos.length; i++){ %>
+                <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
+                <%if(modulasos[i].Tipo=='video'){%>
+                    <iframe width=355 height=360 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
+                <%}else if(modulasos[i].Tipo=='imagen') {%>
+                    <img src= <%=modulasos[i].Informacion%> width=100 height=150 style="margin-top:10px;" />
+                <%}else if(modulasos[i].Tipo=='texto') {%>
+                    <%=modulasos[i].Informacion%>
+                <%}%></p>
+              <%}%>
+            </div>
+            <input type="hidden" value=<%=unidad_id%> name="unidad_id">
+            <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
+            <button type="submit" class="btn btn-default" id='botonSave'>Editar Modulo</button>
+          </form>
+          <!---<form action="/revisarPlantillas" method="post" name="Propuestos" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
+              <input type="hidden" value=<%=unidad_id%> name="unidad_id">
+              <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
+              <button type="submit" class="btn btn-default" id='botonPropuesta'>Ver modulos propuestos</button>
+          </form>-->
+        </div>
+
+    </div><!-- end row-->
+
+    <div class="row">
+
+      <div class="pull-right">
+        <form action="/adm_plantilla" method="post">
+          <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+          <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
+          <button type="submit" class="btn btn-default">Volver</button>
+        </form>
+      </div>
+      <form class="pull-right" action="/crearModulos" method="post" onsubmit="return confirm('¿Seguro que quieres continuar? Si no guardas tu cambios estos se perderán.');">
+        <input type="hidden" value=<%=unidad_id%> name="unidad_id">
+        <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
+        <button type="submit" class="pull-right btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo módulo</button>
+      </form><!-- Agregar modulo nuevo-->
+
+    </div><!-- end row -->
+
+  </div>
+
+<% include ../footer %>

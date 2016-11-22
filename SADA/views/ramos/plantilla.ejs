@@ -1,0 +1,91 @@
+<%include ../layout%>
+<%include ../nav %>
+
+<style>
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      color: grey;
+    }
+
+    .clasificacion {
+      direction: rtl;
+      unicode-bidi: bidi-override;
+    }
+
+    label:hover,
+    label:hover ~ label {
+      color: orange;
+    }
+
+    input[type="radio"]:checked ~ label {
+      color: orange;
+    }
+</style>
+
+<div class="menu container">
+  <%if(ok==1){%>
+    <div class="row">
+        <%if(user.Profesor==0 && valor.length==0){%>
+            <div>
+                <form method="post" action="/valorar">
+                      <p class="clasificacion">
+                        <input type="hidden" name="idPlantilla" value=<%=plantilla.idPlantilla%>>
+                        <button type="submit" name="button" class="btn btn-warning">Enviar</button>
+                        <input id="radio1" type="radio" name="estrellas" value=5>
+                        <label for="radio1">&#9733; </label>
+                        <input id="radio2" type="radio" name="estrellas" value=4>
+                        <label for="radio2">&#9733;</label>
+                        <input id="radio3" type="radio" name="estrellas" value=3>
+                        <label for="radio3">&#9733;</label>
+                        <input id="radio4" type="radio" name="estrellas" value=2>
+                        <label for="radio4">&#9733;</label>
+                        <input id="radio5" type="radio" name="estrellas" value=1>
+                        <label for="radio5">&#9733;</label>
+                        <strong>!anigáp atse acifilaC</strong>
+                      </p>
+                </form>
+            </div>
+        <%}%>
+    </div>
+    </br>
+    <div class="row">
+        <%var i=0;%>
+        <%for(var j=1;j<4;j++){%>
+            <div class="col-md-4">
+                <%for(i;i<modulos.length;i++){%>
+                    <%if(modulos[i].Columna==j){%>
+                        <%if(modulos[i].Tipo=='video'){%>
+                            <iframe width=355 height=360 src=<%=modulos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
+                        <%}else if(modulos[i].Tipo=='imagen') {%>
+                            <img src= <%=modulos[i].Informacion%> width=355 height=360 style="margin-top:10px;" />
+                        <%}else if(modulos[i].Tipo=='texto') {%>
+                            <p><%=modulos[i].Informacion%></p>
+                        <%}%>
+                    <%}else {%>
+                        <%break; %>
+                    <%}%>
+                <%}%>
+            </div>
+        <%}%>
+    </div>
+    <div class="row">
+      <%if(user.Profesor==0){%>
+        <div style="text-align: center;">
+            <form method="post" action="/proponerPlantilla">
+                <input type="hidden" name="idPlantilla" value=<%=plantilla.idPlantilla%>>
+                <button type="submit" name="button" class="btn btn-success">Propone tu propia página!</button>
+            </form>
+        </div>
+      <%}%>
+    </div>
+  <%}else{%>
+    <div class="row">
+      <h4>No hay plantillas activas para <strong><%=nombreUnidad%></strong></h4>
+    </div>
+  <%}%>
+</div>
+
+<% include ../footer %>

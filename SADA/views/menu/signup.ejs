@@ -1,5 +1,5 @@
 <%include ../layout %>
-<%include nav %>
+<%include ../nav %>
 
 <script src="../../angular/ngApp.js"></script>
 <script src="../../angular/controllers/signup.js"></script>
@@ -11,15 +11,18 @@
 
       <section class="col-sm-4 signup-agregar">
         <a ng-click="signup.isAlumno=true; signup.error=true">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Alumno
+          <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Alumno Manual
         </a>
         <a ng-click="signup.isAlumno=false; signup.error=true">
-          <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Profesor
+          <i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Profesor Manual
         </a>
 
+        <div class="archivo">
+          <a href="/lista"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Alumnos Desde Archivo</a>
+        </div>
         <!-- Administrar usuarios -->
         <div class="administrar">
-          <a href="/administrarUsuarios"><i class="fa fa-wrench" aria-hidden="true"></i> Editar Usuarios</a>
+          <a href="/administrarUsuarios"><i class="fa fa-wrench" aria-hidden="true"></i> Administrar Usuarios</a>
         </div>
       </section>
 
@@ -81,8 +84,7 @@
                     <input type="number" class="form-control" name="rut" placeholder="123456789 (Sin dígito verificador)" required>
                 </div>
                 <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" class="form-control" name="password" placeholder="Contraseña (Mínimo 4 carácteres)" required>
+                    <input type='hidden' value='4' class="form-control" name="password" placeholder="Contraseña (Mínimo 4 carácteres)" required>
                 </div>
                     <input type="hidden" name="isAlumno" value={{signup.isAlumno}}>
 
@@ -111,8 +113,7 @@
                     <input type="number" class="form-control" name="rut" placeholder="123456789 (Sin dígito verificador)" required>
                 </div>
                 <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" class="form-control" name="password" placeholder="Contraseña (Mínimo 4 carácteres)" required>
+                    <input type="hidden" value='4' class="form-control" name="password" placeholder="Contraseña (Mínimo 4 carácteres)" required>
                 </div>
                 <input type="hidden" name="isAlumno" value={{signup.isAlumno}}>
 

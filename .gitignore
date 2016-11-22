@@ -3,3 +3,4 @@ SADA/.idea/
 .idea/
 SADA/npm-debug.log
 npm-debug.log
+SADA/config/database.js

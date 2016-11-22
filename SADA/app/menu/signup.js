@@ -20,6 +20,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
     }
   });
 
+
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
       successRedirect: '/signup', // redirect to the secure profile section
