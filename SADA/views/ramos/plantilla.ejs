@@ -26,6 +26,7 @@
 </style>
 
 <div class="menu container">
+  <%if(ok==1){%>
     <div class="row">
         <%if(user.Profesor==0 && valor.length==0){%>
             <div>
@@ -80,6 +81,11 @@
         </div>
       <%}%>
     </div>
+  <%}else{%>
+    <div class="row">
+      <h4>No hay plantillas activas para <strong><%=nombreUnidad%></strong></h4>
+    </div>
+  <%}%>
 </div>
 
 <% include ../footer %>
