@@ -18,6 +18,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.post('/ramos/u',isLoggedIn,function(req,res){
 
     req.session.idRamo = req.body.ramo_id;
+    req.session.nombreRamo = req.body.ramo_nombre;
     res.redirect("/ramos/u");
 
   });
@@ -28,7 +29,8 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
       res.render("ramos/unidades.ejs",{
         title:title,
         user:req.user,
-        unidades:rows
+        unidades:rows,
+        ramo_nombre:req.session.nombreRamo
       });
 
     });//end query
@@ -70,6 +72,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
                   plantilla:plantilla[0],
                   modulos:modulos,
                   nombreUnidad:req.session.nombreUnidad,
+                  nombreRamo:req.session.nombreRamo,
                   ok:1,
                   valor:valor
                 });
