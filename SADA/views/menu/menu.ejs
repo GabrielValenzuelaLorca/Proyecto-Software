@@ -9,18 +9,31 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam nisi nostrum, qui reprehenderit possimus blanditiis dolorum rerum quaerat necessitatibus non cum ducimus quibusdam suscipit tenetur, minus culpa doloribus dolor autem!
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, doloremque, rerum. Provident, praesentium. Provident laboriosam aut nam maiores veniam, dolore et vel voluptatem sunt iste earum asperiores, cumque voluptates fugit.</p>
       <%if(user.Profesor==1){%>
-        <br>
-        <p><label>Elija un perfil temporáneo:</label></p>
-        <form action="/perfilTemp" method="post">
-          <input type="radio" name="perfilTemp" value="1"> 1
-          <input type="radio" name="perfilTemp" value="2"> 2
-          <input type="radio" name="perfilTemp" value="3"> 3
-          <input type="radio" name="perfilTemp" value="4"> 4
-          <button type="submit" class="btn btn-warning">Aceptar</button>
-        </form>
-        <br>
-        <div class="font-20">
-          Actualmente su perfil temporal es: <strong><%=perfilTemp%></strong>          
+        <div class="well">
+          <p><label>Elija un perfil temporáneo:</label></p>
+          <form action="/perfilTemp" method="post">
+            <input type="radio" name="perfilTemp" value="1"> Adaptador <br>
+            <input type="radio" name="perfilTemp" value="2"> Divergente <br>
+            <input type="radio" name="perfilTemp" value="3"> Convergente <br>
+            <input type="radio" name="perfilTemp" value="4"> Asimilador <br><br>
+            <button type="submit" class="btn btn-warning">Aceptar</button>
+          </form>
+          <br>
+          <div class="font-20">
+            Actualmente su perfil temporal es:
+            <%if(perfilTemp==1){%>
+              <strong>Adaptador</strong>
+            <%}%>
+            <%if(perfilTemp==2){%>
+              <strong>Divergente</strong>
+            <%}%>
+            <%if(perfilTemp==3){%>
+              <strong>Convergente</strong>
+            <%}%>
+            <%if(perfilTemp==4){%>
+              <strong>Asimilador</strong>
+            <%}%>
+          </div>
         </div>
       <%}%>
     </div>
