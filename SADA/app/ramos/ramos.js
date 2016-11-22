@@ -50,17 +50,29 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
       perfilAux = req.user.perfil_idperfil;
     }
 
-    connection.query('SELECT * FROM plantilla WHERE Activo=1 AND  perfil_idperfil = ? AND Unidad_idUnidad = ?',[perfilAux,req.session.idUnidad], function(err, plantilla) {
-      connection.query('SELECT * FROM ensamblaje INNER JOIN modulo ON ensamblaje.Modulo_idModulo=modulo.idModulo WHERE Plantilla_idPlantilla=? ORDER BY columna ASC, posicion ASC',[plantilla[0].idPlantilla], function(err, modulos) {
-          if (err) throw err;
-          res.render("ramos/plantilla.ejs",{
-            title:title,
-            user:req.user,
-            plantilla:plantilla[0],
-            modulos:modulos,
-            nombreUnidad:req.session.nombreUnidad
-          });
-      });
+    connection.query('SELECT * FROM plantilla WHERE Activo = 1 AND  perfil_idperfil = ? AND Unidad_idUnidad = ?',[perfilAux,req.session.idUnidad], function(err, plantilla) {
+      if(err) throw err;
+      if(plantilla.length==0){
+        res.render("ramos/plantilla.ejs",{
+          title:title,
+          user:req.user,
+          nombreUnidad:req.session.nombreUnidad,
+          ok:0
+        });
+      }
+      else{
+        connection.query('SELECT * FROM ensamblaje INNER JOIN modulo ON ensamblaje.Modulo_idModulo=modulo.idModulo WHERE Plantilla_idPlantilla=? ORDER BY columna ASC, posicion ASC',[plantilla[0].idPlantilla], function(err, modulos) {
+            if (err) throw err;
+            res.render("ramos/plantilla.ejs",{
+              title:title,
+              user:req.user,
+              plantilla:plantilla[0],
+              modulos:modulos,
+              nombreUnidad:req.session.nombreUnidad,
+              ok:1
+            });
+        });
+      }
     });//end query
 
   });
