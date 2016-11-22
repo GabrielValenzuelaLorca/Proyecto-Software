@@ -189,10 +189,10 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.post('/denegar_plantilla', isLoggedIn, function(req, res){
      console.log("llegoncio");
 
-     connection.query('DELETE FROM plantilla WHERE idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
+     connection.query('DELETE FROM ensamblaje WHERE Plantilla_idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
        if(err) throw err;
 
-       connection.query('DELETE FROM ensamblaje WHERE Plantilla_idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
+       connection.query('DELETE FROM plantilla WHERE idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
          if(err) throw err;
 
          res.render('ramos/ver_plantillas.ejs',{
