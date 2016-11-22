@@ -28,7 +28,10 @@
     <%for(var i = 0;i<plantillas.length;i++){%>
       <% if (plantillas[i].perfil_idperfil==profile && plantillas[i].Propuesta==0){%>
         <div class="col-xs-4 col-xs-offset-2 usuario">
-            <h4 class="pull-left"><%= plantillas[i].Nombre%></h4>
+            <form action="/analisisDePlantilla" method="post" id="elform">
+                <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
+                <button class="btn btn-primary pull-left"><%= plantillas[i].Nombre%></button>
+            </form>
             <%if(plantillas[i].Activo=='1'){%>
               <h4><i style="color:green;" class="pull-left fa fa-check-circle" aria-hidden="true"></i></h4>
             <%}%><!-- activo -->
@@ -44,7 +47,11 @@
       <%}%>
       <%if (plantillas[i].perfil_idperfil==profile && plantillas[i].Propuesta==1){%>
           <div class="col-xs-4 usuario">
-              <h4 class="pull-left"><%= plantillas[i].Nombre%></h4>
+
+              <form action="/analisisDePlantilla" method="post" id="elform">
+                  <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
+                  <button class="btn btn-primary pull-left"><%= plantillas[i].Nombre%></button>
+              </form>
               <form action="/aprobar_plantilla" method="post">
                   <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
                   <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
