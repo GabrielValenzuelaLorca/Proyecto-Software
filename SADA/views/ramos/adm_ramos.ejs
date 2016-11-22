@@ -4,8 +4,6 @@
 <div class="menu container">
   <div class="row">
     <section class="col-sm-4 ramos">
-      <br>
-      <br>
       <%for(var i=0;i<rows.length;i++){%>
         <form action="/adm_unidades" method="post">
           <input type="hidden" value=<%=rows[i].idRamo%> name="ramo_id">
@@ -15,6 +13,21 @@
       <%}%>
     </section>
 
+    <section class="col-sm-6 col-sm-offset-1 ramos-img">
+      <%if(user.Admin==1){%>
+        <img src="http://adminweapon.com/wp-content/uploads/2012/06/logo-admin-weapon.jpg" alt="">
+      <%}else if(user.Profesor==1){%>
+        <img src="http://www.eldinamo.cl/wp-content/uploads/2016/10/profesor-574x238.jpg" alt="">
+      <%}else if(user.perfil_idperfil==1){%>
+        <img src="../../img/adaptador.jpg" alt="">
+      <%}else if(user.perfil_idperfil==2){%>
+        <img src="../../img/divergente.jpg" alt="">
+      <%}else if(user.perfil_idperfil==3){%>
+        <img src="../../img/convergente.jpg" alt="">
+      <%}else if(user.perfil_idperfil==4){%>
+        <img src="../../img/asimilador.jpg" alt="">
+      <%}%>
+    </section>
   </div> <!-- end row -->
 </div>
 

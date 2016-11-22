@@ -75,7 +75,7 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
                                     }
                                 }
                             }
-                            agregar(lista,0);    
+                            agregar(lista,0);
                         }
                         else {
                             // Se crea el usuario
