@@ -30,7 +30,7 @@
         <%for(var i = 0;i<plantillas.length;i++){%>
           <% if (plantillas[i].perfil_idperfil==profile){%>
             <div class="col-xs-12 usuario">
-                <h4 class="pull-left"><%= plantillas[i].Nombre%></h4>
+                <h4 class="pull-left"><%= plantillas[i].Nombre%> <%= plantillas[i].Valoracion%>&#9733;</h4>
                 <%if(plantillas[i].Activo=='1'){%>
                   <h4><i style="color:green;" class="pull-left fa fa-check-circle" aria-hidden="true"></i></h4>
                 <%}%><!-- activo -->

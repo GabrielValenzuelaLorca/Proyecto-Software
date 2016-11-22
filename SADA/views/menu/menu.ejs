@@ -6,19 +6,11 @@
   <div class="row">
     <div class="col-md-4">
       <h1>Menú Principal</h1>
-      <p>Utiliza esta plataforma para aprender física de la mejor manera.</p>
-      <p>No olvides <strong>calificar</strong> las páginas que ves y no dudes en recomendarnos <strong>tu propia página.</strong></p>
+      <%if(user.Profesor==0){%>
+          <p>Utiliza esta plataforma para aprender física de la mejor manera.</p>
+          <p>No olvides <strong>calificar</strong> las páginas que ves y no dudes en recomendarnos <strong>tu propia página.</strong></p>
+      <%}%>
       <%if(user.Profesor==1){%>
-        <div class="well">
-          <p><label>Elija un perfil temporáneo:</label></p>
-          <form action="/perfilTemp" method="post">
-            <input type="radio" name="perfilTemp" value="1"> Adaptador <br>
-            <input type="radio" name="perfilTemp" value="2"> Divergente <br>
-            <input type="radio" name="perfilTemp" value="3"> Convergente <br>
-            <input type="radio" name="perfilTemp" value="4"> Asimilador <br><br>
-            <button type="submit" class="btn btn-warning">Aceptar</button>
-          </form>
-          <br>
           <div class="font-20">
             Actualmente su perfil temporal es:
             <%if(perfilTemp==1){%>
@@ -34,6 +26,18 @@
               <strong>Asimilador</strong>
             <%}%>
           </div>
+           <br>
+        <div class="well">
+          <p><label>Elija un perfil temporáneo:</label></p>
+          <form action="/perfilTemp" method="post">
+            <input type="radio" name="perfilTemp" value="1"> Adaptador <br>
+            <input type="radio" name="perfilTemp" value="2"> Divergente <br>
+            <input type="radio" name="perfilTemp" value="3"> Convergente <br>
+            <input type="radio" name="perfilTemp" value="4"> Asimilador <br><br>
+            <button type="submit" class="btn btn-warning">Aceptar</button>
+          </form>
+
+
         </div>
       <%}%>
     </div>
