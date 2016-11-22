@@ -245,6 +245,17 @@ INSERT INTO `usuario` VALUES (123456789,NULL,'max','m@m','$2a$10$KZvc16XxlBtTNml
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+DROP TABLE IF EXISTS `valoracion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `valoracion` (
+  `Plantilla_idPlantilla` int(11) NOT NULL,
+  `usuario_Rut` int(11) NOT NULL,
+  CONSTRAINT FOREIGN KEY (`Plantilla_idPlantilla`) REFERENCES `plantilla` (`idPlantilla`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
