@@ -19,6 +19,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
 
     req.session.idRamo = req.body.ramo_id;
     req.session.nombreRamo = req.body.ramo_nombre;
+    req.session.siglaRamo=req.body.ramo_sigla;
     res.redirect("/ramos/u");
 
   });
@@ -26,10 +27,12 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.get('/ramos/u', isLoggedIn, function(req, res) {
     connection.query('SELECT * FROM unidad WHERE Ramo_idRamo = ? ',req.session.idRamo, function(err, rows, fields) {
       if (err) throw err;
+      console.log(req.session.nombreRamo);
       res.render("ramos/unidades.ejs",{
         title:title,
         user:req.user,
         unidades:rows,
+        ramo_sigla:req.session.siglaRamo,
         ramo_nombre:req.session.nombreRamo
       });
 
@@ -59,7 +62,9 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
           title:title,
           user:req.user,
           nombreUnidad:req.session.nombreUnidad,
-          ok:0
+          ok:0,
+          ramo_sigla:req.session.siglaRamo,
+          ramo_nombre:req.session.nombreRamo
         });
       }
       else{
@@ -74,7 +79,9 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
                   nombreUnidad:req.session.nombreUnidad,
                   nombreRamo:req.session.nombreRamo,
                   ok:1,
-                  valor:valor
+                  valor:valor,
+                  ramo_sigla:req.session.siglaRamo,
+                  ramo_nombre:req.session.nombreRamo
                 });
             });
         });

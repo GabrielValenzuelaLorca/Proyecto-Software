@@ -2,10 +2,16 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
 
     app.post('/modulo', isLoggedIn, function(req, res) {
 
-        var informacion = req.body.contenido;
         var tipo = req.body.tipo;
         var unidad= req.body.unidad_id;
 
+        if(tipo=="video"){
+            var informacion=req.body.contenido.replace(/watch\?v\=/,"embed/");
+            console.log(informacion);
+        }
+        else{
+            var informacion = req.body.contenido;
+        }
         connection.query('INSERT INTO modulo (Tipo, Informacion, Unidad_idUnidad) VALUES (?, ?, ?)',[tipo,informacion,unidad] ,function (err, rows) {
             if (err) throw err;
 

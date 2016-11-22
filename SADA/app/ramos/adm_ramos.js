@@ -169,5 +169,69 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
       });
     }
   });
+  app.post('/aprobar_plantilla', isLoggedIn, function(req, res){
+     console.log("llegamolinos");
+
+     connection.query('UPDATE plantilla SET propuesta=0 WHERE idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
+       if(err) throw err;
+
+       res.render('ramos/ver_plantillas.ejs',{
+         title: title,
+         user: req.user,
+         plantillas: req.body.tillas,
+         unidad_id:req.body.unidad_id,
+         unidad_nombre:req.body.unidad_nombre,
+         profile:req.body.profile,
+       });
+    });
+
+  });
+  app.post('/denegar_plantilla', isLoggedIn, function(req, res){
+     console.log("llegoncio");
+
+     connection.query('DELETE FROM ensamblaje WHERE Plantilla_idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
+       if(err) throw err;
+
+       connection.query('DELETE FROM plantilla WHERE idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
+         if(err) throw err;
+
+         res.render('ramos/ver_plantillas.ejs',{
+           title: title,
+           user: req.user,
+           plantillas: req.body.tillas,
+           unidad_id:req.body.unidad_id,
+           unidad_nombre:req.body.unidad_nombre,
+           profile:req.body.profile,
+         });
+      });
+    });
+  });
+
+  app.post('/analisisDePlantilla',isLoggedIn,function(req,res){
+    var perfilAux;
+    console.log("yahoo");
+    if(req.user.Profesor==1){
+      perfilAux = req.session.perfilTemp;
+    }
+    else{
+      perfilAux = req.user.perfil_idperfil;
+    }
+    console.log(req.body.plantilla_id);
+    connection.query('SELECT * FROM plantilla WHERE idplantilla= ? ;',req.body.plantilla_id, function(err, plantilla) {
+      connection.query('SELECT * FROM ensamblaje INNER JOIN modulo ON ensamblaje.Modulo_idModulo=modulo.idModulo WHERE Plantilla_idPlantilla=? ORDER BY columna ASC, posicion ASC ;',[req.body.plantilla_id], function(err, modulos) {
+          if (err) throw err;
+          res.render("ramos/analisisDePlantilla.ejs",{
+            title:title,
+            user:req.user,
+            plantilla:plantilla[0],
+            modulos:modulos,
+            nombreUnidad:req.session.nombreUnidad
+          });
+      });
+    });//end query
+
+  });
+
+
 
 }
