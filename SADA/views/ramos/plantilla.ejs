@@ -61,7 +61,7 @@
                         <%}else if(modulos[i].Tipo=='imagen') {%>
                             <img src= <%=modulos[i].Informacion%> width=355 height=360 style="margin-top:10px;" />
                         <%}else if(modulos[i].Tipo=='texto') {%>
-                            <p><%=modulos[i].Informacion%></p>
+                            <p style="word-wrap: break-word"><%=modulos[i].Informacion%></p>
                         <%}%>
                     <%}else {%>
                         <%break; %>
