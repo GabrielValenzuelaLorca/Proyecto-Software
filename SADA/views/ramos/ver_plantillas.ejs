@@ -3,31 +3,31 @@
 
 <div class="menu container">
 
-  <div style="margin-bottom:20px;" class="row col-xs-4 col-xs-offset-4">
+  <div style="margin-bottom:20px;" class="row col-xs-4">
     <form action="/ver_plantillas" method="post">
-      <strong>Filtrar por perfil: </strong>
-      <input type="radio" name="profile" value="1"> 1
-      <input type="radio" name="profile" value="2"> 2
-      <input type="radio" name="profile" value="3"> 3
-      <input type="radio" name="profile" value="4"> 4
+      <strong>Filtrar por perfil: </strong> <br>
+      <input type="radio" name="profile" value="1"> Adaptador <br>
+      <input type="radio" name="profile" value="2"> Divergente <br>
+      <input type="radio" name="profile" value="3"> Convergente <br>
+      <input type="radio" name="profile" value="4"> Asimilador <br><br>
       <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
       <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
       <input type="hidden" name="activar" value='0'>
-      <button type="submit" class="btn btn-default">Buscar</button>
-    </form>
-  </div><!-- filtrar x perfil -->
-
-  <div class="row">
-
-    <form action="/adm_plantilla" method="post" class="pull-right">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </form><!-- filtrar x perfil -->
+    <br>
+    <form action="/adm_plantilla" method="post">
       <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
       <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
       <button type="submit" class="btn btn-default">Volver</button>
     </form><!-- Volver -->
+  </div>
+
+  <div class="row">
 
     <%for(var i = 0;i<plantillas.length;i++){%>
       <% if (plantillas[i].perfil_idperfil==profile){%>
-        <div class="col-xs-4 col-xs-offset-4 usuario">
+        <div class="col-xs-4 usuario">
             <h4 class="pull-left"><%= plantillas[i].Nombre%></h4>
             <%if(plantillas[i].Activo=='1'){%>
               <h4><i style="color:green;" class="pull-left fa fa-check-circle" aria-hidden="true"></i></h4>

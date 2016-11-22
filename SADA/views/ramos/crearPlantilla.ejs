@@ -92,20 +92,20 @@
 
   <div class="menu container modulos">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <h4><label>Unidad: </label> <%=unidad_nombre%></h4>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
           <form action="/agregar_plantilla" method="post" name="formu">
             <input type="hidden" name="sort1">
             <input type="hidden" name="sort2">
             <input type="hidden" name="sort3">
             <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
             <label>Seleccione Perfil</label>
-            <input type="radio" name="perfil" value='1' checked> 1 /
-            <input type="radio" name="perfil" value='2'> 2 /
-            <input type="radio" name="perfil" value='3'> 3 /
-            <input type="radio" name="perfil" value='4'> 4
+            <input type="radio" name="perfil" value='1' checked> Adaptador /
+            <input type="radio" name="perfil" value='2'> Divergente /
+            <input type="radio" name="perfil" value='3'> Convergente /
+            <input type="radio" name="perfil" value='4'> Asimilador
             <input type="text" placeholder="Nombre de la plantilla" name="plantillaSave" id="plantillaSave" required>
             <button type="submit" class="btn btn-primary" id='botonSave'>Guardar Plantilla</button>
           </form><!-- Guardar plantilla-->
