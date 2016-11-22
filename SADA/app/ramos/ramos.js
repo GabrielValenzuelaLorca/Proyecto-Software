@@ -70,7 +70,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
                   plantilla:plantilla[0],
                   modulos:modulos,
                   nombreUnidad:req.session.nombreUnidad,
-                  ok:1
+                  ok:1,
                   valor:valor
                 });
             });
