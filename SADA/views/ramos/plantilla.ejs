@@ -28,7 +28,7 @@
 <div class="menu container">
   <%if(ok==1){%>
     <div class="row">
-      <h4>Actualmente estás viendo la unidad <strong><%=nombreUnidad%></strong> en la asignatura <strong><%=nombreRamo%></strong></h4>
+      <h4>Actualmente estás viendo la unidad <strong><%=nombreUnidad%></strong> en la asignatura <strong><%=ramo_sigla%></strong></h4>
       <%if(user.Profesor==0 && valor.length==0){%>
           <form method="post" action="/valorar">
                 <p class="clasificacion">
@@ -61,7 +61,7 @@
                         <%}else if(modulos[i].Tipo=='imagen') {%>
                             <img src= <%=modulos[i].Informacion%> width=355 height=360 style="margin-top:10px;" />
                         <%}else if(modulos[i].Tipo=='texto') {%>
-                            <p><%=modulos[i].Informacion%></p>
+                            <p style="word-wrap: break-word"><%=modulos[i].Informacion%></p>
                         <%}%>
                     <%}else {%>
                         <%break; %>

@@ -9,6 +9,7 @@
         <form action="/ramos/u" method="post">
           <input type="hidden" value=<%=rows[i].Nombre%> name="ramo_nombre">
           <input type="hidden" value=<%=rows[i].idRamo%> name="ramo_id">
+          <input type="hidden" value=<%=rows[i].Sigla%> name="ramo_sigla">
           <button type="submit"><%= rows[i].Nombre%></button>
         </form>
       <%}%>
