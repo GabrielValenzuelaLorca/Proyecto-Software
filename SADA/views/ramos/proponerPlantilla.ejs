@@ -92,10 +92,10 @@
 
   <div class="menu container modulos">
       <div class="row">
-        <div class="col-md-2">
-          <label>Unidad: </label> <font size=4><strong><%=nombreUnidad%></strong></font>
+        <div class="col-md-6">
+          <h4><label>Unidad: </label> <%=nombreUnidad%></h4>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 pull-right">
           <form action="/enviarProposicion" method="post" name="formu">
             <input type="hidden" name="sort1">
             <input type="hidden" name="sort2">
@@ -113,7 +113,7 @@
 
               <!--Primera columna-->
               <h4>Columna 1</h4>
-              <button class="btn btn-danger" id='botoncito1'>Agregar modulo</button>
+              <button class="btn btn-danger" id='botoncito1'>Agregar módulo</button>
               <ul id="sortable1" style="list-style: none;">
                   <!--Aca van los modulos-->
               </ul>
@@ -124,7 +124,7 @@
 
               <!--Segunda columna-->
               <h4>Columna 2</h4>
-              <button class="btn btn-danger" id='botoncito2'>Agregar modulo</button>
+              <button class="btn btn-danger" id='botoncito2'>Agregar módulo</button>
 
               <ul id="sortable2">
                   <!--Aca van los modulos-->
@@ -137,7 +137,7 @@
 
               <!--Tercera columna-->
               <h4>Columna 3</h4>
-              <button class="btn btn-danger" id='botoncito3'>Agregar modulo</button>
+              <button class="btn btn-danger" id='botoncito3'>Agregar módulo</button>
 
               <ul id="sortable3">
                   <!--Aca van los modulos-->
@@ -153,9 +153,9 @@
             <% for (var i = 0; i < modulasos.length; i++){ %>
               <p><input type="radio" name="modulitos" value="<%=modulasos[i].idModulo %>,<%=modulasos[i].Informacion %>">
               <%if(modulasos[i].Tipo=='video'){%>
-                  <iframe width=355 height=360 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
+                  <iframe width=255 height=260 src=<%=modulasos[i].Informacion%> frameborder="0" allowfullscreen style="margin-top:10px;"></iframe>
               <%}else if(modulasos[i].Tipo=='imagen') {%>
-                  <img src= <%=modulasos[i].Informacion%> width=100 height=150 style="margin-top:10px;" />
+                  <img src= <%=modulasos[i].Informacion%> width=255 height=260 style="margin-top:10px;" />
               <%}else if(modulasos[i].Tipo=='texto') {%>
                   <%=modulasos[i].Informacion%>
               <%}%></p>

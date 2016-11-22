@@ -16,7 +16,7 @@
         <input type="hidden" name="modulo_id" value=<%=moduloObjetivo[0].idModulo%>>
         <input type="hidden" value=<%=unidad_id%> name="unidad_id">
         <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
-        <button type="submit" id='enviar' class="btn btn-default">Guardar cambios</button>
+        <button type="submit" id='enviar' class="btn btn-primary">Guardar cambios</button>
       </div>
       <div class="col-md-4">
         Estás en la unidad <label><%=unidad_nombre%></label>
@@ -28,9 +28,9 @@
       <input type="hidden" name="modulo_id" value=<%=moduloObjetivo[0].idModulo%>>
       <input type="hidden" value=<%=unidad_id%> name="unidad_id">
       <input type="hidden" value=<%=unidad_nombre%> name="unidad_nombre">
-      <button type="submit" id='enviar' class="btn btn-default">Borrar Modulo</button>
+      <button type="submit" id='enviar' class="btn btn-danger">Borrar Modulo</button>
     </form><!-- borrar modulo -->
-
+    <br>
     <div class="row col-md-3">
       <form action="/adm_plantilla" method="post">
         <input type="hidden" value=<%=unidad_id%> name="unidad_id">
