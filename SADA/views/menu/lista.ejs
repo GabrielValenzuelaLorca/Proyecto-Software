@@ -1,6 +1,18 @@
 <%include ../layout %>
 <%include ../nav %>
 
+<script type="text/javascript">
+    function showHide(){
+        //create an object reference to the div containing images
+        var oImageDiv=document.getElementById('myimageDiv')
+        var form=document.getElementById('formulario')
+        //set display to inline if currently none, otherwise to none
+        oImageDiv.style.display=(oImageDiv.style.display=='none')?'inline':'none'
+        form.style.display=(form.style.display=='inline')?'none':'inline'
+    }
+</script>
+
+
 <div class="lista">
 
     <div class="container">
@@ -8,7 +20,7 @@
       <div class="row">
 
         <div>
-          <div class="col-sm-7 col-md-8">
+          <div class="col-sm-5 col-md-6">
             <h1>Selecciona un archivo (xlsx):</h1>
             <p class="help-block">
                 El archivo debe poseer la siguiente estructura: </br></br>
@@ -22,21 +34,29 @@
           </div>
         </div>
 
-        <div class="col-sm-5 col-md-4">
-            <form action="/agregarLista" method="post" enctype="multipart/form-data">
+        <div class="col-sm-5 col-md-4 ">
+            <form id="formulario"  style="display:inline" action="/agregarLista" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Buscar Archivo:</label>
                     <input type="file" name="archivo" class="form-control" required>
                 </div>
                 <div class="botones">
-                  <button type="submit" value="Subir" class="btn btn-primary btn-sm pull-left"> Aceptar</button>
+                    <button type="submit" value="Subir" onclick="showHide()" class="btn btn-primary btn-sm pull-left"> Aceptar</button>
                 </div>
             </form>
+            <div id="myimageDiv" class="container" style="display:none;">
+                <div class="loader"></div>
+            </div>
         </div>
+
+
+
 
       </div>
     </div>
 
 </div>
+
+
 
 <% include ../footer %>

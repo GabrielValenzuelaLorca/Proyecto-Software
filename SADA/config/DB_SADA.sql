@@ -94,7 +94,7 @@ CREATE TABLE `modulo` (
 
 LOCK TABLES `modulo` WRITE;
 /*!40000 ALTER TABLE `modulo` DISABLE KEYS */;
-
+INSERT INTO `modulo` VALUES (1,'texto','sdfda',1),(2,'video','https://www.youtube.com/embed/i79M4nKW1Ms',45),(3,'imagen','http://www.mundoperro.net/wp-content/uploads/consejos-perro-feliz-verano-400x300.jpg',1);
 /*!40000 ALTER TABLE `modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +178,7 @@ CREATE TABLE `ramo` (
 
 LOCK TABLES `ramo` WRITE;
 /*!40000 ALTER TABLE `ramo` DISABLE KEYS */;
-INSERT INTO `ramo` VALUES (1,'fisica 100','fis100'),(2,'fisica 110','fis110'),(3,'fisica 120','fis120'),(4,'fisica 130','fis130'),(5,'fisica 140','fis140');
+INSERT INTO `ramo` VALUES (1,'FISICA100','fis100'),(2,'FISICA110','fis110'),(3,'FISICA120','fis120'),(4,'FISICA130','fis130'),(5,'FISICA140','fis140');
 /*!40000 ALTER TABLE `ramo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,10 +240,21 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (123456789,NULL,'max','m@m','$2a$10$KZvc16XxlBtTNmlYklVW6uFghfAICRP4RVkH741amsEFOejNYgxQC',1,1,NULL);
+INSERT INTO `usuario` VALUES (123456789,NULL,'max','max@usm.cl','$2a$10$KZvc16XxlBtTNmlYklVW6uFghfAICRP4RVkH741amsEFOejNYgxQC',1,1,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+DROP TABLE IF EXISTS `valoracion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `valoracion` (
+  `Plantilla_idPlantilla` int(11) NOT NULL,
+  `usuario_Rut` int(11) NOT NULL,
+  CONSTRAINT FOREIGN KEY (`Plantilla_idPlantilla`) REFERENCES `plantilla` (`idPlantilla`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

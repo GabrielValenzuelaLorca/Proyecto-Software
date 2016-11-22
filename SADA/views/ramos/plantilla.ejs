@@ -26,27 +26,29 @@
 </style>
 
 <div class="menu container">
+  <%if(ok==1){%>
     <div class="row">
-        <div>
-            <form method="post" action="/valorar">
-                  <p class="clasificacion">
-                    <input type="hidden" name="idPlantilla" value=<%=plantilla.idPlantilla%>>
-                    <button type="submit" name="button" class="btn btn-warning">Enviar</button>
-                    <input id="radio1" type="radio" name="estrellas" value=5>
-                    <label for="radio1">&#9733; </label>
-                    <input id="radio2" type="radio" name="estrellas" value=4>
-                    <label for="radio2">&#9733;</label>
-                    <input id="radio3" type="radio" name="estrellas" value=3>
-                    <label for="radio3">&#9733;</label>
-                    <input id="radio4" type="radio" name="estrellas" value=2>
-                    <label for="radio4">&#9733;</label>
-                    <input id="radio5" type="radio" name="estrellas" value=1>
-                    <label for="radio5">&#9733;</label>
-                    <strong>!anigáp atse acifilaC</strong>
-                  </p>
-            </form>
-        </div>
-    </div>
+      <h4>Actualmente estás viendo la unidad <strong><%=nombreUnidad%></strong> en la asignatura <strong><%=nombreRamo%></strong></h4>
+      <%if(user.Profesor==0 && valor.length==0){%>
+          <form method="post" action="/valorar">
+                <p class="clasificacion">
+                  <input type="hidden" name="idPlantilla" value=<%=plantilla.idPlantilla%>>
+                  <button type="submit" name="button" class="btn btn-warning">Enviar</button>
+                  <input id="radio1" type="radio" name="estrellas" value=5>
+                  <label for="radio1">&#9733; </label>
+                  <input id="radio2" type="radio" name="estrellas" value=4>
+                  <label for="radio2">&#9733;</label>
+                  <input id="radio3" type="radio" name="estrellas" value=3>
+                  <label for="radio3">&#9733;</label>
+                  <input id="radio4" type="radio" name="estrellas" value=2>
+                  <label for="radio4">&#9733;</label>
+                  <input id="radio5" type="radio" name="estrellas" value=1>
+                  <label for="radio5">&#9733;</label>
+                  <strong>!anigáp atse acifilaC</strong>
+                </p>
+          </form>
+      <%}%>
+    </div><!-- valoracion -->
     </br>
     <div class="row">
         <%var i=0;%>
@@ -67,7 +69,8 @@
                 <%}%>
             </div>
         <%}%>
-    </div>
+    </div><!-- modulos -->
+    <br>
     <div class="row">
       <%if(user.Profesor==0){%>
         <div style="text-align: center;">
@@ -77,7 +80,12 @@
             </form>
         </div>
       <%}%>
+    </div><!-- proponer plantilla -->
+  <%}else{%>
+    <div class="row">
+      <h4>No hay plantillas activas para <strong><%=nombreUnidad%></strong></h4>
     </div>
+  <%}%>
 </div>
 
 <% include ../footer %>

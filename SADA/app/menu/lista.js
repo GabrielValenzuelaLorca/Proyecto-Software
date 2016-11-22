@@ -51,24 +51,31 @@ module.exports = function(app, passport, connection, transporter,dbconfig,title,
                 if(lista.length!=0){
                     var valores=lista.pop();
                     connection.query("SELECT * FROM " + dbconfig.users_table + " WHERE Correo = ? OR Rut = ? OR Rol = ?", [valores[2], valores[0], valores[6]], function(err, rows) {
+                        var re = /@(sansano\.usm\.cl|usm\.cl|alumnos\.usm\.cl)/;
+                        var flag = valores[2].search(re);
                         if (err) console.log("Error1");
-                        if (rows.length) { //Busca si ya hay un email o rol o rut registrado del form. Agrega errores correspondientes
+                        if (flag==-1 || rows.length) { //Busca si ya hay un email o rol o rut registrado del form. Agrega errores correspondientes
                             var messages2 = [];
-                            for (var j = 0; j < rows.length; j++) {
-                                if (rows[j].Correo == valores[2]) {
-                                    messages2.push('Este Email ya está en uso.');
-                                    flag=0;
-                                }
-                                if (rows[j].Rut == valores[0]) {
-                                    messages2.push('Ya hay una cuenta asociada a este Rut');
-                                    flag=0;
-                                }
-                                if (rows[j].Rol == valores[6]) {
-                                    messages2.push('Ya hay una cuenta asociada a este Rol');
-                                    flag=0;
+                            if (flag==-1){
+                                messages2.push('Formato de Email incorrecto.');
+                            }
+                            if(rows.length){
+                                for (var j = 0; j < rows.length; j++) {
+                                    if (rows[j].Correo == valores[2]) {
+                                        messages2.push('Este Email ya está en uso.');
+                                        flag=0;
+                                    }
+                                    if (rows[j].Rut == valores[0]) {
+                                        messages2.push('Ya hay una cuenta asociada a este Rut');
+                                        flag=0;
+                                    }
+                                    if (rows[j].Rol == valores[6]) {
+                                        messages2.push('Ya hay una cuenta asociada a este Rol');
+                                        flag=0;
+                                    }
                                 }
                             }
-
+                            agregar(lista,0);
                         }
                         else {
                             // Se crea el usuario

@@ -5,26 +5,43 @@
 
   <div class="row">
     <div class="col-md-4">
-      <h1>Menú Principal aún por mejorar...</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam nisi nostrum, qui reprehenderit possimus blanditiis dolorum rerum quaerat necessitatibus non cum ducimus quibusdam suscipit tenetur, minus culpa doloribus dolor autem!
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, doloremque, rerum. Provident, praesentium. Provident laboriosam aut nam maiores veniam, dolore et vel voluptatem sunt iste earum asperiores, cumque voluptates fugit.</p>
+      <h1>Menú Principal</h1>
+      <p>Utiliza esta plataforma para aprender física de la mejor manera.</p>
+      <p>No olvides <strong>calificar</strong> las páginas que ves y no dudes en recomendarnos <strong>tu propia página.</strong></p>
       <%if(user.Profesor==1){%>
-        <br>
-        <p><label>Elija un perfil temporáneo:</label></p>
-        <form action="/perfilTemp" method="post">
-          <input type="radio" name="perfilTemp" value="1"> 1
-          <input type="radio" name="perfilTemp" value="2"> 2
-          <input type="radio" name="perfilTemp" value="3"> 3
-          <input type="radio" name="perfilTemp" value="4"> 4
-          <button type="submit" class="btn btn-warning">Aceptar</button>
-        </form>
+        <div class="well">
+          <p><label>Elija un perfil temporáneo:</label></p>
+          <form action="/perfilTemp" method="post">
+            <input type="radio" name="perfilTemp" value="1"> Adaptador <br>
+            <input type="radio" name="perfilTemp" value="2"> Divergente <br>
+            <input type="radio" name="perfilTemp" value="3"> Convergente <br>
+            <input type="radio" name="perfilTemp" value="4"> Asimilador <br><br>
+            <button type="submit" class="btn btn-warning">Aceptar</button>
+          </form>
+          <br>
+          <div class="font-20">
+            Actualmente su perfil temporal es:
+            <%if(perfilTemp==1){%>
+              <strong>Adaptador</strong>
+            <%}%>
+            <%if(perfilTemp==2){%>
+              <strong>Divergente</strong>
+            <%}%>
+            <%if(perfilTemp==3){%>
+              <strong>Convergente</strong>
+            <%}%>
+            <%if(perfilTemp==4){%>
+              <strong>Asimilador</strong>
+            <%}%>
+          </div>
+        </div>
       <%}%>
     </div>
 
     <section class="col-md-6 col-md-offset-1 ramos-img">
       <%if(user.Admin==1){%>
         <img src="http://adminweapon.com/wp-content/uploads/2012/06/logo-admin-weapon.jpg" alt="">
-      <%}else if(user.Profesor==1){%>
+      <%}else if(user.Profesor==1 && user.Admin==0){%>
         <img src="http://www.eldinamo.cl/wp-content/uploads/2016/10/profesor-574x238.jpg" alt="">
       <%}else if(user.perfil_idperfil==1){%>
         <img src="../../img/adaptador.jpg" alt="">

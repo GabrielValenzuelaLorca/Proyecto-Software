@@ -4,7 +4,7 @@
   }
 </style>
 
-<h3 class="page-header">Login</h3>
+<h3 class="page-header">Iniciar Sesión</h3>
 
 <% if (messages.length > 0){%>
   <% for(var i=0;i<messages.length;i++){%>
@@ -17,14 +17,14 @@
 <form action="/login" method="post">
     <div class="form-group">
         <label>Email</label>
-        <input type="email" class="form-control" name="email" placeholder="ejemplo@ejemplo.com" required>
+        <input type="email" class="form-control" name="email" placeholder="ejemplo@sansano.usm.cl" required>
     </div>
     <div class="form-group">
         <label>Contraseña</label>
         <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
     </div>
     <div class="botones">
-      <button type="submit" class="btn btn-primary btn-sm pull-left"><span class="fa fa-sign-in"></span> Login</button>
+      <button type="submit" class="btn btn-primary btn-sm pull-left"><span class="fa fa-sign-in"></span> Ingresar</button>
       <div class="recover-pass">
         <a class="pull-right" href="/recover">¿Olvidó su contraseña?</a>
       </div>
