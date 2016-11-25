@@ -151,8 +151,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
           });
         });
       });
-    }//poca pajitae
-
+    }
     else{
       connection.query('SELECT * FROM plantilla WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, filas, fields){
         if(err) throw err;

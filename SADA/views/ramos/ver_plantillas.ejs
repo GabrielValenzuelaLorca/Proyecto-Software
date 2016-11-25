@@ -12,6 +12,23 @@
   <div class="row">
 
     <div class="col-xs-3">
+      <br>
+      <%if(profile!=" "){%>
+        <h4>Estás viendo plantillas para el perfil
+          <%if(profile==1){%>
+            <strong>Adaptador</strong>
+          <%}if(profile==2){%>
+            <strong>Divergente</strong>
+          <%}if(profile==3){%>
+            <strong>Convergente</strong>
+          <%}if(profile==4){%>
+            <strong>Asimilador</strong>
+          <%}%>
+        </h4>
+      <%}else{%>
+        <h4>Selecciona un perfil para ver plantillas</h4>
+      <%}%>
+      <br>
       <form action="/ver_plantillas" method="post">
         <strong>Filtrar por perfil: </strong> <br>
         <input type="radio" name="profile" value="1"> Adaptador <br>
@@ -31,8 +48,11 @@
       </form><!-- Volver -->
     </div>
 
-    <div class="col-xs-4 col-xs-offset-1">
+    <div class="col-xs-5 col-xs-offset-1">
       <div class="row">
+
+        <%contador=0;%>
+
         <%for(var i = 0;i<plantillas.length;i++){%>
           <% if (plantillas[i].perfil_idperfil==profile && plantillas[i].Propuesta==0){%>
             <div class="col-xs-12 usuario">
@@ -52,7 +72,8 @@
                   <button class="btn btn-primary pull-right">Elegir como activa</button>
                 </form><!-- se activa una plantilla -->
             </div>
-          <%}%>
+            <%contador++;%>
+          <%}%><!-- end if -->
 
           <%if (plantillas[i].perfil_idperfil==profile && plantillas[i].Propuesta==1){%>
               <div class="col-xs-12 usuario">
@@ -78,10 +99,25 @@
                     <button class="btn btn-primary pull-right">Eliminar</button>
                 </form><!-- se borra una plantilla -->
               </div>
-               <%}%>
-
+              <%contador++;%>
+           <%}%><!-- end if -->
         <%}%><!-- end for-->
-      </div>
+
+        <%if(contador==0 && profile != " "){%>
+          <h4>No hay plantillas disponibles para el perfil
+            <%if(profile==1){%>
+              <strong>Adaptador</strong>
+            <%}if(profile==2){%>
+              <strong>Divergente</strong>
+            <%}if(profile==3){%>
+              <strong>Convergente</strong>
+            <%}if(profile==4){%>
+              <strong>Asimilador</strong>
+            <%}%>
+          </h4>
+        <%}%><!-- end if -->
+
+      </div><!-- end row -->
     </div>
 
   </div><!-- end row -->

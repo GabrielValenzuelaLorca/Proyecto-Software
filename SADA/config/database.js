@@ -3,8 +3,8 @@
 module.exports = {
     'connection': {
         'host': 'localhost',
-        'user': 'user',
-        'password': 'password'
+        'user': 'root',
+        'password': '1234'
     },
     'database': 'Sada_DB',
     'users_table': 'usuario'
