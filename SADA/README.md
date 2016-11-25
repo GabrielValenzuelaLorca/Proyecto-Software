@@ -7,14 +7,10 @@
 * [NodeJS](https://nodejs.org/en/) - JS runtime environment
 
 ##Pre-requisitos
-1. Desde la terminal dirigirse al directorio `/config` ejecutando el comando
-```
-cd config
-```
-Luego ejecutar el comando `mysql -u "nombreusuario" -p < DB_SADA.sql` para crear la Base de Datos en caso de que no exista. Se le pedirá su contraseña. (Puede que el nombre de usuario sea 'root')<br/>
+1. Desde la terminal dirigirse al directorio `/config` ejecutando el comando `cd config`
+1. Luego ejecutar el comando `mysql -u "nombreusuario" -p < DB_SADA.sql` para crear la Base de Datos en caso de que no exista. Se le pedirá su contraseña. (Puede que el nombre de usuario sea 'root')<br/>
 \* Si el comando anterior no funciona (Windows u otro), importar de forma manual el archivo `DB_SADA.sql` a través de `MySql`.
 1. Editar `user` y `password` en `config/database.js`
-
 
 ##Instrucciones:
 
