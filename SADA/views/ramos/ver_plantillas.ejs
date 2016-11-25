@@ -12,6 +12,23 @@
   <div class="row">
 
     <div class="col-xs-3">
+      <br>
+      <%if(profile!=" "){%>
+        <h4>Estás viendo plantillas para el perfil
+          <%if(profile==1){%>
+            <strong>Adaptador</strong>
+          <%}if(profile==2){%>
+            <strong>Divergente</strong>
+          <%}if(profile==3){%>
+            <strong>Convergente</strong>
+          <%}if(profile==4){%>
+            <strong>Asimilador</strong>
+          <%}%>
+        </h4>
+      <%}else{%>
+        <h4>Selecciona un perfil para ver plantillas</h4>
+      <%}%>
+      <br>
       <form action="/ver_plantillas" method="post">
         <strong>Filtrar por perfil: </strong> <br>
         <input type="radio" name="profile" value="1"> Adaptador <br>
@@ -31,57 +48,90 @@
       </form><!-- Volver -->
     </div>
 
-    <div class="col-xs-4 col-xs-offset-1">
+    <div class="col-xs-5 col-xs-offset-1">
       <div class="row">
+
+        <%contador=0;%>
+
         <%for(var i = 0;i<plantillas.length;i++){%>
           <% if (plantillas[i].perfil_idperfil==profile && plantillas[i].Propuesta==0){%>
-            <div class="col-xs-12 usuario">
+            <div class="col-xs-12 plantilla">
+              <div class="row">
+                <span class="font-20 pull-left">Nombre plantilla: <strong><%= plantillas[i].Nombre%></strong></span>
+                <%if(plantillas[i].Activo=='1'){%>
+                  <i style="color:green;margin-left:10px;" class="font-20 pull-left fa fa-check-circle" aria-hidden="true"></i>
+                <%}%><!-- activo -->
+                <h4 class="pull-right"><%= plantillas[i].Valoracion%> <span style="color:#f8c727;">&#9733;</span> </h4>
+              </div>
+
+              <div class="row">
                 <form action="/analisisDePlantilla" method="post" id="elform">
                     <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
-                    <button class="btn btn-primary pull-left"><%= plantillas[i].Nombre%> <%= plantillas[i].Valoracion%>&#9733;</button>
+                    <button class="btn btn-info pull-left">Ver Plantilla</button>
                 </form>
-                <%if(plantillas[i].Activo=='1'){%>
-                  <h4><i style="color:green;" class="pull-left fa fa-check-circle" aria-hidden="true"></i></h4>
-                <%}%><!-- activo -->
-                <form action="/ver_plantillas" method="post">
+
+                <form action="/ver_plantillas" method="post" class="pull-right">
                   <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
                   <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
                   <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
                   <input type="hidden" name="activar" value='1'>
                   <input type="hidden" name="profile" value=<%=profile%>>
-                  <button class="btn btn-primary pull-right">Elegir como activa</button>
+                  <button class="btn btn-primary">Elegir como activa</button>
                 </form><!-- se activa una plantilla -->
+              </div>
+
             </div>
-          <%}%>
+            <%contador++;%>
+          <%}%><!-- end if -->
 
           <%if (plantillas[i].perfil_idperfil==profile && plantillas[i].Propuesta==1){%>
-              <div class="col-xs-12 usuario">
-
-                  <form action="/analisisDePlantilla" method="post" id="elform">
-                      <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
-                      <button class="btn btn-primary pull-left"><%= plantillas[i].Nombre%></button>
-                  </form>
-                  <form action="/aprobar_plantilla" method="post">
-                      <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
-                      <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
-                      <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
-                      <input type="hidden" name="profile" value=<%=profile%>>
-                      <input type="hidden" name="tillas" value=<%=plantillas%>>
-                    <button class="btn btn-primary pull-right">Aprobar insercion</button>
+              <div class="col-xs-12 plantilla">
+                <div class="row">
+                  <span class="font-20 pull-left">Nombre plantilla: <strong><%= plantillas[i].Nombre%></strong></span>
+                  <form action="/aprobar_plantilla" method="post" class="pull-right">
+                    <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
+                    <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+                    <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
+                    <input type="hidden" name="profile" value=<%=profile%>>
+                    <button class="btn btn-success">Aprobar insercion</button>
                   </form><!-- se activa una plantilla -->
-                  <form action="/denegar_plantilla" method="post">
-                      <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
-                      <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
-                      <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
-                      <input type="hidden" name="profile" value=<%=profile%>>
-                      <input type="hidden" name="tillas" value=<%=plantillas%>>
-                    <button class="btn btn-primary pull-right">Eliminar</button>
-                </form><!-- se borra una plantilla -->
-              </div>
-               <%}%>
+                </div>
+                <br>
+                <div class="row">
+                  <form action="/analisisDePlantilla" method="post" id="elform">
+                    <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
+                    <button class="btn btn-info pull-left">Ver Plantilla</button>
+                  </form>
+                  <form action="/denegar_plantilla" method="post" class="pull-right">
+                    <input type="hidden" name="plantilla_id" value=<%=plantillas[i].idPlantilla%>>
+                    <input type="hidden" name="unidad_id" value=<%=unidad_id%>>
+                    <input type="hidden" name="unidad_nombre" value=<%=unidad_nombre%>>
+                    <input type="hidden" name="profile" value=<%=profile%>>
+                    <input type="hidden" name="tillas" value=<%=plantillas%>>
+                    <button class="btn btn-danger">Eliminar</button>
+                  </form><!-- se borra una plantilla -->
+                </div>
 
+            </div>
+            <%contador++;%>
+          <%}%><!-- end if -->
         <%}%><!-- end for-->
-      </div>
+
+        <%if(contador==0 && profile != " "){%>
+          <h4>No hay plantillas disponibles para el perfil
+            <%if(profile==1){%>
+              <strong>Adaptador</strong>
+            <%}if(profile==2){%>
+              <strong>Divergente</strong>
+            <%}if(profile==3){%>
+              <strong>Convergente</strong>
+            <%}if(profile==4){%>
+              <strong>Asimilador</strong>
+            <%}%>
+          </h4>
+        <%}%><!-- end if -->
+
+      </div><!-- end row -->
     </div>
 
   </div><!-- end row -->

@@ -151,8 +151,7 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
           });
         });
       });
-    }//poca pajitae
-
+    }
     else{
       connection.query('SELECT * FROM plantilla WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, filas, fields){
         if(err) throw err;
@@ -172,17 +171,20 @@ module.exports = function(app, passport, connection, transporter, dbconfig, titl
   app.post('/aprobar_plantilla', isLoggedIn, function(req, res){
      console.log("llegamolinos");
 
-     connection.query('UPDATE plantilla SET propuesta=0 WHERE idPlantilla=?;',req.body.plantilla_id,function(err, filas, fields){
+     connection.query('UPDATE plantilla SET propuesta = 0 WHERE idPlantilla = ?',req.body.plantilla_id,function(err, filas, fields){
        if(err) throw err;
 
-       res.render('ramos/ver_plantillas.ejs',{
-         title: title,
-         user: req.user,
-         plantillas: req.body.tillas,
-         unidad_id:req.body.unidad_id,
-         unidad_nombre:req.body.unidad_nombre,
-         profile:req.body.profile,
-       });
+      connection.query('SELECT * FROM plantilla WHERE Unidad_idUnidad = ?',[req.body.unidad_id],function(err, filas, fields){
+        if(err) throw err;
+        res.render('ramos/ver_plantillas.ejs',{
+          title: title,
+          user: req.user,
+          plantillas: filas,
+          unidad_id:req.body.unidad_id,
+          unidad_nombre:req.body.unidad_nombre,
+          profile:req.body.profile,
+        });
+      });
     });
 
   });
